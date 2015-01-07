@@ -4,6 +4,41 @@
     font-family: "Cabin";
 }
 
-#rr .column{
+.column{
     border: 1px solid black;
+}
+
+.checkbox {
+    display: none;
+}
+
+.checkLabel {
+    display: inline-block;
+    color: black;
+    font-size: 25px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 0px 5px;
+    font-family: "Cabin";
+}
+
+.checkLabel:hover {
+    background-color: lightblue;
+    border: 1px solid lightblue;
+    color: white;
+}
+
+.checkbox:checked + .checkLabel {
+    background-color: blue;
+}
+
+.searchBar {
+    padding-top: 10px;
+}
+.searchBar:hover {
+    border-color: blue;
+}
+
+.searchBarForm {
+    font-size: 20px;
 }
