@@ -33,12 +33,11 @@
 }
 
 .searchBar {
-    padding-top: 10px;
+    margin-top: 7px;
 }
+
 .searchBar:hover {
     border-color: blue;
 }
 
-.searchBarForm {
-    font-size: 20px;
-}
+
