@@ -85,6 +85,10 @@
     border-color: black;
 }
 
+.comments {
+    height: 170px;
+    width: 100%;
+}
 .category{
     margin-top: 10px;
     text-align: center;
