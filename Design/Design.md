@@ -23,16 +23,16 @@ Necessary Elements
 	+   Match Tags
 		+   Coopertition
 		+   High scoring
+    +   Autonomous
+        +   Picks up grey bins
+        +   Stacks yellow bins
+        +   Moves recycling bins
+        +   Moved to auto zone
 	+   Robot Tags
 		+   Stacking-capable
-		+   Autonomous
 		+   Broken
 		+   Recycling bin handling
 		+   Litter-handling
-		+   Claw system
-		+   Lifting system
-		+   Mechanum
-		+   Swerve
 +   Rating system (Good, meh, bad)
 +   Team Number
 +   Team Name (Entered once only)
