@@ -7,6 +7,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    box-sizing: border-box;
+}
+
+#rr body {
+    background-color: #dbdbdb;
 }
 
 #rr h1{
@@ -14,7 +19,7 @@
 }
 
 .column{
-    border: 1px solid black;
+   border : 1px solid black;
 }
 
 .checkbox {
@@ -28,7 +33,6 @@
     display: block;
     /*color: black;*/
     font-size: 25px;
-    border: 1px solid blue;
     border-radius: 10px;
     padding: 0px 5px;
     font-family: "Cabin";
@@ -41,7 +45,6 @@
     display: inline-block;
     color: black;
     font-size: 25px;
-    border: 1px solid blue;
     border-radius: 10px;
     padding: 0px 5px;
     font-family: "Cabin";
@@ -50,32 +53,32 @@
     text-align: center;
     margin-top: 2px;
 }
-.checkLabel:hover {
-    background-color: lightblue;
-    border: 1px solid lightblue;
-    color: white;
+
+.checkLabel:hover,
+.checkLabel:focus,
+.radioLabel:hover,
+.radioLabel:focus{
+    background-color: #e8322e;
+    color: #b8c2b8;
 }
 
-.radioLabel:hover {
-    background-color: lightblue;
-    border: 1px solid lightblue;
-    color: white;
+.radio:checked + .radioLabel:hover,
+.radio:checked + .radioLabel:focus,
+.checkbox:checked + .checkLabel:hover,
+.checkbox:checked + .checkLabel:focus {
+    background-color: #b8c2b8;
+    color: #e8322e;
 }
 
+.radio:checked + .radioLabel,
+.radio:checked + .radioLabel,
+.checkbox:checked + .checkLabel,
 .checkbox:checked + .checkLabel {
-    background-color: blue;
-}
-
-.radio:checked + .radioLabel {
-    background-color: blue;
+    background-color: #e8322e;
 }
 
 .searchBar {
     margin-top: 7px;
-}
-
-.searchBar:hover {
-    border-color: blue;
 }
 
 .teamName{
@@ -86,8 +89,11 @@
 }
 
 .comments {
-    height: 170px;
-    width: 100%;
+    height: 315px;
+    width: 90%;
+    resize: none;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .category{
     margin-top: 10px;

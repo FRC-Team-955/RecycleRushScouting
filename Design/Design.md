@@ -43,7 +43,7 @@ Necessary Elements
 
 +   Writing and referencing JSON objects with robot data
 +   Reading and recording Blue Alliance OPRs
-+   Wrting a responsive reference interface
++   Writing a responsive reference interface
 
 ### Design Things
 
