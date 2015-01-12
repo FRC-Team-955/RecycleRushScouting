@@ -1,103 +1,27 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin);
-
-*{
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+* {
+    font-family: "Cabin";
     box-sizing: border-box;
 }
 
-#rr body {
+body {
+    font-size: 100%;
     background-color: #dbdbdb;
 }
 
-#rr h1{
-    font-family: "Cabin";
+.column {
+    border: 1px solid black;
 }
 
-.column{
-   border : 1px solid black;
+.title {
+    font-size: 3rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
 }
 
-.checkbox {
-    display: none;
-}
-
-.radio {
-    display: none;
-}
-.checkLabel {
-    display: block;
-    /*color: black;*/
-    font-size: 25px;
-    border-radius: 10px;
-    padding: 0px 5px;
-    font-family: "Cabin";
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.radioLabel {
-    display: inline-block;
-    color: black;
-    font-size: 25px;
-    border-radius: 10px;
-    padding: 0px 5px;
-    font-family: "Cabin";
-    height: 36px;
-    width: 75px;
-    text-align: center;
-    margin-top: 2px;
-}
-
-.checkLabel:hover,
-.checkLabel:focus,
-.radioLabel:hover,
-.radioLabel:focus{
-    background-color: #e8322e;
-    color: #b8c2b8;
-}
-
-.radio:checked + .radioLabel:hover,
-.radio:checked + .radioLabel:focus,
-.checkbox:checked + .checkLabel:hover,
-.checkbox:checked + .checkLabel:focus {
-    background-color: #b8c2b8;
-    color: #e8322e;
-}
-
-.radio:checked + .radioLabel,
-.radio:checked + .radioLabel,
-.checkbox:checked + .checkLabel,
-.checkbox:checked + .checkLabel {
-    background-color: #e8322e;
-}
-
-.searchBar {
-    margin-top: 7px;
-}
-
-.teamName{
-    height: 100%;
+.button-alliance {
+    background-color: #3bbeff;
     width: 100%;
-    margin-top: 5px;
-    border-color: black;
-}
-
-.comments {
-    height: 315px;
-    width: 90%;
-    resize: none;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-.category{
-    margin-top: 10px;
-    text-align: center;
-    font-size: 25px;
-    font-family: "Cabin";
+    display: block;
+    margin-top: 1rem;
 }
