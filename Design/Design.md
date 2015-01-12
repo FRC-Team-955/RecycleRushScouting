@@ -12,31 +12,45 @@ This competition is going to rely a lot on hard data, as rankings are going to b
 
 +   Good, medium, or bad performance ratings per robot, per match
 +   Generalized tags to descrube a robot's actions, per robot, per match
++   Scoring stats for individual robots
+    +   Number of grey totes scored
+    +   Number of recycling bins scored, including their level
 +   A description database, including a general rating of each robot, their team name, and team number
 
 Necessary Elements
 ---------------------
 
-### Data Objects
+### Data Objects in Match mode
 
 +   Tags
 	+   Match Tags
-		+   Coopertition
+		+   Coopertition Stack
+        +   Coopertition Set
 		+   High scoring
     +   Autonomous
-        +   Picks up grey bins
-        +   Stacks yellow bins
+        +   Handles grey totes
+        +   Handles yellow totes
         +   Moves recycling bins
-        +   Moved to auto zone
-	+   Robot Tags
-		+   Stacking-capable
-		+   Broken
-		+   Recycling bin handling
-		+   Litter-handling
-+   Rating system (Good, meh, bad)
+        +   Moves to auto zone
+	+   Capabilities/General
+		+   Capable of stacking
+		+   Can place recycling bins
+		+   Can move/hold litter
+		+   Broken drivebase
+        +   Broken pickup sytem
++   Scoring
+    +   Autonomous
+        +   # of yellow totes moved to auto zone
+        +   # of yellow totes stacked
+        +   # of rcycling bins moved to auto zone
+    +   Teleop
+        +   # of grey totes stacked
+        +   # of stacks created
+        +   # of Recycling bins stacked + level of stack
++   Comments on individual robots (when applicable)
++   Comments on individual rounds (when applicable)
++   Rating system (Good, meh, bad) for robot performance in individual rounds
 +   Team Number
-+   Team Name (Entered once only)
-+   Match schedule
 
 
 ### Technical things to be thought out:
