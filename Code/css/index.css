@@ -14,9 +14,10 @@ body {
 }
 
 .title {
-    font-size: 3rem;
+    font-size: 2rem;
     margin-left: 2rem;
     margin-top: 1rem;
+    text-m
 }
 
 .button-alliance {
@@ -24,4 +25,31 @@ body {
     width: 100%;
     display: block;
     margin-top: 1rem;
+    height: 2rem;
+}
+
+.teamInput {
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
+    text-align: center;
+}
+
+.searchBar {
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
+}
+
+.matchNumber {
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.button-search {
+    margin-top: 1rem;
+    height: 2rem;
 }
