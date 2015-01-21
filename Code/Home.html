@@ -23,47 +23,209 @@
         <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
-        <section class = "pure-g column">
+        <!--
+            header
+        -->
+        <section class = "pure-g cx">
+            <!--
+                Scouting Application Title
+            -->
             <section class = "pure-u-1-4">
                 <h1 class="title">Scouting App. v0.0</h1>
             </section>
+            <!--
+                Alliance Selection
+            -->
             <section class = "pure-u-1-12">
                 <button class = "pure-button button-alliance pure-button-active">
                     Blue
                 </button>
             </section>
+            <!--
+                Filler section
+            -->
             <section class = "pure-u-1-24"></section>
+            <!--
+                Team 1 Label
+            -->
             <section class = "pure-u-2-24">
                 <form class= "pure-form">
                     <input type="text" class = "pure-input-1 teamInput">
                 </form>
             </section>
+            <!--
+                Filler section
+            -->
             <section class = "pure-u-1-24"></section>
+            <!--
+                Team 2 Label
+            -->
             <section class = "pure-u-2-24">
                 <form class = "pure-form">
                     <input type="text" class = "pure-input-1 teamInput">
                 </form>
             </section>
+            <!--
+                Filler section
+            -->
             <section class = "pure-u-1-24"></section>
+            <!--
+                Team 3 Label
+            -->
             <section class = "pure-u-2-24">
                 <form class = "pure-form">
                     <input type="text" class = "pure-input-1 teamInput">
                 </form>
             </section>
+            <!--
+                Filler section
+            -->
             <section class = "pure-u-1-24"></section>
+            <!--
+                Search Bar
+            -->
             <section class = "pure-u-1-8">
                 <form class = "pure-form">
                     <input class = "pure-input-2-3 searchBar" type = "search">
-                    <button class="pure-button button-search">
+                    <section class = "pure-u-1-3">
+                    <button class="pure-button pure-button-active button-search">
                         <i class="fa fa-search"></i>
                     </button>
+                    </section>
                 </form>
             </section>
+            <!--
+                Filler section
+            -->
             <section class = "pure-u-1-24"></section>
+            <!--
+                Match Number Indicator
+            -->
             <section class = "pure-u-1-24">
                 <form class = "pure-form">
                     <input type="text" class = "pure-input-1 matchNumber">
                 </form>
+            </section>
+        </section>
+        <!--
+            Second Row
+        -->
+        <section class = "pure-g cx">
+            <!--
+                Tags Title
+            -->
+            <section class = "pure-u-7-12 header">
+                <h2 class = "tags">TAGS</h2>
+            </section>
+        </section>
+        <!--
+            Third Row
+        -->
+        <section class = "pure-g">
+            <!--
+                Autonomous Title
+            -->
+            <section class = "pure-u-7-12 header">
+                <h3 class = "autoTags">Autonomous</h2>
+            </section>
+        </section>
+        <!--
+                Fourth Row
+        -->
+        <section class = "pure-g">
+            <section class = "pure-u-7-12">
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-auto">
+                       Handles Grey Totes
+                    </button>
+                </section>
+                <section class="pure-u-2-24 filler spaceFixer"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-auto button-right">
+                       Handles Yellow Totes
+                    </button>
+                </section>
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+            </section>
+        </section>
+        <section class = "pure-g">
+            <section class = "pure-u-7-12">
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-auto">
+                       Handles Recyling Bins
+                    </button>
+                </section>
+                <section class="pure-u-2-24 filler spaceFixer"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-auto button-right">
+                       Moves to Auto Zone
+                    </button>
+                </section>
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+            </section>
+        </section>
+        <section class = "pure-g">
+            <!--
+                Teleop Title
+            -->
+            <section class = "pure-u-7-12 header">
+                <h3 class = "teleTags">Capabilities</h2>
+            </section>
+        </section>
+        <!--
+                Fifth Row
+        -->
+        <section class = "pure-g">
+            <section class = "pure-u-7-12">
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele">
+                       Can Stack Totes
+                    </button>
+                </section>
+                <section class="pure-u-2-24 filler spaceFixer"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele button-right">
+                       Can Place Recycling Bins
+                    </button>
+                </section>
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+            </section>
+        </section>
+        <section class = "pure-g">
+            <section class = "pure-u-7-12">
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele">
+                       Can Move/Hold Litter
+                    </button>
+                </section>
+                <section class="pure-u-2-24 filler spaceFixer"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele button-right">
+                       GRAHAM'S SPECIAL SPACE
+                    </button>
+                </section>
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+            </section>
+        </section>
+        <section class = "pure-g">
+            <section class = "pure-u-7-12">
+                <section class="pure-u-1-24 spaceFixer filler"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele">
+                       Broken Drivebase
+                    </button>
+                </section>
+                <section class="pure-u-2-24 filler spaceFixer"></section>
+                <section class = "pure-u-10-24 spaceFixer">
+                    <button class = "pure-button pure-button-active button-tele button-right">
+                       Broken Pickup
+                    </button>
+                </section>
+                <section class="pure-u-1-24 spaceFixer filler"></section>
             </section>
         </section>
     </body>
