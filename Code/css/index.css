@@ -67,7 +67,9 @@ body {
 
 .tags,
 .autoTags,
-.teleTags
+.teleTags,
+.rateTitle,
+.commTitle
 {
     text-align: center;
     margin: 0;
@@ -91,3 +93,14 @@ body {
     display: inline-block;
     height: 5px;
 }
+
+.button-rate {
+    width: 100%;
+    height: 3rem;
+}
+
+.comments {
+    width: 100%;
+    height: 12.1em;
+}
+
