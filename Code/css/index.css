@@ -69,7 +69,8 @@ body {
 .autoTags,
 .teleTags,
 .rateTitle,
-.commTitle
+.commTitle,
+.scoringTitle
 {
     text-align: center;
     margin: 0;
