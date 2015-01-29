@@ -1,410 +1,639 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap 101 Template</title>
-
-        <!-- Bootstrap -->
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <link href="css/index.css" rel="stylesheet" type="text/css">
-        <script src = "jquery/jquery-2.1.3.min.js" type = "text/javascript"></script>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+        <link rel="stylesheet" href="bower_components/pure/buttons-core-min.css" type="text/css">
+        <link rel= "stylesheet" href="bower_components/pure/buttons-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/base-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/base-context-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/forms-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/forms-nr-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/grids-core-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/grids-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/grids-responsive-old-ie-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/grids-units-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/menus-core-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/menus-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/menus-nr-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/menus-paginator-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/pure-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/pure-nr-min.css" type="text/css">
+        <link rel="stylesheet" href="bower_components/pure/tables-min.css" type="text/css">
+        <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="css/index.css" type="text/css">
     </head>
     <body>
-        <div id = "rr">
-
-        <section class = "container-fluid">
-            <section class = "row">
-                <header class = "col-lg-4">
-                    <h1>Scouting Application v0.0</h1>
-                </header>
-                <section class = "col-lg-2 col-lg-offset-1">
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            &#8203
-                        </section>
+        <!--
+            header
+        -->
+        <section class = "pure-g cx">
+            <!--
+                Scouting Application Title
+            -->
+            <section class = "pure-u-1-4">
+                <h1 class="title">Scouting App. v0.0</h1>
+            </section>
+            <!--
+                Alliance Selection
+            -->
+            <section class = "pure-u-1-12">
+                <button class = "pure-button button-alliance pure-button-active">
+                    Blue
+                </button>
+            </section>
+            <!--
+                Filler section
+            -->
+            <section class = "pure-u-1-24"></section>
+            <!--
+                Team 1 Label
+            -->
+            <section class = "pure-u-2-24">
+                <button class = "pure-button pure-button-active teamInput">Team 1</button>
+            </section>
+            <!--
+                Filler section
+            -->
+            <section class = "pure-u-1-24"></section>
+            <!--
+                Team 2 Label
+            -->
+            <section class = "pure-u-2-24">
+                <button class = "pure-button pure-button-active teamInput">Team 2</button>
+            </section>
+            <!--
+                Filler section
+            -->
+            <section class = "pure-u-1-24"></section>
+            <!--
+                Team 3 Label
+            -->
+            <section class = "pure-u-2-24">
+                <button class = "pure-button pure-button-active teamInput">Team 3</button>
+            </section>
+            <!--
+                Filler section
+            -->
+            <section class = "pure-u-1-24"></section>
+            <!--
+                Search Bar
+            -->
+            <section class = "pure-u-1-8">
+                <form class = "pure-form">
+                    <input class = "pure-input-2-3 searchBar" type = "search">
+                    <section class = "pure-u-1-3">
+                    <button class="pure-button pure-button-active button-search">
+                        <i class="fa fa-search"></i>
+                    </button>
                     </section>
-                    <section class= "row">
-                        <section class = "col-lg-12">
-                            <input type = "checkbox", class = "checkbox", id = "cooper" tabindex="1">
-                            </input>
-                            <label for = "cooper" class = "checkLabel">
-                                Coopertition
-                            </label>
-                        </section>
+                </form>
+            </section>
+            <!--
+                Filler section
+            -->
+            <section class = "pure-u-1-24"></section>
+            <!--
+                Match Number Indicator
+            -->
+            <section class = "pure-u-1-24">
+                <form class = "pure-form">
+                    <input type="text" class = "pure-input-1 matchNumber">
+                </form>
+            </section>
+        </section>
+        <!--
+            Main Container
+        -->
+        <section class = "pure-g">
+            <!--
+                First Column
+            -->
+           <section class = "pure-u-7-12">
+                <!--
+                    Second Row 1
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                    Tags Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h2 class = "tags">TAGS</h2>
+                    </section>
+               </section>
+                <!--
+                Third Row 1
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                    Autonomous Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h3 class = "autoTags">Autonomous</h3>
                     </section>
                 </section>
-                <section class = "col-lg-2">
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            &#8203
+                <!--
+                Fourth Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                    Auto Container 1
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                        Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                        Auto Button 1: Handles Grey Totes
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-auto">
+                                Handles Grey Totes
+                            </button>
                         </section>
-                    </section>
-                    <section class= "row">
-                        <section class = "col-lg-12">
-                            <input type = "checkbox", id = "hscore" class = "checkbox">
-                            </input>
-                            <label for = "hscore" class = "checkLabel">
-                                High Scoring?
-                            </label>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 filler spaceFixer"></section>
+                        <!--
+                        Auto Button 2: Handles Yellow Totes
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-auto button-right">
+                                Handles Yellow Totes
+                            </button>
                         </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
                     </section>
                 </section>
-                <section class = "col-lg-3">
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            &#8203
+                <!--
+                    Fifth Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Auto Container 2
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                            Auto Button 3: Handles Recycling Bins
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-auto">
+                                Handles Recyling Bins
+                            </button>
                         </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 filler spaceFixer"></section>
+                        <!--
+                            Auto Button 4: Moves to Auto Zone
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-auto button-right">
+                                Moves to Auto Zone
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
                     </section>
-                    <section class= "row">
-                        <section class = "col-lg-12">
-                            <form class = searchBarForm>
-                                <input type="text" placeholder="Search for a team..." class = "searchBar">
-                                <input type="button" value="Search">
+                </section>
+                <!--
+                    Sixth Row 1
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                        Teleop Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h3 class = "teleTags">Capabilities</h3>
+                    </section>
+                </section>
+                <!--
+                    Seventh Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Teleop Container 1
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                            Teleop Button 1: Can Stack Totes
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele">
+                                    Can Stack Totes
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 filler spaceFixer"></section>
+                        <!--
+                            Teleop Button 2: Can Place Recycling Bins
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele button-right">
+                            Can Place Recycling Bins
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                    </section>
+                </section>
+                <!--
+                    Eighth Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Teleop Container 2
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                            Teleop Button 3: Can Move/Hold Litter
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele">
+                                Can Move/Hold Litter
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 filler spaceFixer"></section>
+                        <!--
+                            Teleop Button 4: GRAHAM'S SPECIAL SPACE
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele button-right">
+                                Clumsiness
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                    </section>
+                </section>
+                <!--
+                    Ninth Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Teleop Container 3
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                            Teleop Button 5: Broken Drivebase
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele">
+                                Broken Drivebase
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 filler spaceFixer"></section>
+                        <!--
+                            Teleop Button 6: Broken Pickup
+                        -->
+                        <section class = "pure-u-10-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-tele button-right">
+                               Broken Pickup
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                    </section>
+                </section>
+                <!--
+                    Tenth Row 1
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                        Rating Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h3 class = "rateTitle">Rating</h3>
+                    </section>
+                </section>
+                <!--
+                    Eleventh Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Rating Container
+                    -->
+                    <section class= "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-4-24 spaceFixer filler"></section>
+                        <!--
+                            Rating Button 1: GOOD
+                        -->
+                        <section class = "pure-u-4-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-rate">
+                                GOOD
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 spaceFixer filler"></section>
+                        <!--
+                            Rating Button 2: MEH
+                        -->
+                        <section class = "pure-u-4-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-rate">
+                                MEH
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-2-24 spaceFixer filler"></section>
+                        <!--
+                            Rating Button 3: BAD
+                        -->
+                        <section class = "pure-u-4-24 spaceFixer">
+                            <button class = "pure-button pure-button-active button-rate">
+                                BAD
+                            </button>
+                        </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-4-24 spaceFixer filler"></section>
+                    </section>
+                </section>
+                <!--
+                    Twelth Row 1
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                        Comments Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h3 class = "commTitle">Comments</h3>
+                    </section>
+                </section>
+                <!--
+                    Thirteenth Row 1
+                -->
+                <section class = "pure-g">
+                    <!--
+                        Comments Container
+                    -->
+                    <section class = "pure-u-1">
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <!--
+                            Comments Box
+                        -->
+                        <section class = "pure-u-22-24 spaceFixer commentContainer">
+                            <form>
+                                <textarea class = "comments"></textarea>
                             </form>
                         </section>
+                        <!--
+                            Filler section
+                        -->
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
                     </section>
                 </section>
             </section>
-            <section class = "row">
-                <section class = "col-lg-4 column">
-                    <section class = "row">
-                        <section class = "col-lg-5">
-                            <input type = "text" name = "teamName" class = "teamName">
-
-                            </input>
-                        </section>
-                        <section class = "col-lg-7">
-                            <form>
-                                <input type = "radio" class = "radio" value = "good" id = "good1" name = "toggle">
-                                <label for = "good1" class = "radioLabel">
-                                    Good
-                                </label>
-                                <input type = "radio" class = "radio" value = "meh" id = "meh1" name = "toggle">
-                                <label for = "meh1" class = "radioLabel">
-                                    Meh
-                                </label>
-                                <input type = "radio" class = "radio" value = "bad" id = "bad1" name = "toggle">
-                                <label for = "bad1" class = "radioLabel">
-                                    Bad
-                                </label>
-                            </form>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Autonomous
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "greyBinsAuto" class = "checkbox">
-                            </input>
-                            <label for = "greyBinsAuto" class = "checkLabel">
-                                Grey Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "yellowBinsAuto" class = "checkbox">
-                            </input>
-                            <label for = "yellowBinsAuto" class = "checkLabel">
-                                Yellow Bins
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsAuto" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsAuto" class = "checkLabel">
-                                Recycle Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "autoZoneAuto" class = "checkbox">
-                            </input>
-                            <label for = "autoZoneAuto" class = "checkLabel">
-                                Auto Zone
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Capabilities
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "stackingTele" class = "checkbox">
-                            </input>
-                            <label for = "stackingTele" class = "checkLabel">
-                                Stacking
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsTele" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsTele" class = "checkLabel">
-                                Recycle Handling
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "litterTele" class = "checkbox">
-                            </input>
-                            <label for = "litterTele" class = "checkLabel">
-                                Litter Handling
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "brokenTele" class = "checkbox">
-                            </input>
-                            <label for = "brokenTele" class = "checkLabel">
-                                Broken
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Comments
-                        </section>
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            <textarea name="comments" class = "comments"></textarea>
-                        </section>
+            <!--
+                Column 2
+            -->
+            <section class="pure-u-5-12">
+                <!--
+                    Second Row 2
+                -->
+                <section class = "pure-g cx">
+                    <!--
+                        Scoring Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h2 class = "tags">SCORING</h2>
                     </section>
                 </section>
-                </section>
-                <section class = "col-lg-4 column">
-                     <section class = "row">
-                        <section class = "col-lg-5">
-                            <input type = "text" name = "teamName" class = "teamName">
-
-                            </input>
+                <!--
+                    Third Row 2
+                -->
+                <section class = "pure-g">
+                    <section class="pure-u-2-3">
+                        <section class = "pure-g cx">
+                            <!--
+                            Autonomous Scoring Title
+                            -->
+                            <section class = "pure-u-1 header">
+                                <h3 class = "autoS">Autonomous</h3>
+                            </section>
                         </section>
-                        <section class = "col-lg-7">
+                        <!--
+                            Fourth Row 2
+                        -->
+                        <section class="pure-g">
+                            <!--
+                                Filler section
+                            -->
+                            <section class="pure-u-1-4 filler spaceFixer"></section>
+                            <!--
+                                Auto Scoring Label 1: Yellow Totes Moved to Auto
+                            -->
+                            <section class="pure-u-1-2 spaceFixer autoSLabel">
+                                <label for="yellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
+                            </section>
+                            <!--
+                                Auto Scoring Button 1
+                            -->
+                            <section class = "pure-u-1-4 spaceFixer">
+                                <button id="yellowMoved" class="pure-button pure-button-active autoSButton">0</button>
+                            </section>
+                        </section>
+                        <!--
+                            Fifth Row 2
+                        -->
+                        <section class="pure-g">
+                            <!--
+                                Filler section
+                            -->
+                            <section class="pure-u-1-4 filler spaceFixer"></section>
+                            <!--
+                                Auto Scoring Label 2: Yellow Totes Stacked
+                            -->
+                            <section class="pure-u-1-2 spaceFixer autoSLabel">
+                                <label for="yellowStacked" class = "label">Yellow Totes Stacked:</label>
+                            </section>
+                            <!--
+                                Auto Scoring Button 2
+                            -->
+                            <section class = "pure-u-1-4 spaceFixer">
+                                <button id="yellowStacked" class="pure-button pure-button-active autoSButton">0</button>
+                            </section>
+                        </section>
+                        <!--
+                            Sixth Row 2
+                        -->
+                        <section class="pure-g">
+                            <!--
+                                Filler section
+                            -->
+                            <section class="pure-u-1-4 filler spaceFixer"></section>
+                            <!--
+                                Auto Scoring Label 3: Recycling Bins Moved
+                            -->
+                            <section class="pure-u-1-2 spaceFixer autoSLabel">
+                                <label for="autoRecycle" class = "label" >Recycling Bins Moved:</label>
+                            </section>
+                            <!--
+                                Auto Scoring Button 3
+                            -->
+                            <section class = "pure-u-1-4 spaceFixer">
+                                <button id="autoRecycle" class="pure-button pure-button-active autoSButton">0</button>
+                            </section>
+                        </section>
+                        <!--
+                            Sexenth Row 2
+                        -->
+                        <section class = "pure-g cx">
+                            <!--
+                            Teleop Scoring Title
+                            -->
+                            <section class = "pure-u-1 header">
+                                <h3 class = "teleS">Teleop</h3>
+                            </section>
+                        </section>
+                        <!--
+                            Eighth Row 2
+                        -->
+                        <section class="pure-g">
+                            <!--
+                                Filler section
+                            -->
+                            <section class="pure-u-1-4 filler spaceFixer"></section>
+                            <!--
+                                Tele Scoring Label 1: Grey Totes Stacked
+                            -->
+                            <section class="pure-u-1-2 spaceFixer teleSLabel">
+                                <label for="teleGrey" class = "label">Grey Totes Stacked:</label>
+                            </section>
+                            <!--
+                                Tele Scoring Button 1
+                            -->
+                            <section class = "pure-u-1-4 spaceFixer">
+                                <button id="teleGrey" class="pure-button pure-button-active teleSButton">0</button>
+                            </section>
+                        </section>
+                        <!--
+                            Ninth Row 2
+                        -->
+                        <section class="pure-g">
+                            <!--
+                                Filler section
+                            -->
+                            <section class="pure-u-1-4 filler spaceFixer"></section>
+                            <!--
+                                Tele Scoring Label 2: Recycling Bins Stacked
+                            -->
+                            <section class="pure-u-1-2 spaceFixer teleSLabel">
+                                <label for="teleRecycle" class = "label">Recycling Bins Stacked:</label>
+                            </section>
+                            <!--
+                                Tele Scoring Button 2
+                            -->
+                            <section class = "pure-u-1-4 spaceFixer">
+                                <input type = "number" min = "0" max="10" class="pure-button pure-button-active teleSButton"/>
+                            </section>
+                        </section>
+                    </section>
+                    <section class="pure-u-1-3 levels">
+                        <input type = "range" min = "0" max = "6" class="slide" value="0" step = "1"/>
+                    </section>
+                </section>
+                <!--
+                    Tenth Row 2
+                -->
+                <section class = "pure-g matchThings matchMargin cx">
+                    <!--
+                        Match Things Title
+                    -->
+                    <section class = "pure-u-1 header">
+                        <h3 class = "matchThingsTitle">Match Things</h3>
+                    </section>
+                </section>
+                <section class = "pure-g">
+                    <section class = "pure-u-1-3 spaceFixer">
+                        <section class = "pure-g matchMargin">
+                            <section class = "pure-u-1">
+                                <button class = "pure-button pure-button-active button-match spaceFixer">
+                                    Coopertition Stack
+                                </button>
+                            </section>
+                        </section>
+                        <section class = "pure-g matchMargin">
+                            <section class = "pure-u-1">
+                                <button class = "pure-button pure-button-active button-match spaceFixer">
+                                    Coopertition Set
+                                </button>
+                            </section>
+                        </section>
+                        <section class = "pure-g matchMargin">
+                            <section class = "pure-u-1">
+                                <button class = "pure-button pure-button-active button-match spaceFixer">
+                                    High Scoring
+                                </button>
+                            </section>
+                        </section>
+                    </section>
+                    <section class = "pure-u-2-3 spaceFixer">
+                        <section class = "pure-g">
+                            <!--
+                                Match Comments Title
+                            -->
+                            <section class = "pure-u-1 header">
+                                <h3 class = "commTitle">Comments</h3>
+                            </section>
+                        </section>
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
+                        <section class = "pure-u-11-12 spaceFixer commentContainer">
                             <form>
-                                <input type = "radio" class = "radio" value = "good" id = "good2" name = "toggle">
-                                <label for = "good2" class = "radioLabel">
-                                    Good
-                                </label>
-                                <input type = "radio" class = "radio" value = "meh" id = "meh2" name = "toggle">
-                                <label for = "meh2" class = "radioLabel">
-                                    Meh
-                                </label>
-                                <input type = "radio" class = "radio" value = "bad" id = "bad2" name = "toggle">
-                                <label for = "bad2" class = "radioLabel">
-                                    Bad
-                                </label>
+                                <textarea class = "matchComments"></textarea>
                             </form>
                         </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Autonomous
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "greyBinsAuto2" class = "checkbox">
-                            </input>
-                            <label for = "greyBinsAuto2" class = "checkLabel">
-                                Grey Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "yellowBinsAuto2" class = "checkbox">
-                            </input>
-                            <label for = "yellowBinsAuto2" class = "checkLabel">
-                                Yellow Bins
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsAuto2" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsAuto2" class = "checkLabel">
-                                Recycle Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "autoZoneAuto2" class = "checkbox">
-                            </input>
-                            <label for = "autoZoneAuto2" class = "checkLabel">
-                                Auto Zone
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Capabilities
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "stackingTele2" class = "checkbox">
-                            </input>
-                            <label for = "stackingTele2" class = "checkLabel">
-                                Stacking
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsTele2" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsTele2" class = "checkLabel">
-                                Recycle Handling
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "litterTele2" class = "checkbox">
-                            </input>
-                            <label for = "litterTele2" class = "checkLabel">
-                                Litter Handling
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "brokenTele2" class = "checkbox">
-                            </input>
-                            <label for = "brokenTele2" class = "checkLabel">
-                                Broken
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Comments
-                        </section>
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            <textarea name="comments" class = "comments"></textarea>
-                        </section>
+                        <section class="pure-u-1-24 spaceFixer filler"></section>
                     </section>
                 </section>
             </section>
-                <section class = "col-lg-4 column">
-                    <section class = "row">
-                        <section class = "col-lg-5">
-                            <input type = "text" name = "teamName" class = "teamName">
-
-                            </input>
-                        </section>
-                        <section class = "col-lg-7">
-                            <form>
-                                <input type = "radio" class = "radio" value = "good" id = "good3" name = "toggle">
-                                <label for = "good3" class = "radioLabel">
-                                    Good
-                                </label>
-                                <input type = "radio" class = "radio" value = "meh" id = "meh3" name = "toggle">
-                                <label for = "meh3" class = "radioLabel">
-                                    Meh
-                                </label>
-                                <input type = "radio" class = "radio" value = "bad" id = "bad3" name = "toggle">
-                                <label for = "bad3" class = "radioLabel">
-                                    Bad
-                                </label>
-                            </form>
-                        </section>
-                    </section>
-                     <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Autonomous
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "greyBinsAuto3" class = "checkbox">
-                            </input>
-                            <label for = "greyBinsAuto3" class = "checkLabel">
-                                Grey Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "yellowBinsAuto3" class = "checkbox">
-                            </input>
-                            <label for = "yellowBinsAuto3" class = "checkLabel">
-                                Yellow Bins
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsAuto3" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsAuto3" class = "checkLabel">
-                                Recycle Bins
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "autoZoneAuto3" class = "checkbox">
-                            </input>
-                            <label for = "autoZoneAuto3" class = "checkLabel">
-                                Auto Zone
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Capabilities
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "stackingTele3" class = "checkbox">
-                            </input>
-                            <label for = "stackingTele3" class = "checkLabel">
-                                Stacking
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "recycleBinsTele3" class = "checkbox">
-                            </input>
-                            <label for = "recycleBinsTele3" class = "checkLabel">
-                                Recycle Handling
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "litterTele3" class = "checkbox">
-                            </input>
-                            <label for = "litterTele3" class = "checkLabel">
-                                Litter Handling
-                            </label>
-                        </section>
-                        <section class = "col-lg-6">
-                            <input type = "checkbox", id = "brokenTele3" class = "checkbox">
-                            </input>
-                            <label for = "brokenTele3" class = "checkLabel">
-                                Broken
-                            </label>
-                        </section>
-                    </section>
-                    <section class = "row">
-                        <section class = "col-lg-12 category">
-                            Comments
-                        </section>
-                    <section class = "row">
-                        <section class = "col-lg-12">
-                            <textarea name="comments" class = "comments"></textarea>
-                        </section>
-                    </section>
-                    </section>
-                </section>
-            <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-            <!-- Include all compiled plugins (below), or include insectionidual files as needed -->
-            <script src="js/bootstrap.min.js"></script>
-        </div>
+        </section>
     </body>
 </html>

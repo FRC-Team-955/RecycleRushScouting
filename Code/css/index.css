@@ -1,103 +1,187 @@
-@import url(http://fonts.googleapis.com/css?family=Cabin);
+@font-face {
+    font-family: "Raleway";
+    src: url("../fonts/Raleway-Medium.ttf");
+    font-family: "OpenSans";
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
 
-*{
+
+* {
+    font-family: "OpenSans";
+    box-sizing: border-box;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    box-sizing: border-box;
 }
 
-#rr body {
+body {
     background-color: #dbdbdb;
 }
 
-#rr h1{
-    font-family: "Cabin";
+.column {
+    border: black solid 1px;
+}
+.title {
+    font-size: 2rem;
+    margin-left: 2rem;
+    margin-top: 1rem;
+    font-family: "Raleway";
 }
 
-.column{
-   border : 1px solid black;
-}
-
-.checkbox {
-    display: none;
-}
-
-.radio {
-    display: none;
-}
-.checkLabel {
+.button-alliance {
+    background-color: #3bbeff;
+    width: 100%;
     display: block;
-    /*color: black;*/
-    font-size: 25px;
-    border-radius: 10px;
-    padding: 0px 5px;
-    font-family: "Cabin";
+    margin-top: 1rem;
+    height: 2rem;
+}
+
+.teamInput {
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
     text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.radioLabel {
-    display: inline-block;
-    color: black;
-    font-size: 25px;
-    border-radius: 10px;
-    padding: 0px 5px;
-    font-family: "Cabin";
-    height: 36px;
-    width: 75px;
-    text-align: center;
-    margin-top: 2px;
-}
-
-.checkLabel:hover,
-.checkLabel:focus,
-.radioLabel:hover,
-.radioLabel:focus{
-    background-color: #e8322e;
-    color: #b8c2b8;
-}
-
-.radio:checked + .radioLabel:hover,
-.radio:checked + .radioLabel:focus,
-.checkbox:checked + .checkLabel:hover,
-.checkbox:checked + .checkLabel:focus {
-    background-color: #b8c2b8;
-    color: #e8322e;
-}
-
-.radio:checked + .radioLabel,
-.radio:checked + .radioLabel,
-.checkbox:checked + .checkLabel,
-.checkbox:checked + .checkLabel {
-    background-color: #e8322e;
+    font-size: .75rem;
 }
 
 .searchBar {
-    margin-top: 7px;
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
+    float: left;
 }
 
-.teamName{
-    height: 100%;
+.matchNumber {
+    background-color: #3bbeff;
+    margin-top: 1rem;
+    height: 2rem;
+    text-align: center;
+    margin-right: 2rem;
+}
+
+.button-search {
+    margin-top: 1rem;
+    height: 2rem;
     width: 100%;
-    margin-top: 5px;
-    border-color: black;
+    padding: 8px 0;
+    background-color: #3bbeff;
+    border-radius: 4px;
+    box-shadow: inset 0 1px 3px #ddd;
+    border: 1px solid #ccc;
+}
+
+
+.cx {
+    margin: 1rem 1rem .5rem 1rem;
+    background-color: #b8c2b8;
+}
+
+.tags,
+.autoTags,
+.teleTags,
+.rateTitle,
+.scoringTitle,
+.autoS,
+.teleS,
+.matchThingsTitle
+{
+    text-align: center;
+    margin: 0;
+    background-color: #b8c2b8;
+}
+
+.button-auto,
+.button-tele,
+.button-match
+{
+    width: 100%;
+    font-size: .75rem;
+}
+
+.button-right {
+    float: right;
+}
+
+.spaceFixer {
+    float: left;
+}
+
+.filler {
+    display: inline-block;
+    height: 5px;
+}
+
+.button-rate {
+    width: 100%;
+    height: 3rem;
 }
 
 .comments {
-    height: 315px;
-    width: 90%;
-    resize: none;
-    margin-left: 5%;
-    margin-right: 5%;
+    width: 100%;
+    height: 8rem;
+    margin-top: 1rem;
 }
-.category{
-    margin-top: 10px;
+
+.autoScore,
+.teleScore,
+.matchThings
+{
+    margin-bottom: .25rem;
+    background-color: #b8c2b8;
+}
+
+.autoSButton,
+.teleSButton
+{
+    float: right;
+    width: 100%;
+}
+
+.autoSLabel,
+.teleSLabel
+{
+    margin-top: .2rem;
+    margin-bottom: auto;
+}
+
+.levels {
+    height: 100%;
+    margin-top: .25rem;
+    text-align: right;
+    padding-left: 1rem;
+}
+
+.matchThingsContainer {
+    margin-left: .5rem;
+    margin-top: 1rem;
+}
+
+.matchMargin {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
+
+.matchComments {
+    height: 9rem;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.slide {
+    -webkit-appearance: slider-vertical;
+    writing-mode: bt-lr;
+    height: 14rem;
+}
+
+.label {
+    float: right;
+    padding-right: 1rem;
+    font-size: .75rem;
+}
+.commTitle {
+    margin: 0;
     text-align: center;
-    font-size: 25px;
-    font-family: "Cabin";
 }
