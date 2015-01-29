@@ -1,11 +1,23 @@
-@import url(http://fonts.googleapis.com/css?family=Cabin);
+@font-face {
+    font-family: "Raleway";
+    src: url("../fonts/Raleway-Medium.ttf");
+    font-family: "OpenSans";
+    src: url("../fonts/OpenSans-Regular.ttf");
+}
+
+
 * {
-    font-family: "Cabin";
+    font-family: "OpenSans";
     box-sizing: border-box;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 body {
-    font-size: 100%;
     background-color: #dbdbdb;
 }
 
@@ -16,6 +28,7 @@ body {
     font-size: 2rem;
     margin-left: 2rem;
     margin-top: 1rem;
+    font-family: "Raleway";
 }
 
 .button-alliance {
@@ -31,6 +44,7 @@ body {
     margin-top: 1rem;
     height: 2rem;
     text-align: center;
+    font-size: .75rem;
 }
 
 .searchBar {
@@ -61,7 +75,7 @@ body {
 
 
 .cx {
-    margin: 1rem;
+    margin: 1rem 1rem .5rem 1rem;
     background-color: #b8c2b8;
 }
 
@@ -69,7 +83,6 @@ body {
 .autoTags,
 .teleTags,
 .rateTitle,
-.commTitle,
 .scoringTitle,
 .autoS,
 .teleS,
@@ -77,6 +90,7 @@ body {
 {
     text-align: center;
     margin: 0;
+    background-color: #b8c2b8;
 }
 
 .button-auto,
@@ -84,6 +98,7 @@ body {
 .button-match
 {
     width: 100%;
+    font-size: .75rem;
 }
 
 .button-right {
@@ -106,7 +121,7 @@ body {
 
 .comments {
     width: 100%;
-    height: 12.5em;
+    height: 8rem;
     margin-top: 1rem;
 }
 
@@ -133,11 +148,10 @@ body {
 }
 
 .levels {
-    height: 2rem;
-    margin-top: 1rem;
-    margin-left: .5rem;
-    margin-right: .5rem;
-    text-align: center;
+    height: 100%;
+    margin-top: .25rem;
+    text-align: right;
+    padding-left: 1rem;
 }
 
 .matchThingsContainer {
@@ -150,7 +164,23 @@ body {
 }
 
 .matchComments {
-    height: 13em;
+    height: 9rem;
     width: 100%;
     margin-top: 1rem;
+}
+
+.slide {
+    -webkit-appearance: slider-vertical;
+    writing-mode: bt-lr;
+    height: 14rem;
+}
+
+.label {
+    float: right;
+    padding-right: 1rem;
+    font-size: .75rem;
+}
+.commTitle {
+    margin: 0;
+    text-align: center;
 }
