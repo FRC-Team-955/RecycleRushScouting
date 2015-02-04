@@ -1,9 +1,18 @@
-var matchNumber
+var contr = new Controller();
 
-var matchAmount;
+$(function(){
+    init();
+});
 
-for(matchNumber = 1; matchNumber < matchAmount; matchNumber ++){
-
+function init()
+{
+    console.log("Init");
+    window.requestAnimationFrame(main);
 }
 
-
+function main()
+{
+    contr.update(navigator.getGamepads()[0]);
+    console.log("Main Yo");
+    window.requestAnimationFrame(main);
+}
