@@ -33,3 +33,9 @@ function getData(key, callback)
         } 
     });
 }
+
+function buttonSelect(el)
+{
+    var button = $("el.id");
+    button.addClass("button-select");
+}

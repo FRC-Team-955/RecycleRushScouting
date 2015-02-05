@@ -185,3 +185,7 @@ body {
     margin: 0;
     text-align: center;
 }
+
+.button-select {
+    background-color: pink;
+}
