@@ -18,11 +18,8 @@ Controller.prototype.update = function(contr)
     
     for(var i = 0; i < maxContrBtns; i++)
     {
-        this.rawButtons[i] = exists ? Boolean(contr.buttons[i]) : false;
-        
-        if(this.rawButtons[i] && !this.prevButtons[i])
-            this.buttons[i] = true;
-        
+        this.rawButtons[i] = exists ? Boolean(contr.buttons[i].pressed) : false;
+        this.buttons[i] = this.rawButtons[i] && !this.prevButtons[i];
         this.prevButtons[i] = this.rawButtons[i];
     }
 };

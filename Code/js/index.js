@@ -12,10 +12,11 @@ function init()
 
 function main()
 {
-    contr.update(navigator.getGamepads()[0]);    
-    getData("team/frc254/years_participated", print);
-    console.log("Main Yo");
-    //window.requestAnimationFrame(main);
+    contr.update(navigator.getGamepads()[0]); 
+    //console.log(navigator.getGamepads()[0]);
+    //getData("team/frc254/years_participated", print);
+    console.log(contr.getButton(contrBtn.a));
+    window.requestAnimationFrame(main);
 }
 
 function print(str)
@@ -32,10 +33,4 @@ function getData(key, callback)
             callback(null);
         } 
     });
-}
-
-function buttonSelect(el)
-{
-    var button = $("el.id");
-    button.addClass("button-select");
 }
