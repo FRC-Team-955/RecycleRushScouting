@@ -1,7 +1,7 @@
-Design Decisions
+DESIGN DECISIONS
 ====================
 
-Introduction
+INTRODUCTION
 ---------------------
 
 This scouting application is supposed to look pretty. If you don't think it looks pretty, please leave.
@@ -17,10 +17,10 @@ This competition is going to rely a lot on hard data, as rankings are going to b
     +   Number of recycling bins scored, including their level
 +   A description database, including a general rating of each robot, their team name, and team number
 
-Necessary Elements
+NECESSARY ELEMENTS
 ---------------------
 
-### Data Objects in Match mode
+### DATA OBJECTS IN MATCH MODE
 
 +   Tags
 	+   Match Tags
@@ -40,33 +40,33 @@ Necessary Elements
         +   Broken pickup sytem
 +   Scoring
     +   Autonomous
-        +   # of yellow totes moved to auto zone
-        +   # of yellow totes stacked
-        +   # of rcycling bins moved to auto zone
+        +   \# of yellow totes moved to auto zone
+        +   \# of yellow totes stacked
+        +   \# of rcycling bins moved to auto zone
     +   Teleop
-        +   # of grey totes stacked
-        +   # of stacks created
-        +   # of Recycling bins stacked + level of stack
+        +   \# of grey totes stacked
+        +   \# of stacks created
+        +   \# of Recycling bins stacked + level of stack
 +   Comments on individual robots (when applicable)
 +   Comments on individual rounds (when applicable)
 +   Rating system (Good, meh, bad) for robot performance in individual rounds
 +   Team Number
 
 
-### Technical things to be thought out:
+### TECHNICAL THINGS TO BE THOUGHT ABOUT
 
 +   Writing and referencing JSON objects with robot data
 +   Reading and recording Blue Alliance OPRs
 +   Writing a responsive reference interface
 
-### Design Things
+### VISUAL DESIGN THINGS
 
 +   Color palette
 +   Ghost buttons and images?
 +   Framework or hand-coded?
 +   Mock-up interface
 
-Key mappings
+KEY MAPPINGS
 ---------------------
 
 You can use an Xbox 360 controller to navigate the input section. Here are the controls:
