@@ -65,3 +65,50 @@ Necessary Elements
 +   Ghost buttons and images?
 +   Framework or hand-coded?
 +   Mock-up interface
+
+Key mappings
+---------------------
+
+You can use an Xbox 360 controller to navigate the input section. Here are the controls:
+
++	A button
+	+	In Autonomous:
+		+	Increments Recycling Bins Moved.
+	+	In Teleop
+		+	Increments Grey Totes Stacked.
++	B Button
+	+	Undoes the last Scoring increment.
++	X Button
+	+	In Autonomous:
+		+	Increments Yellow Totes Stacked.
+	+	In Teleop:
+		+	Does nothing.
++	Y Button
+	+	In Autonomous:
+		+	Increments Yellow Totes Moved To Auto.
+	+	In Teleop
+		+	Does nothing.
++	Left Bumper
+	+	Switches focus to the previous button, inside the Tags and Match Things areas.
++	Right Bumper
+	+	Switches focus to the next button, inside the Tags and Match Things areas.
++	Left Trigger
+	+	Switches to the previous robot tab, globally.
++	Right Trigger
+	+	Switches to the next robot tab, globally.
++	Back Button
+	+	Switches the Tags area focus to the previous area (Capabilities -> Autonomous)
++	Start Button
+	+	Switches the Tags area focus to the next area (Autonomous -> Capabilities)
++	Left Stick Button
+	+	Switches the Scoring area focus to the previous area (Teleop -> Autonomous).
++	Right Stick Button
+	+	Switches the Scoring area focus to the next area (Autonomous -> Teleop).
++	D-Pad Up
+	+	Moves the tote slider down a position.
++	D-Pad Down
+	+	Moves the tote slider up a position.
++	D-Pad Left
+	+	Increments the tote number, refreshing the slider with corresponding data.
++	D-Pad Right
+	+	Decrements the tote number, refreshing the slider with corresponding data.
