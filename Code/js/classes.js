@@ -1,3 +1,4 @@
+// XBOX 360 Controller
 function Controller()
 {
     this.buttons = [];
@@ -28,3 +29,59 @@ Controller.prototype.getButton = function(btnId)
 {
     return this.buttons[btnId];
 };
+
+// Robot data
+function RobotData()
+{
+    this.data = 
+    {
+        "tags":
+        {
+            "match": 
+            {
+                "coopStack" : 0,
+                "coopSet": 0,
+                "highScoring": 0
+            },
+            
+            "auto":
+            {
+                "handlesGrey": 0,
+                "handlesYellow": 0,
+                "movesBins": 0,
+                "movesToAuto": 0
+            },
+
+            "abilites":
+            {
+                "canStack": 0,
+                "canPlaceBins": 0,
+                "canMoveLitter": 0,
+                "brokenDrive": 0,
+                "brokenPickup": 0
+            }
+        },
+        
+        "scoring":
+        {
+            "auto":
+            {
+                "yellowMoved": 0,
+                "yellowStacked": 0,
+                "binsMoved": 0
+            },
+            
+            "teleop":
+            {
+                "greyStacked": 0,
+                "stacksMade": 0,
+                "binsStackedAndLevel": 0
+            }
+        },
+        
+        "commentsRobot": "",
+        "commentsMatch": "",
+        "rating": 0,
+        "teamNumber": 0
+    }; 
+}
