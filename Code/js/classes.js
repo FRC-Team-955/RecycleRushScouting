@@ -19,8 +19,8 @@ Controller.prototype.update = function(contr)
     var exists = typeof contr !== "undefined";
     var leftStickDpadId = exists ? getDpadId(contr, chnLeftStick): 0;
     var rightStickDpadId = exists ? getDpadId(contr, chnRightStick): 0;
-    var leftMag = exists ? getMag(contr, chnLeftStick) : 0;
-    var rightMag = exists ? getMag(contr, chnRightStick): 0;
+    var leftStickMag = exists ? getMag(contr, chnLeftStick) : 0;
+    var rightStickMag = exists ? getMag(contr, chnRightStick): 0;
     this.buttonWasPressed = false;
     
     for(var i = 0; i < maxContrBtns; i++)
@@ -28,28 +28,28 @@ Controller.prototype.update = function(contr)
         if(exists)
         {
             if(i === contrBtn.lu)       // left stick up
-                this.rawButtons[i] = leftMag > stickTolerance && leftStickDpadId === dpadId.u;
+                this.rawButtons[i] = leftStickMag > stickTolerance && leftStickDpadId === dpadId.u;
             
             else if(i === contrBtn.ld)  // left stick down  
-                this.rawButtons[i] = leftMag > stickTolerance && leftStickDpadId === dpadId.d;
+                this.rawButtons[i] = leftStickMag > stickTolerance && leftStickDpadId === dpadId.d;
             
             else if(i === contrBtn.ll)  // left stick left
-                this.rawButtons[i] = leftMag > stickTolerance && leftStickDpadId === dpadId.l;
+                this.rawButtons[i] = leftStickMag > stickTolerance && leftStickDpadId === dpadId.l;
             
             else if(i === contrBtn.lr)  // left stick right
-                this.rawButtons[i] = leftMag > stickTolerance && leftStickDpadId === dpadId.r;
+                this.rawButtons[i] = leftStickMag > stickTolerance && leftStickDpadId === dpadId.r;
             
             else if(i === contrBtn.ru)  // right stick up
-                this.rawButtons[i] = rightMag > stickTolerance && rightStickDpadId === dpadId.u;
+                this.rawButtons[i] = rightStickMag > stickTolerance && rightStickDpadId === dpadId.u;
             
             else if(i === contrBtn.rd)  // right stick down
-                this.rawButtons[i] = rightMag > stickTolerance && rightStickDpadId === dpadId.d;
+                this.rawButtons[i] = rightStickMag > stickTolerance && rightStickDpadId === dpadId.d;
             
             else if(i === contrBtn.rl)  // right stick left
-                this.rawButtons[i] = rightMag > stickTolerance && rightStickDpadId === dpadId.l;
+                this.rawButtons[i] = rightStickMag > stickTolerance && rightStickDpadId === dpadId.l;
             
             else if(i === contrBtn.rr)  // right stick right
-                this.rawButtons[i] = rightMag > stickTolerance && rightStickDpadId === dpadId.r;
+                this.rawButtons[i] = rightStickMag > stickTolerance && rightStickDpadId === dpadId.r;
             
             else
                 this.rawButtons[i] = contr.buttons[i].pressed;
@@ -98,7 +98,7 @@ function RobotData()
                 "movesToAuto": 0
             },
 
-            "abilites":
+            "capabilities":
             {
                 "canStack": 0,
                 "canPlaceBins": 0,

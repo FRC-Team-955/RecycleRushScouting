@@ -1,10 +1,35 @@
-var maxTeamsPerAlliance = 3;                // Max teams per alliance
-var maxContrBtns = 24;                      // Max buttons on controller
-var dpadId = { d: 0, r: 1, u: 2, l: 3 };    // Dpad id
-var stickTolerance = 0.1;                   // Min stick tolerance
-var chnLeftStick = { x: 0, y: 1 };          // Axes chn for left stick
-var chnRightStick = { x: 2, y: 3 };         // Axes chn for right stick
-var contrBtn =                              // Button ids for controller
+// Max teams per alliance
+var maxTeamsPerAlliance = 3; 
+
+// Max buttons on controller
+var maxContrBtns = 24;  
+
+// Dpad id
+var dpadId = { d: 0, r: 1, u: 2, l: 3 };
+
+// Min stick tolerance
+var stickTolerance = 0.2;  
+
+// Axes chn for left stick
+var chnLeftStick = { x: 0, y: 1 };  
+
+// Axes chn for right stick
+var chnRightStick = { x: 2, y: 3 };  
+
+// Mode ids
+var modeId = { tags: 0, scoring: 1 };
+
+// Sub mode ids
+var subId = { tags: { auto: 0, capabilities: 1, rating: 2 }, scoring: { auto: 0, teleop: 1} };
+
+// Max sub mode ids
+var maxSubId = { tags: 3, scoring: 2 };
+
+// Max inner ids
+var maxInnerId = { tags: { auto: 4, capabilities: 6, rating: 3 }, scoring: { auto: 3, teleop: 2 } };
+
+// Button ids for controller
+var contrBtn =                              
 {
   a: 0,     // a
   b: 1,     // b
