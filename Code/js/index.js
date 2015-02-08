@@ -14,17 +14,18 @@ var alliance = [];
 var curTeamIndex = 0;          
 
 // Current mode, submode, innermode
-var currMode = { id: 0, subId: 0, innerId: 0, innerIdMax: 0 };
+var currMode = { tags: { subId: 0, innerId: 0, innerIdMax: 0 }, scoring: { subId: 0, innerId: 0, innerIdMax: 0 } };
 
 // Previous submode
 var prevSubId = { tags: { subId: 0 }, scoring: { subId: 0 } };
 
 // Previous innermode 
-var prevInnerId = { tags: { auto: 0, capabilities: 0, rating: 0 }, scoring: { auto: 0, teleop: 0 } };
+var prevInnerId = { tags: { auto: 0, capabilities: 0, rating: 0 }, scoring: { subName: "", innerName: "" } };
 
 $(function()
 {
     console.log("Init");
+    resetScouting();
     window.requestAnimationFrame(main);
 });
 
@@ -35,110 +36,116 @@ function main()
     
     // Switch to previous robot in alliance
     if(contr.getButton(contrBtn.lt) && --curTeamIndex < 0)
-        curTeamIndex = 0;
+        curTeamIndex = maxTeamsPerAlliance - 1;
     
     // Switch to next robot in alliance
     if(contr.getButton(contrBtn.rt) && ++curTeamIndex >= maxTeamsPerAlliance)
-        curTeamIndex = maxTeamsPerAlliance - 1;
+        curTeamIndex = 0;
     
-    if(currMode.id === modeId.tags)
+    // Switch tags area focus to previous/next area
+    if(contr.getButton(contrBtn.bk) || contr.getButton(contrBtn.st))
     {
-        // Switch tags area focus to previous/next area
-        if(contr.getButton(contrBtn.bk) || contr.getButton(contrBtn.st))
-        {
-            // Switch to previous area
-            if(contr.getButton(contrBtn.bk) && --currMode.subId < 0)
-                currMode.subId = 0;
-            
-            // Switch to next area
-            else if(contr.getButton(contrBtn.st) && ++currMode.subId >= maxSubId.tags)
-                currMode.subId = maxSubId.tags - 1;
-            
-            // Set focus to old focus in area, update max inner ids
-            if(currMode.subId === subId.tags.auto)
-            {
-                currMode.innerIdMax = maxInnerId.tags.auto;
-                currMode.innerId = prevInnerId.tags.auto;
-            }
-            
-            else if(currMode.subId === subId.tags.capabilities)
-            {
-                currMode.innerIdMax = maxInnerId.tags.capabilities;
-                currMode.innerId = prevInnerId.tags.capabilities;
-            }
-            
-            else if(currMode.subId === subId.tags.rating)
-            {
-                currMode.innerIdMax = maxInnerId.tags.rating;
-                currMode.innerId = prevInnerId.tags.rating;
-            }
-        }
+        // Switch to previous area
+        if(contr.getButton(contrBtn.bk) && --currMode.tags.subId < 0)
+            currMode.tags.subId = maxSubId.tags - 1;
+
+        // Switch to next area
+        else if(contr.getButton(contrBtn.st) && ++currMode.tags.subId >= maxSubId.tags)
+            currMode.tags.subId = 0;
         
-        // Switch focus to previous/next button in tag area submode
-        if(contr.getButton(contrBtn.lb) || contr.getButton(contrBtn.rb))
-        {
-            // Switch to previous button in tag area submode
-            if(contr.getButton(contrBtn.lb) && --currMode.innerId < 0)
-                currMode.innerId = 0;
-            
-            // Switch to next button in tag area submode
-            else if(contr.getButton(contrBtn.rb) && ++currMode.innerId >= currMode.innerIdMax)
-                currMode.innerId = currMode.innerIdMax - 1;
-            
-            // Update prevInnerId when changing current innerId
-            if(currMode.subId === subId.tags.auto)
-                prevInnerId.tags.auto = currMode.innerId;
-            
-            else if(currMode.subId === subId.tags.capabilities)
-                prevInnerId.tags.capabilities = currMode.innerId;
-            
-            else if(currMode.subId === subId.tags.rating)
-                prevInnerId.tags.rating = currMode.innerId;
-        }
+        // Set focus to old focus in area, update max inner ids
+        currMode.tags.innerIdMax = maxInnerId.tags[tagsNames[currMode.tags.subId]];
+        currMode.tags.innerId = prevInnerId.tags[tagsNames[currMode.tags.subId]];
     }
         
+    // Switch focus to previous/next button in tag area submode
+    if(contr.getButton(contrBtn.lb) || contr.getButton(contrBtn.rb))
+    {
+        // Switch to previous button in tag area submode
+        if(contr.getButton(contrBtn.lb) && --currMode.tags.innerId < 0)
+            currMode.tags.innerId = currMode.tags.innerIdMax - 1;
+
+        // Switch to next button in tag area submode
+        else if(contr.getButton(contrBtn.rb) && ++currMode.tags.innerId >= currMode.tags.innerIdMax)
+            currMode.tags.innerId = 0;
         
-    console.log("Mode: " + currMode.id + ", SubMode: " + currMode.subId + ", InnerId: " + currMode.innerId + ", Robot: " + curTeamIndex);
+        // Update prevInnerId when changing innerId
+        prevInnerId.tags[tagsNames[currMode.tags.subId]] = currMode.tags.innerId;
+    }
+       
+    // Switch scoring area focus to previous/next area
+    if(contr.getButton(contrBtn.ls) || contr.getButton(contrBtn.rs))
+    {
+        // Switch to previous area
+        if(contr.getButton(contrBtn.ls) && --currMode.scoring.subId < 0)
+            currMode.scoring.subId = maxSubId.scoring - 1;
+
+        // Switch to next area
+        else if(contr.getButton(contrBtn.rs) && ++currMode.scoring.subId >= maxSubId.scoring)
+            currMode.scoring.subId = 0;
+
+        // Set focus to old focus in area, update max inner ids
+        currMode.scoring.innerIdMax = maxInnerId.scoring[scoringNames[currMode.scoring.subId]];
+        currMode.scoring.innerId = prevInnerId.scoring[scoringNames[currMode.scoring.subId]];
+    }
     
-    //getData("team/frc254/years_participated", print);
+    // Increment recycling bin moved in auto/grey totes stacked in teleop
+    if(contr.getButton(contrBtn.a))
+    {
+        if(currMode.scoring.subId === subId.scoring.auto)
+        {
+            alliance[curTeamIndex].data.scoring.auto.binsMoved++;
+            prevInnerId.scoring.innerName = "binsMoved";
+        }
+        
+        else if(currMode.scoring.subId === subId.scoring.teleop)
+        {
+            alliance[curTeamIndex].data.scoring.teleop.greyStacked++;
+            prevInnerId.scoring.innerName = "greyStacked";
+        }
+        
+        prevInnerId.scoring.subName = scoringNames[currMode.scoring.subId];
+    }
+   
+    // Increment yellow totes stacked in auto
+    if(contr.getButton(contrBtn.x))
+    {
+        if(currMode.scoring.subId === subId.scoring.auto)
+        {
+            alliance[curTeamIndex].data.scoring.auto.yellowStacked++;
+            prevInnerId.scoring.innerName = "yellowStacked";
+        }
+        
+        prevInnerId.scoring.subName = scoringNames[currMode.scoring.subId];
+    }
     
-//    if(contr.getButton(contrBtn.lu))
-//        console.log("lu");
-//    
-//    if(contr.getButton(contrBtn.ld))
-//        console.log("ld");
-//    
-//    if(contr.getButton(contrBtn.ll))
-//        console.log("ll");
-//    
-//    if(contr.getButton(contrBtn.lr))
-//        console.log("lr");
-//    
-//    
-//    if(contr.getButton(contrBtn.ru))
-//        console.log("ru");
-//    
-//    if(contr.getButton(contrBtn.rd))
-//        console.log("rd");
-//    
-//    if(contr.getButton(contrBtn.rl))
-//        console.log("rl");
-//    
-//    if(contr.getButton(contrBtn.rr))
-//        console.log("rr");
+    // Increment yellow totes moved to auto
+    if(contr.getButton(contrBtn.y))
+    {
+        if(currMode.scoring.subId === subId.scoring.auto)
+        {
+            alliance[curTeamIndex].data.scoring.auto.yellowMoved++;
+            prevInnerId.scoring.innerName = "yellowMoved";
+        }
+        
+        prevInnerId.scoring.subName = scoringNames[currMode.scoring.subId];
+    }
     
+    // Decrement the last scoring
+    if(contr.getButton(contrBtn.b) && prevInnerId.scoring.subName !== null)
+        alliance[curTeamIndex].data[prevInnerId.scoring.subName][prevInnerId.scoring.innerName]--;
+
     window.requestAnimationFrame(main);
 }
 
-function print(str)
-{
-    console.log(str);
-}
-
-function resetAlliance()
+function resetScouting()
 {
     for(var i = 0; i < maxTeamsPerAlliance; i++)
         alliance[i] = new RobotData();
+    
+    currMode.tags.innerIdMax = maxInnerId.tags[tagsNames[currMode.tags.subId]];
+    currMode.tags.innerId = prevInnerId.tags[tagsNames[currMode.tags.subId]];
+    prevInnerId.scoring.subName = null;
 }
 
 function getData(key, callback)

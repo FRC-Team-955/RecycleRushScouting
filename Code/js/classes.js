@@ -82,14 +82,7 @@ function RobotData()
     this.data = 
     {
         "tags":
-        {
-            "match": 
-            {
-                "coopStack" : 0,
-                "coopSet": 0,
-                "highScoring": 0
-            },
-            
+        {            
             "auto":
             {
                 "handlesGrey": 0,
@@ -105,6 +98,13 @@ function RobotData()
                 "canMoveLitter": 0,
                 "brokenDrive": 0,
                 "brokenPickup": 0
+            },
+            
+            "rating":
+            {
+                "good": 0,
+                "meh": 0,
+                "bad": 0
             }
         },
         
@@ -125,9 +125,15 @@ function RobotData()
             }
         },
         
-        "commentsRobot": "",
-        "commentsMatch": "",
-        "rating": 0,
+        "match": 
+        {
+            "coopStack": 0,
+            "coopSet": 0,
+            "highScoring": 0,
+            "comments": ""
+        },
+        
+        "comments": "",
         "teamNumber": 0
     }; 
 }

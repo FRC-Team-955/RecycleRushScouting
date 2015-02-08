@@ -22,6 +22,12 @@ var modeId = { tags: 0, scoring: 1 };
 // Sub mode ids
 var subId = { tags: { auto: 0, capabilities: 1, rating: 2 }, scoring: { auto: 0, teleop: 1} };
 
+// Names for tags area submodes
+var tagsNames = ["auto", "capabilities", "rating"];
+
+// Names for scoring area submodes
+var scoringNames = ["auto", "teleop"];
+
 // Max sub mode ids
 var maxSubId = { tags: 3, scoring: 2 };
 
