@@ -1,10 +1,12 @@
 @font-face {
     font-family: "Raleway";
     src: url("../fonts/Raleway-Medium.ttf");
+}
+
+@font-face {
     font-family: "OpenSans";
     src: url("../fonts/OpenSans-Regular.ttf");
 }
-
 
 * {
     font-family: "OpenSans";
@@ -24,6 +26,7 @@ body {
 .column {
     border: black solid 1px;
 }
+
 .title {
     font-size: 2rem;
     margin-left: 2rem;

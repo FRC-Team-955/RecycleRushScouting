@@ -1,3 +1,6 @@
+// Debug mode
+var debugMode = true;
+
 // Max teams per alliance
 var maxTeamsPerAlliance = 3; 
 
@@ -8,7 +11,7 @@ var maxContrBtns = 24;
 var dpadId = { d: 0, r: 1, u: 2, l: 3 };
 
 // Min stick tolerance
-var stickTolerance = 0.2;  
+var stickTolerance = 0.8125;  
 
 // Axes chn for left stick
 var chnLeftStick = { x: 0, y: 1 };  
