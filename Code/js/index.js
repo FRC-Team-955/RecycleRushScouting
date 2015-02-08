@@ -133,8 +133,12 @@ function main()
     
     // Decrement the last scoring
     if(contr.getButton(contrBtn.b) && prevInnerId.scoring.subName !== null)
-        alliance[curTeamIndex].data[prevInnerId.scoring.subName][prevInnerId.scoring.innerName]--;
-
+        alliance[curTeamIndex].data.scoring[prevInnerId.scoring.subName][prevInnerId.scoring.innerName]--;
+    
+    // Print the status of the buttons on the controller
+    if(debugMode)
+        printButtons(contr);
+    
     window.requestAnimationFrame(main);
 }
 
