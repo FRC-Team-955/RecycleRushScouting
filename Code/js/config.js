@@ -39,29 +39,29 @@ var maxInnerId = { tags: { auto: 4, capabilities: 6, rating: 3 }, scoring: { aut
 
 // Button ids for controller
 var contrBtn =                              
-{
-  a: 0,     // a
-  b: 1,     // b
-  x: 2,     // x
-  y: 3,     // y
-  lb: 4,    // left bumper
-  rb: 5,    // right bumper
-  lt: 6,    // left trigger
-  rt: 7,    // right trigger
-  bk: 8,    // back
-  st: 9,    // start
-  ls: 10,   // left stick
-  rs: 11,   // right stick
-  du: 12,   // dpad up
-  dd: 13,   // dpad down
-  dl: 14,   // dpad left
-  dr: 15,   // dpad right
-  lu: 16,   // left stick up
-  ld: 17,   // left stick down
-  ll: 18,   // left stick left
-  lr: 19,   // left stick right
-  ru: 20,   // right stick up
-  rd: 21,   // right stick down
-  rl: 22,   // right stick left
-  rr: 23    // right stick right
-};
+	{
+		a: 0,     // a
+		b: 1,     // b
+		x: 2,     // x
+		y: 3,     // y
+		lb: 4,    // left bumper
+		rb: 5,    // right bumper
+		lt: 6,    // left trigger
+		rt: 7,    // right trigger
+		bk: 8,    // back
+		st: 9,    // start
+		ls: 10,   // left stick
+		rs: 11,   // right stick
+		du: 12,   // dpad up
+		dd: 13,   // dpad down
+		dl: 14,   // dpad left
+		dr: 15,   // dpad right
+		lu: 16,   // left stick up
+		ld: 17,   // left stick down
+		ll: 18,   // left stick left
+		lr: 19,   // left stick right
+		ru: 20,   // right stick up
+		rd: 21,   // right stick down
+		rl: 22,   // right stick left
+		rr: 23    // right stick right
+	};

@@ -1,85 +1,85 @@
 @font-face {
-    font-family: "Raleway";
-    src: url("../fonts/Raleway-Medium.ttf");
+	font-family: "Raleway";
+	src: url("../fonts/Raleway-Medium.ttf");
 }
 
 @font-face {
-    font-family: "OpenSans";
-    src: url("../fonts/OpenSans-Regular.ttf");
+	font-family: "OpenSans";
+	src: url("../fonts/OpenSans-Regular.ttf");
 }
 
 * {
-    font-family: "OpenSans";
-    box-sizing: border-box;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+	font-family: "OpenSans";
+	box-sizing: border-box;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 body {
-    background-color: #dbdbdb;
+	background-color: #dbdbdb;
 }
 
 .column {
-    border: black solid 1px;
+	border: black solid 1px;
 }
 
 .title {
-    font-size: 2rem;
-    margin-left: 2rem;
-    margin-top: 1rem;
-    font-family: "Raleway";
+	font-size: 2rem;
+	margin-left: 2rem;
+	margin-top: 1rem;
+	font-family: "Raleway";
 }
 
 .button-alliance {
-    background-color: #3bbeff;
-    width: 100%;
-    display: block;
-    margin-top: 1rem;
-    height: 2rem;
+	background-color: #3bbeff;
+	width: 100%;
+	display: block;
+	margin-top: 1rem;
+	height: 2rem;
 }
 
 .teamInput {
-    background-color: #3bbeff;
-    margin-top: 1rem;
-    height: 2rem;
-    text-align: center;
-    font-size: .75rem;
+	background-color: #3bbeff;
+	margin-top: 1rem;
+	height: 2rem;
+	text-align: center;
+	font-size: .75rem;
 }
 
 .searchBar {
-    background-color: #3bbeff;
-    margin-top: 1rem;
-    height: 2rem;
-    float: left;
+	background-color: #3bbeff;
+	margin-top: 1rem;
+	height: 2rem;
+	float: left;
 }
 
 .matchNumber {
-    background-color: #3bbeff;
-    margin-top: 1rem;
-    height: 2rem;
-    text-align: center;
-    margin-right: 2rem;
+	background-color: #3bbeff;
+	margin-top: 1rem;
+	height: 2rem;
+	text-align: center;
+	margin-right: 2rem;
 }
 
 .button-search {
-    margin-top: 1rem;
-    height: 2rem;
-    width: 100%;
-    padding: 8px 0;
-    background-color: #3bbeff;
-    border-radius: 4px;
-    box-shadow: inset 0 1px 3px #ddd;
-    border: 1px solid #ccc;
+	margin-top: 1rem;
+	height: 2rem;
+	width: 100%;
+	padding: 8px 0;
+	background-color: #3bbeff;
+	border-radius: 4px;
+	box-shadow: inset 0 1px 3px #ddd;
+	border: 1px solid #ccc;
 }
 
 
 .cx {
-    margin: 1rem 1rem .5rem 1rem;
-    background-color: #b8c2b8;
+	margin: 1rem 1rem .5rem 1rem;
+	background-color: #b8c2b8;
 }
 
 .tags,
@@ -91,104 +91,104 @@ body {
 .teleS,
 .matchThingsTitle
 {
-    text-align: center;
-    margin: 0;
-    background-color: #b8c2b8;
+	text-align: center;
+	margin: 0;
+	background-color: #b8c2b8;
 }
 
 .button-auto,
 .button-tele,
 .button-match
 {
-    width: 100%;
-    font-size: .75rem;
+	width: 100%;
+	font-size: .75rem;
 }
 
 .button-right {
-    float: right;
+	float: right;
 }
 
 .spaceFixer {
-    float: left;
+	float: left;
 }
 
 .filler {
-    display: inline-block;
-    height: 5px;
+	display: inline-block;
+	height: 5px;
 }
 
 .button-rate {
-    width: 100%;
-    height: 3rem;
+	width: 100%;
+	height: 3rem;
 }
 
 .comments {
-    width: 100%;
-    height: 8rem;
-    margin-top: 1rem;
+	width: 100%;
+	height: 8rem;
+	margin-top: 1rem;
 }
 
 .autoScore,
 .teleScore,
 .matchThings
 {
-    margin-bottom: .25rem;
-    background-color: #b8c2b8;
+	margin-bottom: .25rem;
+	background-color: #b8c2b8;
 }
 
 .autoSButton,
 .teleSButton
 {
-    float: right;
-    width: 100%;
+	float: right;
+	width: 100%;
 }
 
 .autoSLabel,
 .teleSLabel
 {
-    margin-top: .2rem;
-    margin-bottom: auto;
+	margin-top: .2rem;
+	margin-bottom: auto;
 }
 
 .levels {
-    height: 100%;
-    margin-top: .25rem;
-    text-align: right;
-    padding-left: 1rem;
+	height: 100%;
+	margin-top: .25rem;
+	text-align: right;
+	padding-left: 1rem;
 }
 
 .matchThingsContainer {
-    margin-left: .5rem;
-    margin-top: 1rem;
+	margin-left: .5rem;
+	margin-top: 1rem;
 }
 
 .matchMargin {
-    margin-top: 1rem;
-    margin-left: 1rem;
+	margin-top: 1rem;
+	margin-left: 1rem;
 }
 
 .matchComments {
-    height: 9rem;
-    width: 100%;
-    margin-top: 1rem;
+	height: 9rem;
+	width: 100%;
+	margin-top: 1rem;
 }
 
 .slide {
-    -webkit-appearance: slider-vertical;
-    writing-mode: bt-lr;
-    height: 14rem;
+	-webkit-appearance: slider-vertical;
+	writing-mode: bt-lr;
+	height: 14rem;
 }
 
 .label {
-    float: right;
-    padding-right: 1rem;
-    font-size: .75rem;
+	float: right;
+	padding-right: 1rem;
+	font-size: .75rem;
 }
 .commTitle {
-    margin: 0;
-    text-align: center;
+	margin: 0;
+	text-align: center;
 }
 
 .button-select {
-    background-color: pink;
+	background-color: pink;
 }
