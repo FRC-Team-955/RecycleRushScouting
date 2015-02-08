@@ -22,12 +22,16 @@ var prevSubId = { tags: { subId: 0 }, scoring: { subId: 0 } };
 // Previous innermode 
 var prevInnerId = { tags: { auto: 0, capabilities: 0, rating: 0 }, scoring: { subName: "", innerName: "" } };
 
-$(function()
-  {
+// Called when the document has been loaded once
+$(document).ready(init);
+
+function init() 
+{
 	console.log("Init");
 	resetScouting();
+	style();
 	window.requestAnimationFrame(main);
-});
+}
 
 function main()
 {
@@ -154,13 +158,13 @@ function resetScouting()
 
 function getData(key, callback)
 {
-	$.ajax(
+	$.ajax
+	({
+		url:"http://www.thebluealliance.com/api/v2/" + key + "?X-TBA-App-Id=frc955:scouting-system:v01",
+		success:callback,
+		error:function()
 		{
-			url:"http://www.thebluealliance.com/api/v2/" + key + "?X-TBA-App-Id=frc955:scouting-system:v01",
-			success:callback,
-			error:function()
-			{
-				callback(null);
-			} 
-		});
+			callback(null);
+		} 
+	});
 }
