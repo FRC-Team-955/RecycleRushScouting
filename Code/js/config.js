@@ -42,8 +42,8 @@ var tagsNames = ["auto", "capabilities", "rating"];
 // Names for buttons in tag area submodes
 var tagsInnerNames = 
 { 
-    auto: ["handlesGrey", "handlesYellow", "movesBins", "movesToAuto"], 
-    capabilities: ["canStack", "canPlaceBins", "canMoveLitter", "brokenDrive", "brokenPickup"], 
+	auto: ["handlesGrey", "movesBins", "handlesYellow", "movesToAuto"], 
+    capabilities: ["canStack", "canMoveLitter", "brokenDrive", "canPlaceBins", "clumsy", "brokenPickup"], 
     rating: ["good", "meh", "bad"]
 };
 
@@ -68,6 +68,23 @@ var maxInnerId =
         auto: { x: 2, y: 2 }, 
         capabilities: { x: 2, y: 3 }, 
         rating: { x: 3, y: 1 } 
+    }
+};
+
+// All the interactive gui elements
+var $gui = 
+{
+    tags: 
+    {
+        auto: [],
+        capabilities: [],
+        rating: []
+    },
+
+    scoring:
+    {
+        auto: [],
+        teleop: []
     }
 };
 

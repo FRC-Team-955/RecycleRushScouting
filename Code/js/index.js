@@ -31,9 +31,9 @@ var prevInnerId =
 { 
     tags: 
     { 
-        auto: { innerId: 0 }, 
-        capabilities: { innerId: 0 }, 
-        rating: { innerId: 0 } 
+        auto: { x: 0, y: 0 }, 
+        capabilities: { x: 0, y: 0 }, 
+        rating: { x: 0, y: 0 } 
     },
     
     scoring: 
@@ -85,6 +85,20 @@ function main()
         currMode.tags.innerIdMax.y = maxInnerId.tags[tagsNames[currMode.tags.subId]].y;
 	}
 
+    // Toggle buton in tags area submode
+    if(contr.getButton([contrBtn.ll, contrBtn.lr]))
+    {
+        var btnI = (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
+        var subName = tagsNames[currMode.tags.subId];
+        var innerName = tagsInnerNames[subName][btnI];
+        
+        if(contr.getButton(contrBtn.ll))
+            alliance[curTeamIndex].data.tags[subName][innerName] = 0;
+        
+        else if(contr.getButton(contrBtn.lr))
+            alliance[curTeamIndex].data.tags[subName][innerName] = 1;
+    }
+    
 	// Switch focus to different button in tag area submode
     if(contr.getButton([contrBtn.du, contrBtn.dd, contrBtn.dl, contrBtn.dr]))
 	{
@@ -93,15 +107,15 @@ function main()
 			currMode.tags.innerId.y = currMode.tags.innerIdMax.y - 1;
 
         // Switch to button down of current in tag area submode
-        if(contr.getButton(contrBtn.dd) && ++currMode.tags.innerId.y >= currMode.tags.innerIdMax.y - 1)
-            currMode.tags.innerId.y = 0;
+        if(contr.getButton(contrBtn.dd) && ++currMode.tags.innerId.y >= currMode.tags.innerIdMax.y)
+			currMode.tags.innerId.y = 0;
 
         // Switch to button up of current in tag area submode
         if(contr.getButton(contrBtn.dl) && --currMode.tags.innerId.x < 0)
             currMode.tags.innerId.x = currMode.tags.innerIdMax.x - 1;
 
         // Switch to button down of current in tag area submode
-        if(contr.getButton(contrBtn.dr) && ++currMode.tags.innerId.x >= currMode.tags.innerIdMax.x - 1)
+        if(contr.getButton(contrBtn.dr) && ++currMode.tags.innerId.x >= currMode.tags.innerIdMax.x)
             currMode.tags.innerId.x = 0;
 
 		// Update prevInnerId when changing innerId
@@ -179,16 +193,23 @@ function main()
         var subName = scoringNames[currMode.scoring.subId];
         var innerName = scoringInnerNames[subName][currMode.scoring.innerId];
         
-        if(contr.getButton(contrBtn.rl))
-            console.log(--alliance[curTeamIndex].data.scoring[subName][innerName]);
+        if(contr.getButton(contrBtn.rl) && --alliance[curTeamIndex].data.scoring[subName][innerName] < 0)
+			alliance[curTeamIndex].data.scoring[subName][innerName] = 0;
 
         else if(contr.getButton(contrBtn.rr))
-            console.log(++alliance[curTeamIndex].data.scoring[subName][innerName]);
+            ++alliance[curTeamIndex].data.scoring[subName][innerName];
+		
+		console.log(alliance[curTeamIndex].data.scoring[subName][innerName]);
     }
 
 	// Print the status of the buttons on the controller
 	if(debugMode)
-		printButtons(contr);
+    {
+        printButtons(contr);
+        
+        if(updateGui)
+            console.log(alliance[curTeamIndex].data);
+    }
 
 	window.requestAnimationFrame(main);
 }
@@ -202,7 +223,6 @@ function resetScouting()
     currMode.tags.innerId.y = prevInnerId.tags[tagsNames[currMode.tags.subId]].y;
 	currMode.tags.innerIdMax.x = maxInnerId.tags[tagsNames[currMode.tags.subId]].x;
     currMode.tags.innerIdMax.y = maxInnerId.tags[tagsNames[currMode.tags.subId]].y;
-	prevInnerId.scoring.subName = null;
 }
 
 function getData(key, callback)
