@@ -1,5 +1,5 @@
 function style() {
-	$("pure-button").onclick(function() {
-		this.toggleClass("unselected selected");
+	$(".pure-button").click(function() {
+		$("#" + this.id).toggleClass("selected");
 	});
 };

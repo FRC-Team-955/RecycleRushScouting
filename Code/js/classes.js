@@ -121,7 +121,8 @@ function RobotData()
 			{
 				"greyStacked": 0,
 				"stacksMade": 0,
-				"binsStackedAndLevel": 0
+				"binsStacked": 0,
+                "highestBinLvl": 0
 			}
 		},
 

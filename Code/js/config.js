@@ -25,6 +25,9 @@ var modeId = { tags: 0, scoring: 1 };
 // Sub mode ids
 var subId = { tags: { auto: 0, capabilities: 1, rating: 2 }, scoring: { auto: 0, teleop: 1} };
 
+// Inner ids
+var scoringInnerId = { auto: { yellowMoved: 0, yellowStacked: 1, binsMoved: 2 }, teleop: { greyStacked: 0, stacksMade: 1, binsStacked: 2, highestBinLvl: 3 } };
+
 // Names for tags area submodes
 var tagsNames = ["auto", "capabilities", "rating"];
 
@@ -35,7 +38,7 @@ var scoringNames = ["auto", "teleop"];
 var maxSubId = { tags: 3, scoring: 2 };
 
 // Max inner ids
-var maxInnerId = { tags: { auto: 4, capabilities: 6, rating: 3 }, scoring: { auto: 3, teleop: 2 } };
+var maxInnerId = { tags: { auto: { x: 2, y: 2 }, capabilities: { x: 2, y: 3 }, rating: { x: 3, y: 1 } }};
 
 // Button ids for controller
 var contrBtn =                              
