@@ -84,14 +84,12 @@ You can use an Xbox 360 controller to navigate the input section. Keep in mind t
 
 ### TAGS MODE CONTROLS
 
-+	X Button
-	+	Toggles the button that is selected in Tagging mode, regardless of submode.
-+	Left Control Stick
-	+	Used to navigate focus between buttons in the selected Tags submode.
-+	Left Bumper
-	+	Toggles submode focus to the previous submode (Rating -> Capabilities -> Autonomous)
-+	Right Bumper
-	+	Toggles submode focus to the next submode (Autonomous -> Capabilities -> Rating)
++	Left Control Stick (Up and Down)
+	+	Used to navigate focus between submodes.
++	Left Control Stick (Left and Right)
+	+	Both directions will toggle the button that has focus.
++	D-Pad
+	+	Used to navigate focus between buttons.
 
 ### SCORING MODE CONTROLS
 
@@ -111,9 +109,6 @@ You can use an Xbox 360 controller to navigate the input section. Keep in mind t
 	+	In Teleop
 		+	Moves button focus to Grey Totes Stacked.
 +	Right Control Stick Movement (Up and Down)
-	+	Increments or decrements the value in focused area.
-+	Left Stick Button
-	+	Switches the Scoring area focus to the previous area (Teleop -> Autonomous).
-+	Right Stick Button
-	+	Switches the Scoring area focus to the next area (Autonomous -> Teleop).
-
+	+	Changes the selected submode.
++	Right Control Stick (Left and Right)
+	+	Increases or decreases the value of the item selected.
