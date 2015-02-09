@@ -73,7 +73,14 @@ Controller.prototype.buttonGotPressed = function()
 
 Controller.prototype.getButton = function(btnId)
 {
-	return this.buttons[btnId];
+    if(typeof(btnId) === "number")
+        return this.buttons[btnId];
+    
+    for(var i in btnId)
+        if(this.buttons[btnId[i]])
+            return true;
+    
+	return false;
 };
 
 // Robot data

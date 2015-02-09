@@ -14,10 +14,34 @@ var alliance = [];
 var curTeamIndex = 0;          
 
 // Current mode, submode, innermode
-var currMode = { tags: { subId: 0, innerId: { x: 0, y: 0 }, innerIdMax: { x: 0, y: 0 } }, scoring: { subId: 0, innerId: 0 } };
+var currMode = 
+{ 
+    tags: 
+    { 
+        subId: 0, 
+        innerId: { x: 0, y: 0 }, 
+        innerIdMax: { x: 0, y: 0 } 
+    }, 
+    
+    scoring: { subId: 0, innerId: 0 } 
+};
 
 // Previous innermode 
-var prevInnerId = { tags: { auto: { x: 0, y: 0 }, capabilities: { x: 0, y: 0 }, rating: { x: 0, y: 0 } }, scoring: { innerId: 0 } };
+var prevInnerId = 
+{ 
+    tags: 
+    { 
+        auto: { innerId: 0 }, 
+        capabilities: { innerId: 0 }, 
+        rating: { innerId: 0 } 
+    },
+    
+    scoring: 
+    { 
+        auto: { innerId: 0 }, 
+        teleop: { innerId: 0 } 
+    } 
+};
 
 // Called when the document has been loaded once
 $(document).ready(init);
@@ -44,7 +68,7 @@ function main()
 		curTeamIndex = 0;
 
 	// Switch tags area focus to previous/next area
-	if(contr.getButton(contrBtn.lu) || contr.getButton(contrBtn.ld))
+	if(contr.getButton([contrBtn.lu, contrBtn.ld]))
 	{
 		// Switch to previous area
 		if(contr.getButton(contrBtn.lu) && --currMode.tags.subId < 0)
@@ -62,7 +86,7 @@ function main()
 	}
 
 	// Switch focus to different button in tag area submode
-    if(contr.getButton(contrBtn.du) || contr.getButton(contrBtn.dd) || contr.getButton(contrBtn.dl) || contr.getButton(contrBtn.dr))
+    if(contr.getButton([contrBtn.du, contrBtn.dd, contrBtn.dl, contrBtn.dr]))
 	{
 		// Switch to button up of current in tag area submode
 		if(contr.getButton(contrBtn.du) && --currMode.tags.innerId.y < 0)
@@ -86,7 +110,7 @@ function main()
 	}
 
 	// Switch scoring area focus to previous/next area
-	if(contr.getButton(contrBtn.ru) || contr.getButton(contrBtn.rd))
+    if(contr.getButton([contrBtn.ru, contrBtn.rd]))
 	{
 		// Switch to previous area
 		if(contr.getButton(contrBtn.ru) && --currMode.scoring.subId < 0)
@@ -97,47 +121,69 @@ function main()
 			currMode.scoring.subId = 0;
 
 		// Set focus to old focus in area
-		currMode.scoring.innerId = prevInnerId.scoring[scoringNames[currMode.scoring.subId]];
+		currMode.scoring.innerId.x = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].x;
+        currMode.scoring.innerId.y = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].y;
 	}
 
 	// Switch focus to bins moved/highest bin lvl in auto/teleop
 	if(contr.getButton(contrBtn.a))
 	{
 		if(currMode.scoring.subId === subId.scoring.auto)
-			currMode.scoring.innerId = prevInnerId.scoring.auto.innerId = scoringInnerId.auto.binsMoved;
+        {	
+            currMode.scoring.innerId = scoringInnerId.auto.binsMoved;
+            prevInnerId.scoring.auto.innerId = currMode.scoring.innerId;
+        }
 
 		else if(currMode.scoring.subId === subId.scoring.teleop)
-            currMode.scoring.innerId = prevInnerId.scoring.teleop.innerId = scoringInnerId.teleop.highestBinLvl;
+        {
+            currMode.scoring.innerId = scoringInnerId.teleop.highestBinLvl;
+            prevInnerId.scoring.teleop.innerId = currMode.scoring.innerId;
+        }
 	}
 
 	// Switch focus to yellow stacked/bins stacked in auto/teleop
 	if(contr.getButton(contrBtn.b))
 	{
         if(currMode.scoring.subId === subId.scoring.auto)
-            currMode.scoring.innerId = prevInnerId.scoring.auto.innerId = scoringInnerId.auto.yellowStacked;
+        {
+            currMode.scoring.innerId = scoringInnerId.auto.yellowStacked;
+            prevInnerId.scoring.auto.innerId = currMode.scoring.innerId;
+        }
 
         else if(currMode.scoring.subId === subId.scoring.teleop)
-            currMode.scoring.innerId = prevInnerId.scoring.teleop.innerId = scoringInnerId.teleop.binsStacked;
+        {
+            currMode.scoring.innerId = scoringInnerId.teleop.binsStacked;
+            prevInnerId.scoring.teleop.innerId = currMode.scoring.innerId;
+        }
 	}
 
 	// Switch focus to yellow moved/grey stacked in auto/teleop
 	if(contr.getButton(contrBtn.y))
 	{
         if(currMode.scoring.subId === subId.scoring.auto)
-            currMode.scoring.innerId = prevInnerId.scoring.auto.innerId = scoringInnerId.auto.yellowMoved;
+        {
+            currMode.scoring.innerId = scoringInnerId.auto.yellowMoved;
+            prevInnerId.scoring.auto.innerId = currMode.scoring.innerId;
+        }
 
         else if(currMode.scoring.subId === subId.scoring.teleop)
-            currMode.scoring.innerId = prevInnerId.scoring.teleop.innerId = scoringInnerId.teleop.greyStacked;
+        {
+            currMode.scoring.innerId = scoringInnerId.teleop.greyStacked;
+            prevInnerId.scoring.teleop.innerId = currMode.scoring.innerId;
+        }
 	}
 
-	// Increment value in current number box in scoring
-    if(contr.getButton(contrBtn.rr))
+	// Increment/Decrement value in current number box in scoring
+    if(contr.getButton([contrBtn.rl, contrBtn.rr]))
     {
-        if(currMode.scoring.subId === subId.scoring.auto)
-            console.log("Inc value: (Auto, " + currMode.scoring.innerId + ")");
+        var subName = scoringNames[currMode.scoring.subId];
+        var innerName = scoringInnerNames[subName][currMode.scoring.innerId];
+        
+        if(contr.getButton(contrBtn.rl))
+            console.log(--alliance[curTeamIndex].data.scoring[subName][innerName]);
 
-        else if(currMode.scoring.subId === subId.scoring.teleop)
-            console.log("Dec value: ( Teleop, " + currMode.scoring.innerId + ")");
+        else if(contr.getButton(contrBtn.rr))
+            console.log(++alliance[curTeamIndex].data.scoring[subName][innerName]);
     }
 
 	// Print the status of the buttons on the controller
@@ -152,8 +198,10 @@ function resetScouting()
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
 		alliance[i] = new RobotData();
 
-	currMode.tags.innerIdMax = maxInnerId.tags[tagsNames[currMode.tags.subId]];
-	currMode.tags.innerId = prevInnerId.tags[tagsNames[currMode.tags.subId]];
+    currMode.tags.innerId.x = prevInnerId.tags[tagsNames[currMode.tags.subId]].x;
+    currMode.tags.innerId.y = prevInnerId.tags[tagsNames[currMode.tags.subId]].y;
+	currMode.tags.innerIdMax.x = maxInnerId.tags[tagsNames[currMode.tags.subId]].x;
+    currMode.tags.innerIdMax.y = maxInnerId.tags[tagsNames[currMode.tags.subId]].y;
 	prevInnerId.scoring.subName = null;
 }
 
