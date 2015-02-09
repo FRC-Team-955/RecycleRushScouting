@@ -69,46 +69,51 @@ NECESSARY ELEMENTS
 KEY MAPPINGS
 ---------------------
 
-You can use an Xbox 360 controller to navigate the input section. Here are the controls:
+You can use an Xbox 360 controller to navigate the input section. Keep in mind that you will be inside of a Scoring submode (Autonomous or Teleop) and a Tags (Autonomous, Capabilities, or Rating) submode at any given time.
 
-+	A button
-	+	In Autonomous:
-		+	Increments Recycling Bins Moved.
-	+	In Teleop
-		+	Increments Grey Totes Stacked.
-+	B Button
-	+	Undoes the last Scoring increment.
-+	X Button
-	+	In Autonomous:
-		+	Increments Yellow Totes Stacked.
-	+	In Teleop:
-		+	Does nothing.
-+	Y Button
-	+	In Autonomous:
-		+	Increments Yellow Totes Moved To Auto.
-	+	In Teleop
-		+	Does nothing.
-+	Left Bumper
-	+	Switches focus to the previous button, inside the Tags and Match Things areas.
-+	Right Bumper
-	+	Switches focus to the next button, inside the Tags and Match Things areas.
+### GLOBAL CONTROLS
+
 +	Left Trigger
 	+	Switches to the previous robot tab, globally.
 +	Right Trigger
 	+	Switches to the next robot tab, globally.
-+	Back Button
-	+	Switches the Tags area focus to the previous area (Capabilities -> Autonomous)
 +	Start Button
-	+	Switches the Tags area focus to the next area (Autonomous -> Capabilities)
+	+	Brings up the Confirm Submission dialogue. A second press confirms the decision.
++	Back Button
+	+	After the Confirm Submission dialogue has been brought up, this button will cancel submission.
+
+### TAGS MODE CONTROLS
+
++	X Button
+	+	Toggles the button that is selected in Tagging mode, regardless of submode.
++	Left Control Stick
+	+	Used to navigate focus between buttons in the selected Tags submode.
++	Left Bumper
+	+	Toggles submode focus to the previous submode (Rating -> Capabilities -> Autonomous)
++	Right Bumper
+	+	Toggles submode focus to the next submode (Autonomous -> Capabilities -> Rating)
+
+### SCORING MODE CONTROLS
+
++	A button
+	+	In Autonomous:
+		+	Moves button focus to Recycling Bins Moved.
+	+	In Teleop
+		+	Moves button Focus to Highest Stacked Recycling Bin Level.
++	B Button
+	+	In Autonomous:
+		+	Moves button focus to Yellow Totes Stacked
+	+	In Teleop:
+		+	Moves button focus to Recycling Bins Stacked.
++	Y Button
+	+	In Autonomous:
+		+	Moves button focus to Yellow Totes Moved To Auto.
+	+	In Teleop
+		+	Moves button focus to Grey Totes Stacked.
++	Right Control Stick Movement (Up and Down)
+	+	Increments or decrements the value in focused area.
 +	Left Stick Button
 	+	Switches the Scoring area focus to the previous area (Teleop -> Autonomous).
 +	Right Stick Button
 	+	Switches the Scoring area focus to the next area (Autonomous -> Teleop).
-+	D-Pad Up
-	+	Moves the tote slider down a position.
-+	D-Pad Down
-	+	Moves the tote slider up a position.
-+	D-Pad Left
-	+	Increments the tote number, refreshing the slider with corresponding data.
-+	D-Pad Right
-	+	Decrements the tote number, refreshing the slider with corresponding data.
+
