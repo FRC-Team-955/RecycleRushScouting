@@ -23,22 +23,70 @@ var chnRightStick = { x: 2, y: 3 };
 var modeId = { tags: 0, scoring: 1 };
 
 // Sub mode ids
-var subId = { tags: { auto: 0, capabilities: 1, rating: 2 }, scoring: { auto: 0, teleop: 1} };
+var subId = 
+{ 
+    tags: { auto: 0, capabilities: 1, rating: 2 }, 
+    scoring: { auto: 0, teleop: 1} 
+};
 
 // Inner ids
-var scoringInnerId = { auto: { yellowMoved: 0, yellowStacked: 1, binsMoved: 2 }, teleop: { greyStacked: 0, stacksMade: 1, binsStacked: 2, highestBinLvl: 3 } };
+var scoringInnerId = 
+{ 
+    auto: { yellowMoved: 0, yellowStacked: 1, binsMoved: 2 }, 
+    teleop: { greyStacked: 0, stacksMade: 1, binsStacked: 2, highestBinLvl: 3 } 
+};
 
 // Names for tags area submodes
 var tagsNames = ["auto", "capabilities", "rating"];
 
+// Names for buttons in tag area submodes
+var tagsInnerNames = 
+{ 
+	auto: ["handlesGrey", "movesBins", "handlesYellow", "movesToAuto"], 
+    capabilities: ["canStack", "canMoveLitter", "brokenDrive", "canPlaceBins", "clumsy", "brokenPickup"], 
+    rating: ["good", "meh", "bad"]
+};
+
 // Names for scoring area submodes
 var scoringNames = ["auto", "teleop"];
+
+// Names for the number boxes in each area in scoring
+var scoringInnerNames = 
+{ 
+    auto: ["yellowMoved", "yellowStacked", "binsMoved"], 
+    teleop: ["greyStacked", "stacksMade", "binsStacked", "highestBinLvl"] 
+};
 
 // Max sub mode ids
 var maxSubId = { tags: 3, scoring: 2 };
 
 // Max inner ids
-var maxInnerId = { tags: { auto: { x: 2, y: 2 }, capabilities: { x: 2, y: 3 }, rating: { x: 3, y: 1 } }};
+var maxInnerId = 
+{ 
+    tags: 
+    { 
+        auto: { x: 2, y: 2 }, 
+        capabilities: { x: 2, y: 3 }, 
+        rating: { x: 3, y: 1 } 
+    }
+};
+
+// All the interactive gui elements
+var $gui = 
+{
+    tags: 
+    {
+        auto: [],
+        capabilities: [],
+        rating: []
+    },
+
+    scoring:
+    {
+        auto: [],
+        teleop: []
+    }
+};
 
 // Button ids for controller
 var contrBtn =                              

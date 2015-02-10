@@ -73,31 +73,39 @@ Controller.prototype.buttonGotPressed = function()
 
 Controller.prototype.getButton = function(btnId)
 {
-	return this.buttons[btnId];
+    if(typeof(btnId) === "number")
+        return this.buttons[btnId];
+    
+    for(var i in btnId)
+        if(this.buttons[btnId[i]])
+            return true;
+    
+	return false;
 };
 
 // Robot data
 function RobotData()
 {
 	this.data = 
-		{
+    {
 		"tags":
 		{            
 			"auto":
 			{
 				"handlesGrey": 0,
-				"handlesYellow": 0,
 				"movesBins": 0,
+				"handlesYellow": 0,
 				"movesToAuto": 0
 			},
 
 			"capabilities":
 			{
 				"canStack": 0,
-				"canPlaceBins": 0,
 				"canMoveLitter": 0,
 				"brokenDrive": 0,
-				"brokenPickup": 0
+				"canPlaceBins": 0,
+				"clumsy": 0,
+                "brokenPickup": 0
 			},
 
 			"rating":
