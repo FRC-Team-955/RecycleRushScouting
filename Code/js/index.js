@@ -14,10 +14,28 @@ var alliance = [];
 var curTeamIndex = 0;          
 
 // Current mode, submode, innermode
-var currMode = { tags: { subId: 0, innerId: { x: 0, y: 0 }, innerIdMax: { x: 0, y: 0 } }, scoring: { subId: 0, innerId: 0 } };
+var currMode  = { tags: { subId: 0,
+						  innerId: {  x: 0,
+									  y: 0
+								   },
+						  innerIdMax: { x: 0,
+										y: 0 }
+						},
+				  scoring: { subId: 0,
+							 innerId: 0
+						 }
+			   };
 
 // Previous innermode 
-var prevInnerId = { tags: { auto: { x: 0, y: 0 }, capabilities: { x: 0, y: 0 }, rating: { x: 0, y: 0 } }, scoring: { innerId: 0 } };
+var prevInnerId = { tags: { auto: { x: 0,
+									y: 0 },
+							capabilities: { x: 0,
+											y: 0 },
+							rating: { x: 0,
+									  y: 0 }
+						  },
+				   scoring: { innerId: 0 }
+				  };
 
 // Called when the document has been loaded once
 $(document).ready(init);
