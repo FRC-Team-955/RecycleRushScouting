@@ -71,6 +71,29 @@ var maxInnerId =
     }
 };
 
+// CSS class names for buttons in sub areas
+var cssButtonAreaName = 
+{
+	tags:
+	{
+		auto: "autoTButton",
+		capabilities: "capaTButton",
+		rating: "ratingTButton"
+	},
+	
+	scoring:
+	{
+		auto: "autoSButton",
+		teleop: "teleSButton"
+	}
+}
+
+// CSS name for buttons that are active
+var cssButtonActiveName = "selected";
+
+// CSS name for buttons that are focused
+var cssButtonFocusedName = "button-focused";
+
 // All the interactive gui elements
 var $gui = 
 {

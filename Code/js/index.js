@@ -2,7 +2,7 @@
 var contr = new Controller();   
 
 // When to update scouting
-var updateGui = false;          
+var needUpdateGui = false;          
 
 // All robot data
 var teams = [];                 
@@ -50,14 +50,14 @@ function init()
 {
 	console.log("Init");
 	resetScouting();
-	style();
+	initStyle();
 	window.requestAnimationFrame(main);
 }
 
 function main()
 {
 	contr.update(navigator.getGamepads()[0]);
-	updateGui = contr.buttonGotPressed();
+	needUpdateGui = contr.buttonGotPressed();
 
 	// Switch to previous robot in alliance
 	if(contr.getButton(contrBtn.lt) && --curTeamIndex < 0)
@@ -88,7 +88,7 @@ function main()
     // Toggle buton in tags area submode
     if(contr.getButton([contrBtn.ll, contrBtn.lr]))
     {
-        var btnI = (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
+        var btnI = getTagInnerIndex();
         var subName = tagsNames[currMode.tags.subId];
         var innerName = tagsInnerNames[subName][btnI];
         
@@ -110,15 +110,15 @@ function main()
         if(contr.getButton(contrBtn.dd) && ++currMode.tags.innerId.y >= currMode.tags.innerIdMax.y)
 			currMode.tags.innerId.y = 0;
 
-        // Switch to button up of current in tag area submode
+        // Switch to button left of current in tag area submode
         if(contr.getButton(contrBtn.dl) && --currMode.tags.innerId.x < 0)
             currMode.tags.innerId.x = currMode.tags.innerIdMax.x - 1;
 
-        // Switch to button down of current in tag area submode
+        // Switch to button right of current in tag area submode
         if(contr.getButton(contrBtn.dr) && ++currMode.tags.innerId.x >= currMode.tags.innerIdMax.x)
             currMode.tags.innerId.x = 0;
 
-		// Update prevInnerId when changing innerId
+		// Update prevInnerId when changing current innerId
 		prevInnerId.tags[tagsNames[currMode.tags.subId]].x = currMode.tags.innerId.x;
         prevInnerId.tags[tagsNames[currMode.tags.subId]].y = currMode.tags.innerId.y;
 	}
@@ -202,12 +202,16 @@ function main()
 		console.log(alliance[curTeamIndex].data.scoring[subName][innerName]);
     }
 
+	// Update gui if controller pressed a button
+	if(needUpdateGui)
+		updateGui();
+	
 	// Print the status of the buttons on the controller
 	if(debugMode)
     {
         printButtons(contr);
         
-        if(updateGui)
+        if(needUpdateGui)
             console.log(alliance[curTeamIndex].data);
     }
 
@@ -236,4 +240,9 @@ function getData(key, callback)
 			callback(null);
 		} 
 	});
+}
+
+function getTagInnerIndex()
+{
+	return (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
 }

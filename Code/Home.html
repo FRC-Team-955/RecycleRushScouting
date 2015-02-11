@@ -133,7 +133,7 @@
 
 						<!-- Auto Button 1: Handles Grey Totes -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button button-auto unselected autoTButton" id = "button-autoGreyTotes">
+							<button class = "pure-button button-auto unselected autoTButton" id = "button-tagsAutoGreyTotes">
 								Handles Grey Totes
 							</button>
 						</section>
@@ -143,7 +143,7 @@
 
 						<!-- Auto Button 2: Handles Yellow Totes -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-autoYellowTotes">
+							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoYellowTotes">
 								Handles Yellow Totes
 							</button>
 						</section>
@@ -164,7 +164,7 @@
 
 						<!-- Auto Button 3: Handles Recycling Bins -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto autoTButton" id = "button-autoRecycle">
+							<button class = "pure-button unselected button-auto autoTButton" id = "button-tagsAutoRecycle">
 								Handles Recyling Bins
 							</button>
 						</section>
@@ -174,7 +174,7 @@
 
 						<!-- Auto Button 4: Moves to Auto Zone -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-autoMovement">
+							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoMovement">
 								Moves to Auto Zone
 							</button>
 						</section>
@@ -204,7 +204,7 @@
 
 						<!-- Teleop Button 1: Can Stack Totes -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-teleStack">
+							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleStack">
 								Can Stack Totes
 							</button>
 						</section>
@@ -214,7 +214,7 @@
 
 						<!-- Teleop Button 2: Can Place Recycling Bins -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-teleRecycle">
+							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleRecycle">
 								Can Place Recycling Bins
 							</button>
 						</section>
@@ -235,7 +235,7 @@
 
 						<!-- Teleop Button 3: Can Move/Hold Litter -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-teleLitter">
+							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleLitter">
 								Can Move/Hold Litter
 							</button>
 						</section>
@@ -245,7 +245,7 @@
 
 						<!-- Teleop Button 4: Clumsiness -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-teleClumsiness">
+							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleClumsiness">
 								Clumsiness
 							</button>
 						</section>
@@ -266,7 +266,7 @@
 
 						<!-- Teleop Button 5: Broken Drivebase -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-teleBrokenDrive">
+							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleBrokenDrive">
 								Broken Drivebase
 							</button>
 						</section>
@@ -276,7 +276,7 @@
 
 						<!-- Teleop Button 6: Broken Pickup -->
 						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-teleBrokenPickup">
+							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleBrokenPickup">
 								Broken Pickup
 							</button>
 						</section>
@@ -306,7 +306,7 @@
 
 						<!-- Rating Button 1: GOOD -->
 						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingButton" id = "button-rateGood">
+							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateGood">
 								GOOD
 							</button>
 						</section>
@@ -316,7 +316,7 @@
 
 						<!-- Rating Button 2: MEH -->
 						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingButton" id = "button-rateMeh">
+							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateMeh">
 								MEH
 							</button>
 						</section>
@@ -326,7 +326,7 @@
 
 						<!-- Rating Button 3: BAD -->
 						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingButton" id = "button-rateBad">
+							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateBad">
 								BAD
 							</button>
 						</section>
@@ -398,12 +398,12 @@
 
 							<!-- Auto Scoring Label 1: Yellow Totes Moved to Auto -->
 							<section class="pure-u-1-2 spaceFixer autoSLabel">
-								<label for="button-scoreYellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
+								<label for="button-scoringAutoYellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
 							</section>
 
 							<!-- Auto Scoring Button 1 -->
 							<section class = "pure-u-1-4 spaceFixer">
-								<button id="button-scoreYellowMoved" class="pure-button unselected autoSButton">0</button>
+								<button id="button-scoringAutoYellowMoved" class="pure-button unselected autoSButton">0</button>
 							</section>
 						</section>
 
@@ -415,12 +415,12 @@
 
 							<!-- Auto Scoring Label 2: Yellow Totes Stacked -->
 							<section class="pure-u-1-2 spaceFixer autoSLabel">
-								<label for="button-scoreYellowStacked" class = "label">Yellow Totes Stacked:</label>
+								<label for="button-scoringAutoYellowStacked" class = "label">Yellow Totes Stacked:</label>
 							</section>
 
 							<!-- Auto Scoring Button 2 -->
 							<section class = "pure-u-1-4 spaceFixer">
-								<button id="button-scoreYellowStacked" class="pure-button unselected autoSButton">0</button>
+								<button id="button-scoringAutoYellowStacked" class="pure-button unselected autoSButton">0</button>
 							</section>
 						</section>
 
@@ -432,12 +432,12 @@
 
 							<!-- Auto Scoring Label 3: Recycling Bins Moved -->
 							<section class="pure-u-1-2 spaceFixer autoSLabel">
-								<label for="button-scoreAutoRecycle" class = "label" >Recycling Bins Moved:</label>
+								<label for="button-scoringAutoRecycle" class = "label" >Recycling Bins Moved:</label>
 							</section>
 
 							<!-- Auto Scoring Button 3 -->
 							<section class = "pure-u-1-4 spaceFixer">
-								<button id="button-scoreAutoRecycle" class="pure-button unselected autoSButton">0</button>
+								<button id="button-scoringAutoRecycle" class="pure-button unselected autoSButton">0</button>
 							</section>
 						</section>
 
@@ -458,12 +458,12 @@
 
 							<!-- Tele Scoring Label 1: Grey Totes Stacked -->
 							<section class="pure-u-1-2 spaceFixer teleSLabel">
-								<label for="button-scoreTeleGrey" class = "label">Grey Totes Stacked:</label>
+								<label for="button-scoringTeleGrey" class = "label">Grey Totes Stacked:</label>
 							</section>
 
 							<!-- Tele Scoring Button 1 -->
 							<section class = "pure-u-1-4 spaceFixer">
-								<button id="button-scoreTeleGrey" class="pure-button unselected teleSButton">0</button>
+								<button id="button-scoringTeleGrey" class="pure-button unselected teleSButton">0</button>
 							</section>
 						</section>
 
@@ -475,12 +475,12 @@
 
 							<!-- Tele Scoring Label 2: Recycling Bins Stacked-->
 							<section class="pure-u-1-2 spaceFixer teleSLabel">
-								<label for="teleRecycle" class = "label">Recycling Bins Stacked:</label>
+								<label for="button-scoringTeleRecycle" class = "label">Recycling Bins Stacked:</label>
 							</section>
 
 							<!-- Tele Scoring Button 2 -->
 							<section class = "pure-u-1-4 spaceFixer">
-								<input type = "number" min = "0" max="10" class="pure-button unselected teleSButton" id ="scoreRecycle"/>
+								<input type = "number" min = "0" max="10" class="pure-button unselected teleSButton" id ="button-scoringTeleRecycle"/>
 							</section>
 						</section>
 					</section>

@@ -198,3 +198,7 @@ body {
 .button-select {
 	background-color: pink;
 }
+
+.button-focused {
+	background-color: red;
+}
