@@ -19,9 +19,6 @@ var chnLeftStick = { x: 0, y: 1 };
 // Axes chn for right stick
 var chnRightStick = { x: 2, y: 3 };  
 
-// Mode ids
-var modeId = { tags: 0, scoring: 1 };
-
 // Sub mode ids
 var subId = 
 { 

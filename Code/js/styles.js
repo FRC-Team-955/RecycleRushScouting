@@ -70,6 +70,10 @@ function tagButtonClick(elmName)
 		{
 			for(var innerProp in tagsInnerNames[subProp])
 			{
+				// Set all rating buttons to false, since only can be active
+				if(subProp === tagsNames[subId.tags.rating])
+					alliance[curTeamIndex].data.tags.rating[tagsInnerNames[subProp][btnIndex]] = 0;
+				
 				// Flip alliance tag data
 				if(elmName === $gui.tags[subProp][btnIndex][0].id)
 				{

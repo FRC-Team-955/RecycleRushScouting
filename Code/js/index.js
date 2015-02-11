@@ -91,7 +91,12 @@ function main()
         var btnI = getTagInnerIndex();
         var subName = tagsNames[currMode.tags.subId];
         var innerName = tagsInnerNames[subName][btnI];
-        
+     	
+		// Set all rating buttons to false since only one can be active
+		if(currMode.tags.subId === subId.tags.rating)
+			for(var innerProp in alliance[curTeamIndex].data.tags.rating)
+				alliance[curTeamIndex].data.tags.rating[innerProp] = 0;
+			
         if(contr.getButton(contrBtn.ll))
             alliance[curTeamIndex].data.tags[subName][innerName] = 0;
         
