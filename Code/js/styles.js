@@ -2,8 +2,15 @@ function initStyle() {
 	setElements();
 	updateGui();
 	
+	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaName.tags)
 		$("." + cssButtonAreaName.tags[subProp]).click(function() { tagButtonClick(this.id); });
+	
+	// Assign double click events to team number inputs
+	$(".teamInput")
+		.attr("contenteditable", "true")
+		.click(function(){ selectAllText(this); });
+	
 }
 
 function updateGui()
@@ -121,4 +128,13 @@ function setElements()
 	// Scoring element
 	$gui.scoring.teleop.push($("#button-scoringTeleGrey"));
 	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
+}
+
+function selectAllText(elm)
+{
+	var selection = window.getSelection();        
+	var range = document.createRange();
+	range.selectNodeContents(elm);
+	selection.removeAllRanges();
+	selection.addRange(range);
 }
