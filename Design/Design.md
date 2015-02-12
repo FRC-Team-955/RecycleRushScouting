@@ -73,42 +73,37 @@ You can use an Xbox 360 controller to navigate the input section. Keep in mind t
 
 ### GLOBAL CONTROLS
 
-+	Left Trigger
++	#### Left Trigger
 	+	Switches to the previous robot tab, globally.
-+	Right Trigger
++	#### Right Trigger
 	+	Switches to the next robot tab, globally.
-+	Start Button
++	#### Start Button
 	+	Brings up the Confirm Submission dialogue. A second press confirms the decision.
-+	Back Button
++	#### Back Button
 	+	After the Confirm Submission dialogue has been brought up, this button will cancel submission.
+
+---
 
 ### TAGS MODE CONTROLS
 
-+	Left Control Stick (Up and Down)
-	+	Used to navigate focus between submodes.
-+	Left Control Stick (Left and Right)
-	+	Both directions will toggle the button that has focus.
-+	D-Pad
-	+	Used to navigate focus between buttons.
++	#### Left Control Stick Movement
+	+	Navigates between the buttons in a submode.
++	#### A Button
+	+	Toggles the selected button.
++	#### DPad (Up and Down)
+	+	Toggles forwards and backwards through submodes.
+
+---
 
 ### SCORING MODE CONTROLS
 
-+	A button
-	+	In Autonomous:
-		+	Moves button focus to Recycling Bins Moved.
-	+	In Teleop
-		+	Moves button Focus to Highest Stacked Recycling Bin Level.
-+	B Button
-	+	In Autonomous:
-		+	Moves button focus to Yellow Totes Stacked
-	+	In Teleop:
-		+	Moves button focus to Recycling Bins Stacked.
-+	Y Button
-	+	In Autonomous:
-		+	Moves button focus to Yellow Totes Moved To Auto.
-	+	In Teleop
-		+	Moves button focus to Grey Totes Stacked.
-+	Right Control Stick Movement (Up and Down)
-	+	Changes the selected submode.
-+	Right Control Stick (Left and Right)
-	+	Increases or decreases the value of the item selected.
++	#### Y Button
+	+	Increases the value in the selected box.
++	#### B Button
+	+	Decreases the value in the selected box.
++	#### X Button
+	+	Toggles between Scoring submodes.
++	#### Right Control Stick Movement
+	+	Navigates between the boxes in a submode.
+
+---
