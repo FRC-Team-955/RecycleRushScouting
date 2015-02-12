@@ -251,3 +251,22 @@ function getTagInnerIndex()
 {
 	return (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
 }
+
+//this can be moved if necessary
+
+function teamEdit(item)
+{
+    $(item).attr("contenteditable", "true");
+}
+
+$(window).bind('keydown', function(event) {
+	if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+            event.preventDefault();
+			$(".modal").addClass("modalVisible").removeClass("modal");
+			$(".mainContent").css("display", "none");
+			break;
+        }
+    }
+});

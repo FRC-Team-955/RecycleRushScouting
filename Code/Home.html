@@ -32,9 +32,8 @@
 		<script src="js/index.js"></script>
 	</head>
 	<body>
-
 		<!-- Page Header -->
-		<section class = "pure-g cx">
+		<section class = "pure-g titleStyle">
 
 			<!-- Scouting Application Title -->
 			<section class = "pure-u-1-4">
@@ -53,7 +52,7 @@
 
 			<!-- Team 1 Label -->
 			<section class = "pure-u-2-24">
-				<button class = "pure-button teamInput" id = "button-teamOneInput">Team 1</button>
+				<button class = "pure-button teamInput" id = "button-teamOneInput" ondblclick = "teamEdit(this);">Team 1</button>
 			</section>
 
 			<!-- Filler section -->
@@ -61,7 +60,7 @@
 
 			<!-- Team 2 Label -->
 			<section class = "pure-u-2-24">
-				<button class = "pure-button teamInput" id = "button-teamTwoInput">Team 2</button>
+				<button class = "pure-button teamInput" id = "button-teamTwoInput" ondblclick = "teamEdit(this);">Team 2</button>
 			</section>
 
 			<!-- Filler section -->
@@ -69,7 +68,7 @@
 
 			<!-- Team 3 Label -->
 			<section class = "pure-u-2-24">
-				<button class = "pure-button teamInput" id = "button-teamOneInput">Team 3</button>
+				<button class = "pure-button teamInput" id = "button-teamOneInput" ondblclick = "teamEdit(this);">Team 3</button>
 			</section>
 
 			<!-- Filler section -->
@@ -97,9 +96,12 @@
 				</form>
 			</section>
 		</section>
-
-		<!-- Main Container -->
+		
 		<section class = "pure-g">
+			<section class = "pure-u-1 modal"></section>
+		</section>
+		<!-- Main Container -->
+		<section class = "pure-g mainContent">
 
 			<!-- First Column -->
 			<section class = "pure-u-7-12">
@@ -381,7 +383,7 @@
 
 				<!-- Third Row 2 -->
 				<section class = "pure-g">
-					<section class="pure-u-2-3">
+					<section class="pure-u-1">
 						<section class = "pure-g cx">
 
 							<!-- Autonomous Scoring Title -->
@@ -394,51 +396,54 @@
 						<section class="pure-g">
 
 							<!-- Filler section -->
-							<section class="pure-u-1-4 filler spaceFixer"></section>
+							<section class="pure-u-1-8 filler spaceFixer"></section>
 
 							<!-- Auto Scoring Label 1: Yellow Totes Moved to Auto -->
-							<section class="pure-u-1-2 spaceFixer autoSLabel">
+							<section class="pure-u-3-8 spaceFixer autoSLabel">
 								<label for="button-scoringAutoYellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
 							</section>
 
 							<!-- Auto Scoring Button 1 -->
-							<section class = "pure-u-1-4 spaceFixer">
+							<section class = "pure-u-1-6 spaceFixer">
 								<button id="button-scoringAutoYellowMoved" class="pure-button unselected autoSButton">0</button>
 							</section>
+							<section class="pure-u-1-3 filler spaceFixer"></section>
 						</section>
 
 						<!-- Fifth Row 2 -->
 						<section class="pure-g">
 
 							<!-- Filler section -->
-							<section class="pure-u-1-4 filler spaceFixer"></section>
+							<section class="pure-u-1-8 filler spaceFixer"></section>
 
 							<!-- Auto Scoring Label 2: Yellow Totes Stacked -->
-							<section class="pure-u-1-2 spaceFixer autoSLabel">
+							<section class="pure-u-3-8 spaceFixer autoSLabel">
 								<label for="button-scoringAutoYellowStacked" class = "label">Yellow Totes Stacked:</label>
 							</section>
 
 							<!-- Auto Scoring Button 2 -->
-							<section class = "pure-u-1-4 spaceFixer">
+							<section class = "pure-u-1-6 spaceFixer">
 								<button id="button-scoringAutoYellowStacked" class="pure-button unselected autoSButton">0</button>
 							</section>
+							<section class="pure-u-1-3 filler spaceFixer"></section>
 						</section>
 
 						<!-- Sixth Row 2 -->
 						<section class="pure-g">
 
 							<!-- Filler section -->
-							<section class="pure-u-1-4 filler spaceFixer"></section>
+							<section class="pure-u-1-8 filler spaceFixer"></section>
 
 							<!-- Auto Scoring Label 3: Recycling Bins Moved -->
-							<section class="pure-u-1-2 spaceFixer autoSLabel">
+							<section class="pure-u-3-8 spaceFixer autoSLabel">
 								<label for="button-scoringAutoRecycle" class = "label" >Recycling Bins Moved:</label>
 							</section>
 
 							<!-- Auto Scoring Button 3 -->
-							<section class = "pure-u-1-4 spaceFixer">
+							<section class = "pure-u-1-6 spaceFixer">
 								<button id="button-scoringAutoRecycle" class="pure-button unselected autoSButton">0</button>
 							</section>
+							<section class="pure-u-1-3 filler spaceFixer"></section>
 						</section>
 
 						<!-- Sexenth Row 2 -->
@@ -454,47 +459,45 @@
 						<section class="pure-g">
 
 							<!-- Filler section -->
-							<section class="pure-u-1-4 filler spaceFixer"></section>
+							<section class="pure-u-1-8 filler spaceFixer"></section>
 
 							<!-- Tele Scoring Label 1: Grey Totes Stacked -->
-							<section class="pure-u-1-2 spaceFixer teleSLabel">
+							<section class="pure-u-3-8 spaceFixer teleSLabel">
 								<label for="button-scoringTeleGrey" class = "label">Grey Totes Stacked:</label>
 							</section>
 
 							<!-- Tele Scoring Button 1 -->
-							<section class = "pure-u-1-4 spaceFixer">
+							<section class = "pure-u-1-6 spaceFixer">
 								<button id="button-scoringTeleGrey" class="pure-button unselected teleSButton">0</button>
 							</section>
+							<section class="pure-u-1-3 filler spaceFixer"></section>
 						</section>
 
 						<!-- Ninth Row 2 -->
 						<section class="pure-g">
 
 							<!-- Filler section -->
-							<section class="pure-u-1-4 filler spaceFixer"></section>
+							<section class="pure-u-1-8 filler spaceFixer"></section>
 
 							<!-- Tele Scoring Label 2: Recycling Bins Stacked-->
-							<section class="pure-u-1-2 spaceFixer teleSLabel">
+							<section class="pure-u-3-8 spaceFixer teleSLabel">
 								<label for="button-scoringTeleRecycle" class = "label">Recycling Bins Stacked:</label>
 							</section>
 
 							<!-- Tele Scoring Button 2 -->
-							<section class = "pure-u-1-4 spaceFixer">
+							<section class = "pure-u-1-6 spaceFixer">
 								<input type = "number" min = "0" max="10" class="pure-button unselected teleSButton" id ="button-scoringTeleRecycle"/>
 							</section>
+							<section class="pure-u-1-3 filler spaceFixer"></section>
 						</section>
 					</section>
-					<section class="pure-u-1-3 levels">
-						<input type = "range" min = "0" max = "6" class="slide" value="0" step = "1" id = "slideBar"/>
-					</section>
 				</section>
-
 				<!-- Tenth Row 2 -->
 				<section class = "pure-g matchThings matchMargin cx">
 
 					<!-- Match Things Title -->
 					<section class = "pure-u-1 header">
-						<h3 class = "matchThingsTitle">Match Things</h3>
+						<h2 class = "matchThingsTitle">Match Things</h2>
 					</section>
 				</section>
 				<section class = "pure-g">
