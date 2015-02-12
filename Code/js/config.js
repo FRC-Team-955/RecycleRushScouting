@@ -33,6 +33,22 @@ var scoringInnerId =
     teleop: { greyStacked: 0, binsStacked: 1, highestBinLvl: 2 } 
 };
 
+// Init curr modes for tags and scoring
+var initMode = 
+{
+	tags : 
+	{
+		subId: 0,
+		innerId: { x: 0, y: 0 } 
+	},
+	
+	scoring: 
+	{
+		subId: 0,
+		innerId: 0
+	}
+};
+
 // Names for tags area submodes
 var tagsNames = ["auto", "capabilities", "rating"];
 
@@ -65,7 +81,9 @@ var maxInnerId =
         auto: { x: 2, y: 2 }, 
         capabilities: { x: 2, y: 3 }, 
         rating: { x: 3, y: 1 } 
-    }
+    },
+	
+	scoring: { auto: 3, teleop: 3 }
 };
 
 // CSS class names for buttons in sub areas
