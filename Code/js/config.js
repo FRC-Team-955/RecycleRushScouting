@@ -30,7 +30,7 @@ var subId =
 var scoringInnerId = 
 { 
     auto: { yellowMoved: 0, yellowStacked: 1, binsMoved: 2 }, 
-    teleop: { greyStacked: 0, stacksMade: 1, binsStacked: 2, highestBinLvl: 3 } 
+    teleop: { greyStacked: 0, binsStacked: 1, highestBinLvl: 2 } 
 };
 
 // Names for tags area submodes
@@ -51,7 +51,7 @@ var scoringNames = ["auto", "teleop"];
 var scoringInnerNames = 
 { 
     auto: ["yellowMoved", "yellowStacked", "binsMoved"], 
-    teleop: ["greyStacked", "stacksMade", "binsStacked", "highestBinLvl"] 
+    teleop: ["greyStacked", "binsStacked", "highestBinLvl"] 
 };
 
 // Max sub mode ids

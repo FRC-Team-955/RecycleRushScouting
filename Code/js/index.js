@@ -252,6 +252,15 @@ function getTagInnerIndex()
 	return (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
 }
 
+function getLocaleData()
+{
+	teams = typeof(localStorage.teams) === "undefined" ? [] : localStorage.teams;
+}
+
+function saveToLocale()
+{
+	localStorage.teams = teams;
+}
 //this can be moved if necessary
 
 function teamEdit(item)

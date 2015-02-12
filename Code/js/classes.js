@@ -128,7 +128,6 @@ function RobotData()
 			"teleop":
 			{
 				"greyStacked": 0,
-				"stacksMade": 0,
 				"binsStacked": 0,
                 "highestBinLvl": 0
 			}
