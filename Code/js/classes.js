@@ -73,13 +73,13 @@ Controller.prototype.buttonGotPressed = function()
 
 Controller.prototype.getButton = function(btnId)
 {
-    if(typeof(btnId) === "number")
-        return this.buttons[btnId];
-    
-    for(var i in btnId)
-        if(this.buttons[btnId[i]])
-            return true;
-    
+	if(typeof(btnId) === "number")
+		return this.buttons[btnId];
+
+	for(var i in btnId)
+		if(this.buttons[btnId[i]])
+			return true;
+
 	return false;
 };
 
@@ -87,7 +87,7 @@ Controller.prototype.getButton = function(btnId)
 function RobotData()
 {
 	this.data = 
-    {
+	{
 		"tags":
 		{            
 			"auto":
@@ -105,7 +105,7 @@ function RobotData()
 				"brokenDrive": 0,
 				"canPlaceBins": 0,
 				"clumsy": 0,
-                "brokenPickup": 0
+				"brokenPickup": 0
 			},
 
 			"rating":
@@ -129,7 +129,7 @@ function RobotData()
 			{
 				"greyStacked": 0,
 				"binsStacked": 0,
-                "highestBinLvl": 0
+				"highestBinLvl": 0
 			}
 		},
 

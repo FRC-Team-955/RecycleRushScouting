@@ -1,16 +1,16 @@
 function initStyle() {
 	setElements();
 	updateGui();
-	
+
 	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaName.tags)
 		$("." + cssButtonAreaName.tags[subProp]).click(function() { tagButtonClick(this.id); });
-	
+
 	// Assign double click events to team number inputs
 	$(".teamInput")
 		.attr("contenteditable", "true")
 		.click(function(){ selectAllText(this); });
-	
+
 }
 
 function updateGui()
@@ -19,7 +19,7 @@ function updateGui()
 	for(var prop in cssButtonAreaName)
 		for(var subProp in cssButtonAreaName[prop])
 			$("." + cssButtonAreaName[prop][subProp]).removeClass(cssButtonActiveName + " " + cssButtonFocusedName);
-	
+
 	// Index for button in array of button elements in gui obj
 	var btnIndex = 0;
 
@@ -32,16 +32,16 @@ function updateGui()
 		{	
 			if(alliance[curTeamIndex].data.tags[subProp][innerProp] === 1)
 				$gui.tags[subProp][btnIndex].addClass(cssButtonActiveName);
-				
+
 			btnIndex++;
 		}
 	}
-	
+
 	// Set the buttons text to match robot data for scoring
 	for(var subProp in alliance[curTeamIndex].data.scoring)
 	{
 		btnIndex = 0;
-		
+
 		for(var innerProp in alliance[curTeamIndex].data.scoring[subProp])
 		{
 			// TODO: Remove this try/catch when these elements actually exist in html...
@@ -49,14 +49,14 @@ function updateGui()
 			{
 				$gui.scoring[subProp][btnIndex++].html(alliance[curTeamIndex].data.scoring[subProp][innerProp]);
 			}
-			
+
 			catch(e)
 			{
 				console.log(e);
 			}
 		}
 	}
-	
+
 	var tagBtnId = getTagInnerIndex();
 	var tagSubName = tagsNames[currMode.tags.subId];
 	var scoringSubName = scoringNames[currMode.scoring.subId];
@@ -67,12 +67,12 @@ function updateGui()
 function tagButtonClick(elmName)
 {
 	var $elm = $("#" + elmName);
-	
+
 	// Find button in gui and alliance data
 	for(var subProp in cssButtonAreaName.tags)
 	{
 		var btnIndex = 0;
-		
+
 		if($elm.hasClass(cssButtonAreaName.tags[subProp]))
 		{
 			for(var innerProp in tagsInnerNames[subProp])
@@ -80,7 +80,7 @@ function tagButtonClick(elmName)
 				// Set all rating buttons to false, since only can be active
 				if(subProp === tagsNames[subId.tags.rating])
 					alliance[curTeamIndex].data.tags.rating[tagsInnerNames[subProp][btnIndex]] = 0;
-				
+
 				// Flip alliance tag data
 				if(elmName === $gui.tags[subProp][btnIndex][0].id)
 				{
@@ -88,12 +88,12 @@ function tagButtonClick(elmName)
 					var currVal = alliance[curTeamIndex].data.tags[subProp][innerName];
 					alliance[curTeamIndex].data.tags[subProp][innerName] = (currVal === 0 ? 1 : 0);
 				}
-				
+
 				btnIndex++;
 			}
 		}
 	}
-	
+
 	updateGui();
 }
 
@@ -105,7 +105,7 @@ function setElements()
 	$gui.tags.auto.push($("#button-tagsAutoRecycle"));
 	$gui.tags.auto.push($("#button-tagsAutoYellowTotes"));
 	$gui.tags.auto.push($("#button-tagsAutoMovement"));
-	
+
 	// Capabilities elements
 	$gui.tags.capabilities.push($("#button-tagsCapaTeleStack"));
 	$gui.tags.capabilities.push($("#button-tagsCapaTeleLitter"));
@@ -113,18 +113,18 @@ function setElements()
 	$gui.tags.capabilities.push($("#button-tagsCapaTeleRecycle"));
 	$gui.tags.capabilities.push($("#button-tagsCapaTeleClumsiness"));
 	$gui.tags.capabilities.push($("#button-tagsCapaTeleBrokenPickup"));
-	
+
 	// Rating elements
 	$gui.tags.rating.push($("#button-tagsRateGood"));
 	$gui.tags.rating.push($("#button-tagsRateMeh"));
 	$gui.tags.rating.push($("#button-tagsRateBad"));
-	
+
 	/* SCORING ELEMENTS */
 	// Auto elements
 	$gui.scoring.auto.push($("#button-scoringAutoYellowMoved"));
 	$gui.scoring.auto.push($("#button-scoringAutoYellowStacked"));
 	$gui.scoring.auto.push($("#button-scoringAutoRecycle"));
-	
+
 	// Scoring element
 	$gui.scoring.teleop.push($("#button-scoringTeleGrey"));
 	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
