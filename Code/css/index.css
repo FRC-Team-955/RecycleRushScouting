@@ -199,8 +199,13 @@ body {
 	background-color: pink;
 }
 
-.button-focused {
-	background-color: red;
+.selected-red {
+	background-color: #e8322e;
+}
+
+.pure-button-active-red {
+	background-color: #ad2522;
+	color: #fff;
 }
 
 .modal {

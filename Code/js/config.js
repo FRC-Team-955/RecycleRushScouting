@@ -107,7 +107,7 @@ var cssButtonAreaName =
 var cssButtonActiveName = "selected";
 
 // CSS name for buttons that are focused
-var cssButtonFocusedName = "button-focused";
+var cssButtonFocusedName = "pure-button-selected pure-button-hover";
 
 // All the interactive gui elements
 var $gui = 
