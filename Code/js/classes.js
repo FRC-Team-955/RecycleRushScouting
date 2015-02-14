@@ -145,3 +145,31 @@ function RobotData()
 		"teamNumber": 0
 	}; 
 }
+
+RobotData.prototype.addData = function(data)
+{
+	var subName = "";
+	var innerName = "";
+	
+	// Add tags data
+	for(var i = 0; i < tagsNames.length; i++)
+	{
+		for(var j = 0; j < tagsInnerNames[i].length; j++)
+		{
+			subName = tagsNames[i];
+			innerName = tagsInnerNames[i][j];
+			this.data.tags[subName][innerName] = data.tags[subName][innerName];
+		}
+	}
+	
+	// Add scoring data
+	for(var i = 0; i < scoringNames.length; i++)
+	{
+		for(var j = 0; j < scoringInnerNames[i].length; j++)
+		{
+			subName = scoringNames[i];
+			innerName = scoringInnerNames[i][j];
+			this.data.tags[subName][innerName] = data.tags[subName][innerName];
+		}
+	}
+}

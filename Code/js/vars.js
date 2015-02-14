@@ -87,7 +87,7 @@ var maxInnerId =
 };
 
 // CSS class names for buttons in sub areas
-var cssButtonAreaName = 
+var cssButtonAreaNames = 
 {
 	tags:
 	{
@@ -103,11 +103,21 @@ var cssButtonAreaName =
 	}
 }
 
-// CSS name for buttons that are active
-var cssButtonActiveName = "selected";
-
-// CSS name for buttons that are focused
-var cssButtonFocusedName = "pure-button-selected pure-button-hover";
+// CSS names for buttons that are active
+var cssButtonStatusNames = 
+{
+	active: 
+	{ 
+		red: "pure-button-active-red", 
+		blue: "pure-button-active-blue" 
+	},
+	
+	focus: 
+	{ 
+		red: "pure-button-focus-red",
+		blue: "pure-button-focus-blue"
+	}
+};
 
 // All the interactive gui elements
 var $gui = 
@@ -123,7 +133,13 @@ var $gui =
 	{
 		auto: [],
 		teleop: []
-	}
+	},
+	
+	teamNumbers: [],
+	allianceColor: null,
+	searchBar: null,
+	searchBarButton: null,
+	matchNumber: null
 };
 
 // Button ids for controller

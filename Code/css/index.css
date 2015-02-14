@@ -98,10 +98,6 @@ body {
 	/*	background-color: #e6e6e6;*/
 }
 
-.selected {
-	background-color: #3bbeff;
-}
-
 .button-auto,
 .button-tele,
 .button-match
@@ -199,13 +195,24 @@ body {
 	background-color: pink;
 }
 
-.selected-red {
-	background-color: #e8322e;
+/* Buttons that are active */
+.pure-button-active-blue {
+	background-color: blue;
+	color: #eee;
 }
 
 .pure-button-active-red {
 	background-color: #ad2522;
 	color: #fff;
+}
+
+/* Buttons that have focus */
+.pure-button-focus-blue {
+	background-color: #3bbeff;
+}
+
+.pure-button-focus-red {
+	background-color: #e8322e;
 }
 
 .modal {

@@ -1,67 +1,83 @@
 function initStyle() {
 	setElements();
-	updateGui();
 
 	// Assign click events to all buttons tags area
-	for(var subProp in cssButtonAreaName.tags)
-		$("." + cssButtonAreaName.tags[subProp]).click(function() { tagButtonClick(this.id); });
+	for(var subProp in cssButtonAreaNames.tags)
+		$("." + cssButtonAreaNames.tags[subProp]).click(function() { tagButtonClick(this.id); });
 
 	// Assign double click events to team number inputs
 	$(".teamInput")
 		.attr("contenteditable", "true")
 		.click(function(){ selectAllText(this); });
+	
+	// Assign click event to alliance color button
+	$gui.allianceColor.click(changeAllianceColor);
 
 }
 
 function updateGui()
 {
+	// CSS classes to remove from all the buttons
+	var btnRemoveClasses = cssButtonStatusNames.active.red + " " + cssButtonStatusNames.active.blue;
+	btnRemoveClasses += " " + cssButtonStatusNames.focus.red + " " + cssButtonStatusNames.focus.blue;
+	
 	// Reset all the buttons gui
-	for(var prop in cssButtonAreaName)
-		for(var subProp in cssButtonAreaName[prop])
-			$("." + cssButtonAreaName[prop][subProp]).removeClass(cssButtonActiveName + " " + cssButtonFocusedName);
-
+	for(var prop in cssButtonAreaNames)
+		for(var subProp in cssButtonAreaNames[prop])
+			$("." + cssButtonAreaNames[prop][subProp]).removeClass(btnRemoveClasses);
+	
 	// Index for button in array of button elements in gui obj
 	var btnIndex = 0;
 
 	// Set buttons that are active gui wise for tags
-	for(var subProp in alliance[curTeamIndex].data.tags)
+	for(var subProp in alliance[currTeamIndex].data.tags)
 	{
 		btnIndex = 0;
 
-		for(var innerProp in alliance[curTeamIndex].data.tags[subProp])
+		for(var innerProp in alliance[currTeamIndex].data.tags[subProp])
 		{	
-			if(alliance[curTeamIndex].data.tags[subProp][innerProp] === 1)
-				$gui.tags[subProp][btnIndex].addClass(cssButtonActiveName);
+			if(alliance[currTeamIndex].data.tags[subProp][innerProp] === 1)
+				$gui.tags[subProp][btnIndex].addClass(currCssButtonStatusName.active);
 
 			btnIndex++;
 		}
 	}
 
 	// Set the buttons text to match robot data for scoring
-	for(var subProp in alliance[curTeamIndex].data.scoring)
+	for(var subProp in alliance[currTeamIndex].data.scoring)
 	{
 		btnIndex = 0;
 
-		for(var innerProp in alliance[curTeamIndex].data.scoring[subProp])
+		for(var innerProp in alliance[currTeamIndex].data.scoring[subProp])
 		{
 			// TODO: Remove this try/catch when these elements actually exist in html...
 			try
 			{
-				$gui.scoring[subProp][btnIndex++].html(alliance[curTeamIndex].data.scoring[subProp][innerProp]);
+				$gui.scoring[subProp][btnIndex++].html(alliance[currTeamIndex].data.scoring[subProp][innerProp]);
 			}
 
 			catch(e)
 			{
-				console.log(e);
+				//console.log(e);
 			}
 		}
 	}
 
+	// Set focus to buttons that have focus
 	var tagBtnId = getTagInnerIndex();
 	var tagSubName = tagsNames[currMode.tags.subId];
 	var scoringSubName = scoringNames[currMode.scoring.subId];
-	$gui.tags[tagSubName][tagBtnId].addClass(cssButtonFocusedName);
-	$gui.scoring[scoringSubName][currMode.scoring.innerId].addClass(cssButtonFocusedName);
+	$gui.tags[tagSubName][tagBtnId].addClass(currCssButtonStatusName.focus);
+	$gui.scoring[scoringSubName][currMode.scoring.innerId].addClass(currCssButtonStatusName.focus);
+	
+	// Set alliance color, team numbers color, searchbar color, match number color
+	for(var i = 0; i < $gui.teamNumbers.length; i++)
+		$gui.teamNumbers[i].removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	
+	$gui.allianceColor.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$gui.searchBar.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$gui.searchBarButton.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$gui.matchNumber.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
 }
 
 function tagButtonClick(elmName)
@@ -69,24 +85,24 @@ function tagButtonClick(elmName)
 	var $elm = $("#" + elmName);
 
 	// Find button in gui and alliance data
-	for(var subProp in cssButtonAreaName.tags)
+	for(var subProp in cssButtonAreaNames.tags)
 	{
 		var btnIndex = 0;
 
-		if($elm.hasClass(cssButtonAreaName.tags[subProp]))
+		if($elm.hasClass(cssButtonAreaNames.tags[subProp]))
 		{
 			for(var innerProp in tagsInnerNames[subProp])
 			{
 				// Set all rating buttons to false, since only can be active
 				if(subProp === tagsNames[subId.tags.rating])
-					alliance[curTeamIndex].data.tags.rating[tagsInnerNames[subProp][btnIndex]] = 0;
+					alliance[currTeamIndex].data.tags.rating[tagsInnerNames[subProp][btnIndex]] = 0;
 
 				// Flip alliance tag data
 				if(elmName === $gui.tags[subProp][btnIndex][0].id)
 				{
 					var innerName = tagsInnerNames[subProp][btnIndex];
-					var currVal = alliance[curTeamIndex].data.tags[subProp][innerName];
-					alliance[curTeamIndex].data.tags[subProp][innerName] = (currVal === 0 ? 1 : 0);
+					var currVal = alliance[currTeamIndex].data.tags[subProp][innerName];
+					alliance[currTeamIndex].data.tags[subProp][innerName] = (currVal === 0 ? 1 : 0);
 				}
 
 				btnIndex++;
@@ -128,6 +144,21 @@ function setElements()
 	// Scoring element
 	$gui.scoring.teleop.push($("#button-scoringTeleGrey"));
 	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
+	
+	// Team numbers elements
+	$gui.teamNumbers.push($("#button-teamOneInput"));
+	$gui.teamNumbers.push($("#button-teamTwoInput"));
+	$gui.teamNumbers.push($("#button-teamThreeInput"));
+	
+	// Alliance color element
+	$gui.allianceColor = $("#button-allianceSelection");
+	
+	// Search bar elements
+	$gui.searchBar = $("#searchBar");
+	$gui.searchBarButton = $("#button-search");
+	
+	// Match number element
+	$gui.matchNumber = $("#matchNumber");
 }
 
 function selectAllText(elm)
@@ -137,4 +168,21 @@ function selectAllText(elm)
 	range.selectNodeContents(elm);
 	selection.removeAllRanges();
 	selection.addRange(range);
+}
+
+function changeAllianceColor()
+{
+	if(currCssButtonStatusName.active == cssButtonStatusNames.active.red)
+	{
+		currCssButtonStatusName.active = cssButtonStatusNames.active.blue;
+		currCssButtonStatusName.focus = cssButtonStatusNames.focus.blue;
+	}
+	
+	else
+	{
+		currCssButtonStatusName.active = cssButtonStatusNames.active.red;
+		currCssButtonStatusName.focus = cssButtonStatusNames.focus.red;
+	}
+	
+	updateGui();
 }

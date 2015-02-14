@@ -11,7 +11,13 @@ var teams = [];
 var alliance = [];              
 
 // Current team in alliance
-var curTeamIndex = 0;          
+var currTeamIndex = 0;          
+
+var currCssButtonStatusName = 
+{
+	active: cssButtonStatusNames.active.red,
+	focus: cssButtonStatusNames.focus.red
+};
 
 // Current mode, submode, innermode
 var currMode = 
@@ -48,14 +54,17 @@ var prevInnerId =
 	} 
 };
 
+// Status of whether the save dialog is being shown
+var submitDialogIsOpen = false;
+
 // Called when the document has been loaded once
 $(document).ready(init);
 
 function init() 
 {
 	console.log("Init");
-	resetScouting();
 	initStyle();
+	resetScouting();
 	window.requestAnimationFrame(main);
 }
 
@@ -65,12 +74,12 @@ function main()
 	needUpdateGui = contr.buttonGotPressed();
 
 	// Switch to previous robot in alliance
-	if(contr.getButton(contrBtn.lt) && --curTeamIndex < 0)
-		curTeamIndex = maxTeamsPerAlliance - 1;
+	if(contr.getButton(contrBtn.lt) && --currTeamIndex < 0)
+		currTeamIndex = maxTeamsPerAlliance - 1;
 
 	// Switch to next robot in alliance
-	if(contr.getButton(contrBtn.rt) && ++curTeamIndex >= maxTeamsPerAlliance)
-		curTeamIndex = 0;
+	if(contr.getButton(contrBtn.rt) && ++currTeamIndex >= maxTeamsPerAlliance)
+		currTeamIndex = 0;
 
 	// Switch tags area focus to previous/next area
 	if(contr.getButton([contrBtn.du, contrBtn.dd]))
@@ -99,11 +108,11 @@ function main()
 
 		// Set all rating buttons to false since only one can be active
 		if(currMode.tags.subId === subId.tags.rating)
-			for(var innerProp in alliance[curTeamIndex].data.tags.rating)
-				alliance[curTeamIndex].data.tags.rating[innerProp] = 0;
+			for(var innerProp in alliance[currTeamIndex].data.tags.rating)
+				alliance[currTeamIndex].data.tags.rating[innerProp] = 0;
 
-		var currVal = alliance[curTeamIndex].data.tags[subName][innerName];
-		alliance[curTeamIndex].data.tags[subName][innerName] = (currVal === 0 ? 1 : 0);
+		var currVal = alliance[currTeamIndex].data.tags[subName][innerName];
+		alliance[currTeamIndex].data.tags[subName][innerName] = (currVal === 0 ? 1 : 0);
 	}
 
 	// Switch focus to different button in tag area submode
@@ -163,15 +172,25 @@ function main()
 		var subName = scoringNames[currMode.scoring.subId];
 		var innerName = scoringInnerNames[subName][currMode.scoring.innerId];
 
-		if(contr.getButton(contrBtn.b) && --alliance[curTeamIndex].data.scoring[subName][innerName] < 0)
-			alliance[curTeamIndex].data.scoring[subName][innerName] = 0;
+		if(contr.getButton(contrBtn.b) && --alliance[currTeamIndex].data.scoring[subName][innerName] < 0)
+			alliance[currTeamIndex].data.scoring[subName][innerName] = 0;
 
 		else if(contr.getButton(contrBtn.y))
-			++alliance[curTeamIndex].data.scoring[subName][innerName];
+			++alliance[currTeamIndex].data.scoring[subName][innerName];
 
-		console.log(alliance[curTeamIndex].data.scoring[subName][innerName]);
+		console.log(alliance[currTeamIndex].data.scoring[subName][innerName]);
 	}
 
+	// Show dialog box/submit match data if dialog box is already open
+	if(contr.getButton(contrBtn.st))
+	{
+		if(submitDialogIsOpen)
+		{
+			
+			resetScouting();
+		}
+	}
+	
 	// Update gui if controller pressed a button
 	if(needUpdateGui)
 		updateGui();
@@ -182,7 +201,7 @@ function main()
 		printButtons(contr);
 
 		if(needUpdateGui)
-			console.log(alliance[curTeamIndex].data);
+			console.log(alliance[currTeamIndex].data);
 	}
 
 	window.requestAnimationFrame(main);
@@ -243,6 +262,8 @@ function resetScouting()
 			teleop: { innerId: 0 } 
 		} 
 	};
+	
+	updateGui();
 }
 
 function getData(key, callback)
