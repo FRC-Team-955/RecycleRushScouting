@@ -186,3 +186,20 @@ function changeAllianceColor()
 	
 	updateGui();
 }
+
+$(window).bind('keydown', function(event) {
+	if (event.ctrlKey || event.metaKey) {
+        switch (String.fromCharCode(event.which).toLowerCase()) {
+        case 's':
+            event.preventDefault();
+			$(".mainContent").animate({
+				opacity: 0.25	
+			}, 200);
+			$(".mainContent button").attr("disabled","disabled");
+			$(".modal").css("display", "block").animate({
+				height: "15rem"
+			}, 400);
+			break;
+		}
+    }
+});
