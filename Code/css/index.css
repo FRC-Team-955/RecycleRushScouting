@@ -252,3 +252,16 @@ body {
 .titleStyle {
 	margin: 1rem 1rem 0 1rem;
 }
+
+.teamContainer {
+	text-align: center;
+	border: 1px solid black;
+}
+
+.teamText {
+	padding-bottom: 2rem;
+}
+
+.teamNumb {
+	font-size: 2rem;
+}
