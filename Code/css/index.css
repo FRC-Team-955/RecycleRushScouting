@@ -217,9 +217,10 @@ body {
 
 .modal {
 	height: 0;
-	width: 40%;
+	width: 30%;
 	text-align: center;
-	padding-top: 2rem;
+	padding-top: 4rem;
+	padding-bottom: 12rem;
 	background-color: #b8c2b8;
 	margin: 10rem auto;
 	display: none;
@@ -228,6 +229,8 @@ body {
 	left: 0;
 	right: 0;
 	overflow: hide;
+	border-radius: 10px;
+	border: 1px #b8c2b8 solid;
 }
 
 .mainContent button[disabled="disabled"] {
@@ -244,6 +247,8 @@ body {
 
 .saveNo {
 	margin-left: 1rem;
+}
+
 .titleStyle {
 	margin: 1rem 1rem 0 1rem;
 }

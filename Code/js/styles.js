@@ -194,11 +194,11 @@ $(window).bind('keydown', function(event) {
             event.preventDefault();
 			$(".mainContent").animate({
 				opacity: 0.25	
-			}, 200);
+			}, 400);
 			$(".mainContent button").attr("disabled","disabled");
 			$(".modal").css("display", "block").animate({
 				height: "15rem"
-			}, 400);
+			}, 800);
 			break;
 		}
     }
