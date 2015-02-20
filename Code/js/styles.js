@@ -1,6 +1,25 @@
-function initStyle() {
+function initStyle() 
+{
 	setElements();
-
+	
+	// Assign ctrl+s to go to next match
+	$(window).bind('keydown', function(event) {
+		if (event.ctrlKey || event.metaKey) {
+			switch (String.fromCharCode(event.which).toLowerCase()) {
+				case 's':
+					event.preventDefault();
+					$(".mainContent").animate({
+						opacity: 0.25	
+					}, 400);
+					$(".mainContent button").attr("disabled","disabled");
+					$(".modal").css("display", "block").animate({
+						height: "15rem"
+					}, 800);
+					break;
+			}
+		}
+	});
+	
 	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaNames.tags)
 		$("." + cssButtonAreaNames.tags[subProp]).click(function() { tagButtonClick(this.id); });
@@ -12,7 +31,11 @@ function initStyle() {
 	
 	// Assign click event to alliance color button
 	$gui.allianceColor.click(changeAllianceColor);
-
+	
+	// Assign change event for match number box
+	$gui.matchNumber
+		.keydown(changeMatchNumber)
+		.blur(changeMatchNumber);
 }
 
 function updateGui()
@@ -49,18 +72,7 @@ function updateGui()
 		btnIndex = 0;
 
 		for(var innerProp in alliance[currTeamIndex].data.scoring[subProp])
-		{
-			// TODO: Remove this try/catch when these elements actually exist in html...
-			try
-			{
-				$gui.scoring[subProp][btnIndex++].html(alliance[currTeamIndex].data.scoring[subProp][innerProp]);
-			}
-
-			catch(e)
-			{
-				//console.log(e);
-			}
-		}
+			$gui.scoring[subProp][btnIndex++].html(alliance[currTeamIndex].data.scoring[subProp][innerProp]);
 	}
 
 	// Set focus to buttons that have focus
@@ -117,6 +129,67 @@ function tagButtonClick(elmName)
 	updateGui();
 }
 
+function selectAllText(elm)
+{
+	var selection = window.getSelection();        
+	var range = document.createRange();
+	range.selectNodeContents(elm);
+	selection.removeAllRanges();
+	selection.addRange(range);
+}
+
+function changeAllianceColor()
+{
+	// Change alliance color to blue, change text to "Blue"
+	if(currCssButtonStatusName.active == cssButtonStatusNames.active.red)
+	{
+		currCssButtonStatusName.active = cssButtonStatusNames.active.blue;
+		currCssButtonStatusName.focus = cssButtonStatusNames.focus.blue;
+	}
+	
+	// Change alliance color to red, change text to "Red"
+	else
+	{
+		currCssButtonStatusName.active = cssButtonStatusNames.active.red;
+		currCssButtonStatusName.focus = cssButtonStatusNames.focus.red;
+	}
+	
+	updateGui();
+}
+
+function changeMatchNumber(e)
+{
+	var currVal = $gui.matchNumber.val();
+	
+	if(e.type === eventTypes.keyDown)
+	{
+		var keyCode = e.keyCode;
+
+		// Limit the length of the match number
+		if(currVal.length < maxMatchNumberLength)
+			// Allow numbers, not '0' if length is 0
+			if(keyCode >= keyCodes.zero && keyCode <= keyCodes.nine)
+				if(!(keyCode === keyCodes.zero && currVal.length === 0))
+					return;
+
+		// Allow left and right arrow keys, backspace, del
+		if([keyCodes.lArrow, keyCodes.rArrow, keyCodes.back, keyCodes.del].indexOf(keyCode) > -1)
+			return;
+
+		// Else dont allow the new input character
+		e.preventDefault();
+	}
+	
+	else if(e.type === eventTypes.blur)
+	{
+		if(currVal.length === 0)
+			$gui.matchNumber.val(matchNumber);
+		
+		else
+			matchNumber = parseInt($gui.matchNumber.val());
+	}
+}
+
 function setElements()
 {
 	/* TAGS ELEMENTS */
@@ -148,64 +221,20 @@ function setElements()
 	// Scoring element
 	$gui.scoring.teleop.push($("#button-scoringTeleGrey"));
 	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
-	
+	$gui.scoring.teleop.push($("#button-scoringTeleHighestRecycle"));
+
 	// Team numbers elements
 	$gui.teamNumbers.push($("#button-teamOneInput"));
 	$gui.teamNumbers.push($("#button-teamTwoInput"));
 	$gui.teamNumbers.push($("#button-teamThreeInput"));
-	
+
 	// Alliance color element
 	$gui.allianceColor = $("#button-allianceSelection");
-	
+
 	// Search bar elements
 	$gui.searchBar = $("#searchBar");
 	$gui.searchBarButton = $("#button-search");
-	
+
 	// Match number element
 	$gui.matchNumber = $("#matchNumber");
 }
-
-function selectAllText(elm)
-{
-	var selection = window.getSelection();        
-	var range = document.createRange();
-	range.selectNodeContents(elm);
-	selection.removeAllRanges();
-	selection.addRange(range);
-}
-
-function changeAllianceColor()
-{
-	// Change alliance color to blue, change text to "Blue"
-	if(currCssButtonStatusName.active == cssButtonStatusNames.active.red)
-	{
-		currCssButtonStatusName.active = cssButtonStatusNames.active.blue;
-		currCssButtonStatusName.focus = cssButtonStatusNames.focus.blue;
-	}
-	
-	// Change alliance color to red, change text to "Red"
-	else
-	{
-		currCssButtonStatusName.active = cssButtonStatusNames.active.red;
-		currCssButtonStatusName.focus = cssButtonStatusNames.focus.red;
-	}
-	
-	updateGui();
-}
-
-$(window).bind('keydown', function(event) {
-	if (event.ctrlKey || event.metaKey) {
-        switch (String.fromCharCode(event.which).toLowerCase()) {
-        case 's':
-            event.preventDefault();
-			$(".mainContent").animate({
-				opacity: 0.25	
-			}, 400);
-			$(".mainContent button").attr("disabled","disabled");
-			$(".modal").css("display", "block").animate({
-				height: "15rem"
-			}, 800);
-			break;
-		}
-    }
-});

@@ -1,6 +1,9 @@
 // Debug mode
 var debugMode = true;
 
+// Max match number length
+var maxMatchNumberLength = 3;
+
 // Max teams per alliance
 var maxTeamsPerAlliance = 3; 
 
@@ -169,4 +172,22 @@ var contrBtn =
 	rd: 21,   // right stick down
 	rl: 22,   // right stick left
 	rr: 23    // right stick right
+};
+
+// Keycodes for keyboard events
+var keyCodes = 
+{
+	zero: 48,
+	nine: 57,
+	back: 8,
+	del: 46,
+	lArrow: 37,
+	rArrow: 39
+};
+
+// Event types
+var eventTypes = 
+{
+	keyDown: "keydown",
+	blur: "blur"
 };

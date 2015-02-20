@@ -4,6 +4,9 @@ var contr = new Controller();
 // When to update scouting
 var needUpdateGui = false;          
 
+// Match number
+var matchNumber = 1;
+
 // All robot data
 var teams = [];                 
 
