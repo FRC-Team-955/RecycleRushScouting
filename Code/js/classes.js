@@ -158,7 +158,7 @@ RobotData.prototype.addData = function(data)
 		{
 			subName = tagsNames[i];
 			innerName = tagsInnerNames[i][j];
-			this.data.tags[subName][innerName] = data.tags[subName][innerName];
+			this.data.tags[subName][innerName] += data.tags[subName][innerName];
 		}
 	}
 	
@@ -169,7 +169,7 @@ RobotData.prototype.addData = function(data)
 		{
 			subName = scoringNames[i];
 			innerName = scoringInnerNames[i][j];
-			this.data.tags[subName][innerName] = data.tags[subName][innerName];
+			this.data.scoring[subName][innerName] += data.scoring[subName][innerName];
 		}
 	}
 }

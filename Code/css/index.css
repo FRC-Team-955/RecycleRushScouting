@@ -197,22 +197,20 @@ body {
 
 /* Buttons that are active */
 .pure-button-active-blue {
-	background-color: blue;
-	color: #eee;
+	background-color: #3bbeff;
 }
 
 .pure-button-active-red {
-	background-color: #ad2522;
-	color: #fff;
+	background-color: #e8322e;
 }
 
 /* Buttons that have focus */
 .pure-button-focus-blue {
-	background-color: #3bbeff;
+	background-color: blue;
 }
 
 .pure-button-focus-red {
-	background-color: #e8322e;
+	background-color: #ad2522;
 }
 
 .modal {
