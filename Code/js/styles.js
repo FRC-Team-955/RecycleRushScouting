@@ -78,6 +78,10 @@ function updateGui()
 	$gui.searchBar.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
 	$gui.searchBarButton.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
 	$gui.matchNumber.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	
+	// Set the text in alliance color based on alliance color
+	var allianceText = currCssButtonStatusName.active === cssButtonStatusNames.active.red ? "Red" : "Blue";
+	$gui.allianceColor.html(allianceText);
 }
 
 function tagButtonClick(elmName)
@@ -172,12 +176,14 @@ function selectAllText(elm)
 
 function changeAllianceColor()
 {
+	// Change alliance color to blue, change text to "Blue"
 	if(currCssButtonStatusName.active == cssButtonStatusNames.active.red)
 	{
 		currCssButtonStatusName.active = cssButtonStatusNames.active.blue;
 		currCssButtonStatusName.focus = cssButtonStatusNames.focus.blue;
 	}
 	
+	// Change alliance color to red, change text to "Red"
 	else
 	{
 		currCssButtonStatusName.active = cssButtonStatusNames.active.red;
