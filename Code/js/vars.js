@@ -73,6 +73,9 @@ var scoringInnerNames =
 	teleop: ["greyStacked", "binsStacked", "highestBinLvl"] 
 };
 
+// Names for button names in match things
+var matchThingsInnerNames = ["coopStack", "coopSet", "highScoring"];
+
 // Max sub mode ids
 var maxSubId = { tags: 3, scoring: 2 };
 
@@ -138,6 +141,10 @@ var $gui =
 		teleop: []
 	},
 	
+	matchThings: [],
+	
+	matchComments: null,
+	robotComments: null,
 	teamNumbers: [],
 	allianceColor: null,
 	searchBar: null,
@@ -177,6 +184,7 @@ var contrBtn =
 // Keycodes for keyboard events
 var keyCodes = 
 {
+	tab: 9,
 	zero: 48,
 	nine: 57,
 	back: 8,

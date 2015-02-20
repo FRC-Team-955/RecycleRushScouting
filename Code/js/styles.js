@@ -17,6 +17,9 @@ function initStyle()
 					}, 800);
 					break;
 			}
+			
+			// Make current element with focus lose focus so data gets saved
+			$(":focus").blur();
 		}
 	});
 	
@@ -25,10 +28,11 @@ function initStyle()
 		$("." + cssButtonAreaNames.tags[subProp]).click(function() { tagButtonClick(this.id); });
 
 	// Assign double click events to team number inputs
-	$(".teamInput")
-		.attr("contenteditable", "true")
-		.click(function(){ selectAllText(this); });
-	
+	for(var i = 0; i < $gui.teamNumbers.length; i++)
+		$gui.teamNumbers[i]
+			.attr("contenteditable", "true")
+			.focus(function(){ selectAllText(this); });
+		
 	// Assign click event to alliance color button
 	$gui.allianceColor.click(changeAllianceColor);
 	
@@ -37,6 +41,21 @@ function initStyle()
 		.focus(function(){ this.select(); })
 		.keydown(changeMatchNumber)
 		.blur(changeMatchNumber);
+	
+	// Assign click events to buttons in match things
+	for(var i = 0; i < $gui.matchThings.length; i++)
+		$gui.matchThings[i].click(function() { matchButtonClick(this.id); } );
+	
+	// Update comment boxes
+	$gui.matchComments.blur(function()
+	{
+		alliance[currTeamIndex].data.match.comments = this.value;
+	});
+	
+	$gui.robotComments.blur(function()
+	{
+		alliance[currTeamIndex].data.comments = this.value;
+	});
 }
 
 function updateGui()
@@ -66,7 +85,18 @@ function updateGui()
 			btnIndex++;
 		}
 	}
-
+	
+	// Set buttons that are active gui wise for match things buttons
+	for(var i = 0; i < $gui.matchThings.length; i++)
+	{
+		var innerName = matchThingsInnerNames[i];
+		var currVal = alliance[currTeamIndex].data.match[innerName];
+		$gui.matchThings[i].removeClass(btnRemoveClasses);
+		
+		if(alliance[currTeamIndex].data.match[innerName] === 1)
+			$gui.matchThings[i].addClass(currCssButtonStatusName.active);
+	}
+	
 	// Set the buttons text to match robot data for scoring
 	for(var subProp in alliance[currTeamIndex].data.scoring)
 	{
@@ -130,6 +160,21 @@ function tagButtonClick(elmName)
 	updateGui();
 }
 
+function matchButtonClick(elmName)
+{
+	for(var i = 0; i < $gui.matchThings.length; i++)
+	{
+		if($gui.matchThings[i][0].id === elmName)
+		{
+			var innerName = matchThingsInnerNames[i];
+			var currVal = alliance[currTeamIndex].data.match[innerName];
+			alliance[currTeamIndex].data.match[innerName] = (currVal === 0 ? 1 : 0); 
+		}
+	}
+	
+	updateGui();
+}
+
 function selectAllText(elm)
 {
 	var selection = window.getSelection();        
@@ -174,7 +219,7 @@ function changeMatchNumber(e)
 					return;
 
 		// Allow left and right arrow keys, backspace, del
-		if([keyCodes.lArrow, keyCodes.rArrow, keyCodes.back, keyCodes.del].indexOf(keyCode) > -1)
+		if([keyCodes.lArrow, keyCodes.rArrow, keyCodes.back, keyCodes.del, keyCodes.tab].indexOf(keyCode) > -1)
 			return;
 
 		// Else dont allow the new input character
@@ -224,6 +269,15 @@ function setElements()
 	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
 	$gui.scoring.teleop.push($("#button-scoringTeleHighestRecycle"));
 
+	/* MATCH THING ELEMENTS */
+	$gui.matchThings.push($("#button-coopStack"));
+	$gui.matchThings.push($("#button-coopSet"));
+	$gui.matchThings.push($("#button-highScoring"));
+	
+	// Comment boxes
+	$gui.matchComments = $("#matchComments");
+	$gui.robotComments = $("#robotComments");
+	
 	// Team numbers elements
 	$gui.teamNumbers.push($("#button-teamOneInput"));
 	$gui.teamNumbers.push($("#button-teamTwoInput"));
