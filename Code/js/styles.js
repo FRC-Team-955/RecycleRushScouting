@@ -34,6 +34,7 @@ function initStyle()
 	
 	// Assign change event for match number box
 	$gui.matchNumber
+		.focus(function(){ this.select(); })
 		.keydown(changeMatchNumber)
 		.blur(changeMatchNumber);
 }
