@@ -255,7 +255,7 @@ body {
 
 .teamContainer {
 	text-align: center;
-	border: 1px solid black;
+	background-color: #636363;
 }
 
 .teamText {
@@ -265,3 +265,4 @@ body {
 .teamNumb {
 	font-size: 2rem;
 }
+
