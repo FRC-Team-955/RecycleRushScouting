@@ -172,4 +172,15 @@ RobotData.prototype.addData = function(data)
 			this.data.scoring[subName][innerName] += data.scoring[subName][innerName];
 		}
 	}
+	
+	// Add match things data
+	for(var i = 0; i < matchThingsInnerNames.length; i++)
+	{
+		innerName = matchThingsInnerNames[i];
+		this.data.match[innerName] += data.match[innerName]; 
+	}
+	
+	// Add comments
+	this.data.match.comments += " | " + data.match.comments;
+	this.data.comments += " | " + data.comments;
 }

@@ -212,7 +212,7 @@ function changeMatchNumber(e)
 		var keyCode = e.keyCode;
 
 		// Limit the length of the match number
-		if(currVal.length < maxMatchNumberLength)
+		if(currVal.length < maxMatchNumberLength || window.getSelection().toString().length > 0)
 			// Allow numbers, not '0' if length is 0
 			if(keyCode >= keyCodes.zero && keyCode <= keyCodes.nine)
 				if(!(keyCode === keyCodes.zero && currVal.length === 0))
@@ -228,11 +228,28 @@ function changeMatchNumber(e)
 	
 	else if(e.type === eventTypes.blur)
 	{
-		if(currVal.length === 0)
-			$gui.matchNumber.val(matchNumber);
+		var newVal = "";
 		
+		// Omit leading 0s
+		for(var i = 0; i < currVal.length; i++)
+		{
+			if(currVal[i] !== '0')
+			{
+				newVal = currVal.substring(i);
+				break;
+			}
+		}
+		
+		// If no number was inputted, put in previous match number
+		if(newVal.length === 0)
+			newVal = matchNumber;
+		
+		// Set match number to new input
 		else
-			matchNumber = parseInt($gui.matchNumber.val());
+			matchNumber = parseInt(newVal);
+		
+		// Update the match number gui
+		$gui.matchNumber.val(newVal);
 	}
 }
 
