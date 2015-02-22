@@ -7,14 +7,7 @@ function initStyle()
 		if (event.ctrlKey || event.metaKey) {
 			switch (String.fromCharCode(event.which).toLowerCase()) {
 				case 's':
-					event.preventDefault();
-					$(".mainContent").animate({
-						opacity: 0.25	
-					}, 400);
-					$(".mainContent button").attr("disabled","disabled");
-					$(".modal").css("display", "block").animate({
-						height: "15rem"
-					}, 800);
+					showSubmitDialog();
 					break;
 			}
 			
@@ -25,13 +18,15 @@ function initStyle()
 	
 	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaNames.tags)
-		$("." + cssButtonAreaNames.tags[subProp]).click(function() { tagButtonClick(this.id); });
+		$("." + cssButtonAreaNames.tags[subProp]).click(function(){ tagButtonClick(this.id); });
 
 	// Assign double click events to team number inputs
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
 		$gui.teamNumbers[i]
 			.attr("contenteditable", "true")
-			.focus(function(){ selectAllText(this); });
+			.focus(function(){ selectAllText(this); })
+			.blur(function(){ window.getSelection().removeAllRanges(); })
+			.click(function(){ teamNumberClick(this); });
 		
 	// Assign click event to alliance color button
 	$gui.allianceColor.click(changeAllianceColor);
@@ -115,7 +110,13 @@ function updateGui()
 	
 	// Set alliance color, team numbers color, searchbar color, match number color
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	{
 		$gui.teamNumbers[i].removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+		
+		// Give current team button for entering data focus
+		if(i === currTeamIndex)
+			$gui.teamNumbers[i].addClass(currCssButtonStatusName.focus);
+	}
 	
 	$gui.allianceColor.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
 	$gui.searchBar.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
@@ -125,6 +126,10 @@ function updateGui()
 	// Set the text in alliance color based on alliance color
 	var allianceText = currCssButtonStatusName.active === cssButtonStatusNames.active.red ? "Red" : "Blue";
 	$gui.allianceColor.html(allianceText);
+	
+	// Set comments in comment boxes
+	$gui.matchComments.val(alliance[currTeamIndex].data.match.comments);
+	$gui.robotComments.val(alliance[currTeamIndex].data.comments);
 }
 
 function tagButtonClick(elmName)
@@ -157,6 +162,22 @@ function tagButtonClick(elmName)
 		}
 	}
 
+	updateGui();
+}
+
+function teamNumberClick(elm)
+{
+	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	{
+		$gui.teamNumbers[i].removeClass(currCssButtonStatusName.focus);
+		
+		if($gui.teamNumbers[i][0].id === elm.id)
+		{
+			$gui.teamNumbers[i].addClass(currCssButtonStatusName.focus);
+			currTeamIndex = i;
+		}
+	}
+	
 	updateGui();
 }
 
@@ -251,6 +272,19 @@ function changeMatchNumber(e)
 		// Update the match number gui
 		$gui.matchNumber.val(newVal);
 	}
+}
+
+function showSubmitDialog()
+{
+	isSubmitDialogOpen = true;
+	event.preventDefault();
+	$(".mainContent").animate({
+		opacity: 0.25	
+	}, 400);
+	$(".mainContent button").attr("disabled","disabled");
+	$(".modal").css("display", "block").animate({
+		height: "15rem"
+	}, 800);
 }
 
 function setElements()

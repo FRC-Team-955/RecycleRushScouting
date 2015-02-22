@@ -58,7 +58,7 @@ var prevInnerId =
 };
 
 // Status of whether the save dialog is being shown
-var submitDialogIsOpen = false;
+var isSubmitDialogOpen = false;
 
 // Called when the document has been loaded once
 $(document).ready(init);
@@ -152,7 +152,7 @@ function main()
 		// Set focus to old focus in area
 		currMode.scoring.innerId.x = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].x;
 		currMode.scoring.innerId.y = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].y;
-		currMode.scoring.innerIdMax = maxInnerId[scoringNames[currMode.scoring.subId]];
+		currMode.scoring.innerIdMax = maxInnerId.scoring[scoringNames[currMode.scoring.subId]];
 	}
 
 	// Switch button focus in scoring submode
@@ -187,7 +187,7 @@ function main()
 	// Show dialog box/submit match data if dialog box is already open
 	if(contr.getButton(contrBtn.st))
 	{
-		if(submitDialogIsOpen)
+		if(isSubmitDialogOpen)
 		{
 			
 			resetScouting();
@@ -294,5 +294,8 @@ function getLocaleData()
 
 function saveToLocale()
 {
+	for(var i = 0; i < $gui.teamNumbers.length; i++)
+		teams[alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].val())].addData(alliance[i].data);
+	
 	localStorage.teams = teams;
 }

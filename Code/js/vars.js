@@ -4,6 +4,9 @@ var debugMode = true;
 // Max match number length
 var maxMatchNumberLength = 3;
 
+// Max team number length
+var maxTeamNumberLength = 4;
+
 // Max teams per alliance
 var maxTeamsPerAlliance = 3; 
 
