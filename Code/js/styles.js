@@ -23,19 +23,20 @@ function initStyle()
 	// Assign double click events to team number inputs
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
 		$gui.teamNumbers[i]
-			.attr("contenteditable", "true")
-			.focus(function(){ selectAllText(this); })
-			.blur(function(){ window.getSelection().removeAllRanges(); })
-			.click(function(){ teamNumberClick(this); });
+			.attr("contenteditable", "true")				// Make it editable
+			.focus(function(){ selectAllText(this); })		// Select all text
+			.keydown(changeTeamNumber)						// Prevent non numbers
+			.blur(changeTeamNumber)							// Update team number data
+			.click(function(){ teamNumberClick(this); });	// Change team focus
 		
 	// Assign click event to alliance color button
 	$gui.allianceColor.click(changeAllianceColor);
 	
 	// Assign change event for match number box
 	$gui.matchNumber
-		.focus(function(){ this.select(); })
-		.keydown(changeMatchNumber)
-		.blur(changeMatchNumber);
+		.focus(function(){ this.select(); })	// Select all text
+		.keydown(changeMatchNumber)				// Prevent non numbers
+		.blur(changeMatchNumber);				// Update match number
 	
 	// Assign click events to buttons in match things
 	for(var i = 0; i < $gui.matchThings.length; i++)
@@ -230,48 +231,88 @@ function changeMatchNumber(e)
 	
 	if(e.type === eventTypes.keyDown)
 	{
-		var keyCode = e.keyCode;
-
-		// Limit the length of the match number
-		if(currVal.length < maxMatchNumberLength || window.getSelection().toString().length > 0)
-			// Allow numbers, not '0' if length is 0
-			if(keyCode >= keyCodes.zero && keyCode <= keyCodes.nine)
-				if(!(keyCode === keyCodes.zero && currVal.length === 0))
-					return;
-
-		// Allow left and right arrow keys, backspace, del
-		if([keyCodes.lArrow, keyCodes.rArrow, keyCodes.back, keyCodes.del, keyCodes.tab].indexOf(keyCode) > -1)
-			return;
-
-		// Else dont allow the new input character
-		e.preventDefault();
+		if(e.keyCode === keyCodes.esc)
+			$gui.matchNumber.blur();
+		
+		else if(preventNonNumbers(e.keyCode, currVal, maxMatchNumberLength))
+			e.preventDefault();
+		
+		return;
 	}
 	
 	else if(e.type === eventTypes.blur)
 	{
-		var newVal = "";
-		
-		// Omit leading 0s
-		for(var i = 0; i < currVal.length; i++)
-		{
-			if(currVal[i] !== '0')
-			{
-				newVal = currVal.substring(i);
-				break;
-			}
-		}
+		currVal = omitLeadingZeros(currVal);
 		
 		// If no number was inputted, put in previous match number
-		if(newVal.length === 0)
-			newVal = matchNumber;
+		if(currVal.length === 0)
+			currVal = matchNumber;
 		
 		// Set match number to new input
 		else
-			matchNumber = parseInt(newVal);
+			matchNumber = parseInt(currVal);
 		
 		// Update the match number gui
-		$gui.matchNumber.val(newVal);
+		$gui.matchNumber.val(currVal);
+		return;
 	}
+}
+
+function changeTeamNumber(e)
+{
+	var teamIndex = parseInt(e.target.id[e.target.id.length - 1]);
+	var currVal = $gui.teamNumbers[teamIndex].text();
+	var selectedText = window.getSelection().toString();
+	
+	if(e.type === eventTypes.keyDown)
+	{
+		if(e.keyCode === keyCodes.esc)
+			$gui.teamNumbers[teamIndex].blur();	
+			
+		else if(e.keyCode === keyCodes.back && (currVal.length <= 1 || selectedText.length === currVal.length))
+		{
+			selectAllText($gui.teamNumbers[teamIndex][0]);
+			e.preventDefault();
+		}
+		
+		else if(preventNonNumbers(e.keyCode, currVal, maxTeamNumberLength))
+			e.preventDefault();
+		
+		return;
+	}
+
+	else if(e.type === eventTypes.blur)
+	{
+		currVal = omitLeadingZeros(currVal);
+
+		// If no number was inputted, put in previous match number
+		if(currVal.length === 0)
+			currVal = alliance[teamIndex].data.teamNumber;
+
+		// Set team number to new input
+		else
+			alliance[teamIndex].data.teamNumber = parseInt(currVal);
+
+		// Update the team number gui
+		$gui.teamNumbers[teamIndex].text(currVal);
+		window.getSelection().removeAllRanges();
+		return;
+	}
+}
+
+function preventNonNumbers(keyCode, str, maxLength)
+{
+	// Limit the length of the match number
+	if(str.length < maxLength || window.getSelection().toString().length > 0)
+		if(keyCode >= keyCodes.zero && keyCode <= keyCodes.nine)
+			return false;
+
+	// Allow left and right arrow keys, backspace, del
+	if([keyCodes.lArrow, keyCodes.rArrow, keyCodes.back, keyCodes.del, keyCodes.tab].indexOf(keyCode) > -1)
+		return false;
+
+	// Else dont allow the new input character
+	return true;
 }
 
 function showSubmitDialog()
@@ -330,9 +371,9 @@ function setElements()
 	$gui.robotComments = $("#robotComments");
 	
 	// Team numbers elements
-	$gui.teamNumbers.push($("#button-teamOneInput"));
-	$gui.teamNumbers.push($("#button-teamTwoInput"));
-	$gui.teamNumbers.push($("#button-teamThreeInput"));
+	$gui.teamNumbers.push($("#button-teamInput0"));
+	$gui.teamNumbers.push($("#button-teamInput1"));
+	$gui.teamNumbers.push($("#button-teamInput2"));
 
 	// Alliance color element
 	$gui.allianceColor = $("#button-allianceSelection");

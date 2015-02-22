@@ -187,6 +187,7 @@ var contrBtn =
 // Keycodes for keyboard events
 var keyCodes = 
 {
+	esc: 27,
 	tab: 9,
 	zero: 48,
 	nine: 57,

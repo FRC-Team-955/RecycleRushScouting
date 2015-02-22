@@ -28,3 +28,13 @@ function getDpadId(contr, stickId)
 {
 	return Math.floor(((getAng(contr, stickId) + 45) % 360) / 90);
 }
+
+// Omit leading characters
+function omitLeadingZeros(str)
+{
+	for(var i = 0; i < str.length; i++)
+		if(str[i] !== '0')
+			return str.substring(i);
+	
+	return "";
+}

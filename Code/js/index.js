@@ -213,7 +213,10 @@ function main()
 function resetScouting()
 {
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
+	{
 		alliance[i] = new RobotData();
+		$gui.teamNumbers[i].text(alliance[i].data.teamNumber = (i + 1));
+	}
 
 	var initSubName = 
 	{
@@ -295,7 +298,7 @@ function getLocaleData()
 function saveToLocale()
 {
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
-		teams[alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].val())].addData(alliance[i].data);
+		teams[alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].text())].addData(alliance[i].data);
 	
 	localStorage.teams = teams;
 }
