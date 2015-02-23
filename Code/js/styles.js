@@ -16,6 +16,9 @@ function initStyle()
 		}
 	});
 	
+	// Assign click event to title
+	$gui.title.click(titleClick);
+	
 	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaNames.tags)
 		$("." + cssButtonAreaNames.tags[subProp]).click(function(){ tagButtonClick(this.id); });
@@ -164,6 +167,13 @@ function tagButtonClick(elmName)
 	}
 
 	updateGui();
+}
+
+function titleClick(elm)
+{
+	saveToLocale();
+	saveFile("scoutingData.txt", JSON.stringify(getTeams()));
+	console.log("saved");
 }
 
 function teamNumberClick(elm)
@@ -384,4 +394,7 @@ function setElements()
 
 	// Match number element
 	$gui.matchNumber = $("#matchNumber");
+	
+	// Title
+	$gui.title = $("#title");
 }

@@ -292,13 +292,33 @@ function getTagInnerIndex()
 
 function getLocaleData()
 {
-	teams = typeof(localStorage.teams) === "undefined" ? [] : localStorage.teams;
+	teams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
 }
 
 function saveToLocale()
 {
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
-		teams[alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].text())].addData(alliance[i].data);
+	{
+		alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].text());
+		
+		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
+			teams[alliance[i].data.teamNumber - 1] = new RobotData();
+		
+		console.log(teams[alliance[i].data.teamNumber - 1]);
+		teams[alliance[i].data.teamNumber - 1].addData(alliance[i].data);
+	}
 	
-	localStorage.teams = teams;
+	localStorage.teams = JSON.stringify(getTeams());
+	console.log(JSON.parse(localStorage.teams));
+}
+
+function getTeams()
+{
+	var ret = [];
+	
+	for(var i = 0; i < teams.length; i++)
+		if(teams[i])
+			ret.push(teams[i]);
+	
+	return ret;
 }

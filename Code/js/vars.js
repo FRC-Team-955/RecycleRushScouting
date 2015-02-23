@@ -152,7 +152,8 @@ var $gui =
 	allianceColor: null,
 	searchBar: null,
 	searchBarButton: null,
-	matchNumber: null
+	matchNumber: null,
+	title: null
 };
 
 // Button ids for controller

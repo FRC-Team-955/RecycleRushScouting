@@ -154,10 +154,11 @@ RobotData.prototype.addData = function(data)
 	// Add tags data
 	for(var i = 0; i < tagsNames.length; i++)
 	{
-		for(var j = 0; j < tagsInnerNames[i].length; j++)
+		subName = tagsNames[i];
+		
+		for(var j = 0; j < tagsInnerNames[subName].length; j++)
 		{
-			subName = tagsNames[i];
-			innerName = tagsInnerNames[i][j];
+			innerName = tagsInnerNames[subName][j];
 			this.data.tags[subName][innerName] += data.tags[subName][innerName];
 		}
 	}
@@ -165,10 +166,11 @@ RobotData.prototype.addData = function(data)
 	// Add scoring data
 	for(var i = 0; i < scoringNames.length; i++)
 	{
-		for(var j = 0; j < scoringInnerNames[i].length; j++)
+		subName = scoringNames[i];
+		
+		for(var j = 0; j < scoringInnerNames[subName].length; j++)
 		{
-			subName = scoringNames[i];
-			innerName = scoringInnerNames[i][j];
+			innerName = scoringInnerNames[subName][j];
 			this.data.scoring[subName][innerName] += data.scoring[subName][innerName];
 		}
 	}
@@ -180,7 +182,8 @@ RobotData.prototype.addData = function(data)
 		this.data.match[innerName] += data.match[innerName]; 
 	}
 	
-	// Add comments
+	// Add comments, set team number
 	this.data.match.comments += " | " + data.match.comments;
 	this.data.comments += " | " + data.comments;
+	this.data.teamNumber = data.teamNumber;
 }

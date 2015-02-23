@@ -38,3 +38,12 @@ function omitLeadingZeros(str)
 	
 	return "";
 }
+
+// Saves the file to the users computer
+function saveFile(fileName, fileData)
+{
+	var e = document.createElement('a');
+	e.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileData));
+	e.setAttribute('download', fileName);
+	e.click();
+}
