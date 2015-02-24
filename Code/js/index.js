@@ -16,6 +16,7 @@ var alliance = [];
 // Current team in alliance
 var currTeamIndex = 0;          
 
+// Current css names for buttons
 var currCssButtonStatusName = 
 {
 	active: cssButtonStatusNames.active.red,
@@ -63,6 +64,7 @@ var isSubmitDialogOpen = false;
 // Called when the document has been loaded once
 $(document).ready(init);
 
+// Init the scouting data
 function init() 
 {
 	console.log("Init");
@@ -71,6 +73,7 @@ function init()
 	window.requestAnimationFrame(main);
 }
 
+// Main loop, checks for controller button presses
 function main()
 {
 	contr.update(navigator.getGamepads()[0]);
@@ -210,6 +213,7 @@ function main()
 	window.requestAnimationFrame(main);
 }
 
+// Resets the scouting data
 function resetScouting()
 {
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
@@ -272,6 +276,7 @@ function resetScouting()
 	updateGui();
 }
 
+// Gets data from thebluealliance
 function getData(key, callback)
 {
 	$.ajax
@@ -285,16 +290,19 @@ function getData(key, callback)
 	});
 }
 
+// Converts inner coord points to button ids in tag buttons
 function getTagInnerIndex()
 {
 	return (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
 }
 
+// Gets data from local storage
 function getLocaleData()
 {
 	teams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
 }
 
+// Saves teams data to local storage, caches it
 function saveToLocale()
 {
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
@@ -312,6 +320,7 @@ function saveToLocale()
 	console.log(JSON.parse(localStorage.teams));
 }
 
+// Gets an array containing all teams that this scouting has data on
 function getTeams()
 {
 	var ret = [];

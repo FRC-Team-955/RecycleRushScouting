@@ -1,3 +1,4 @@
+// Init the gui
 function initStyle() 
 {
 	setElements();
@@ -57,6 +58,7 @@ function initStyle()
 	});
 }
 
+// Updates the gui to match the alliance data
 function updateGui()
 {
 	// CSS classes to remove from all the buttons
@@ -136,6 +138,7 @@ function updateGui()
 	$gui.robotComments.val(alliance[currTeamIndex].data.comments);
 }
 
+// Set button in tag area to false/true, update gui
 function tagButtonClick(elmName)
 {
 	var $elm = $("#" + elmName);
@@ -169,6 +172,7 @@ function tagButtonClick(elmName)
 	updateGui();
 }
 
+// Save scouting to user on title click
 function titleClick(elm)
 {
 	saveToLocale();
@@ -176,6 +180,7 @@ function titleClick(elm)
 	console.log("saved");
 }
 
+// Give focus to team number that was clicked
 function teamNumberClick(elm)
 {
 	for(var i = 0; i < $gui.teamNumbers.length; i++)
@@ -192,6 +197,7 @@ function teamNumberClick(elm)
 	updateGui();
 }
 
+// Updates team in alliance data
 function matchButtonClick(elmName)
 {
 	for(var i = 0; i < $gui.matchThings.length; i++)
@@ -207,6 +213,7 @@ function matchButtonClick(elmName)
 	updateGui();
 }
 
+// Selects all the text for a button
 function selectAllText(elm)
 {
 	var selection = window.getSelection();        
@@ -216,6 +223,7 @@ function selectAllText(elm)
 	selection.addRange(range);
 }
 
+// Changes the alliance color for the gui
 function changeAllianceColor()
 {
 	// Change alliance color to blue, change text to "Blue"
@@ -235,6 +243,7 @@ function changeAllianceColor()
 	updateGui();
 }
 
+// Updates the match number, only allow numbers
 function changeMatchNumber(e)
 {
 	var currVal = $gui.matchNumber.val();
@@ -268,6 +277,7 @@ function changeMatchNumber(e)
 	}
 }
 
+// Updates the team number data, only allow numbers
 function changeTeamNumber(e)
 {
 	var teamIndex = parseInt(e.target.id[e.target.id.length - 1]);
@@ -310,6 +320,7 @@ function changeTeamNumber(e)
 	}
 }
 
+// Prevents non number keys, returns true if the key was not a number except for some
 function preventNonNumbers(keyCode, str, maxLength)
 {
 	// Limit the length of the match number
@@ -325,6 +336,7 @@ function preventNonNumbers(keyCode, str, maxLength)
 	return true;
 }
 
+// Shows the submit data dialog box
 function showSubmitDialog()
 {
 	isSubmitDialogOpen = true;
@@ -338,6 +350,7 @@ function showSubmitDialog()
 	}, 800);
 }
 
+// Gets elements from gui and puts them into $gui obj
 function setElements()
 {
 	/* TAGS ELEMENTS */

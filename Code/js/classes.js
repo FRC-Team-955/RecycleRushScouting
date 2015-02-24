@@ -14,6 +14,7 @@ function Controller()
 	}
 }
 
+// Updates the button status of the controller
 Controller.prototype.update = function(contr)
 {
 	var exists = typeof contr !== "undefined";
@@ -66,11 +67,13 @@ Controller.prototype.update = function(contr)
 	}
 };
 
+// Check if the controller had any of its button pressed
 Controller.prototype.buttonGotPressed = function()
 {
 	return this.buttonWasPressed;
 };
 
+// Check if a specific button got pressed
 Controller.prototype.getButton = function(btnId)
 {
 	if(typeof(btnId) === "number")
@@ -146,6 +149,7 @@ function RobotData()
 	}; 
 }
 
+// Appends data to robot data
 RobotData.prototype.addData = function(data)
 {
 	var subName = "";
