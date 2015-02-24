@@ -5,7 +5,7 @@ var contr = new Controller();
 var needUpdateGui = false;          
 
 // Match number
-var matchNumber = 1;
+var matchNumber = 0;
 
 // All robot data
 var teams = [];                 
@@ -167,7 +167,6 @@ function main()
 		else if(contr.getButton(contrBtn.rd) && ++currMode.scoring.innerId >= currMode.scoring.innerIdMax)
 			currMode.scoring.innerId = 0;
 
-		console.log(currMode.scoring.innerId);
 		var subName = scoringNames[currMode.scoring.subId];
 		prevInnerId.scoring[subName].innerId = currMode.scoring.innerId;
 	}
@@ -183,8 +182,6 @@ function main()
 
 		else if(contr.getButton(contrBtn.y))
 			++alliance[currTeamIndex].data.scoring[subName][innerName];
-
-		console.log(alliance[currTeamIndex].data.scoring[subName][innerName]);
 	}
 
 	// Show dialog box/submit match data if dialog box is already open
@@ -192,10 +189,19 @@ function main()
 	{
 		if(isSubmitDialogOpen)
 		{
-			
+			saveToLocale();
 			resetScouting();
+			hideSubmitDialog();
 		}
+		
+		else
+			showSubmitDialog();
 	}
+	
+	// Cancel submitting data if dialog box is open
+	if(contr.getButton(contrBtn.bk))
+		if(isSubmitDialogOpen)
+			hideSubmitDialog();
 	
 	// Update gui if controller pressed a button
 	if(needUpdateGui)
@@ -216,6 +222,8 @@ function main()
 // Resets the scouting data
 function resetScouting()
 {
+	matchNumber++;
+	
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
 	{
 		alliance[i] = new RobotData();
@@ -312,7 +320,6 @@ function saveToLocale()
 		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
 			teams[alliance[i].data.teamNumber - 1] = new RobotData();
 		
-		console.log(teams[alliance[i].data.teamNumber - 1]);
 		teams[alliance[i].data.teamNumber - 1].addData(alliance[i].data);
 	}
 	

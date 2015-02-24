@@ -17,6 +17,11 @@ function initStyle()
 		}
 	});
 	
+	// Assign click, keyup event to scouting
+	$(window)
+		.click(windowClick)
+		.keyup(windowKeyUp);
+	
 	// Assign click event to title
 	$gui.title.click(titleClick);
 	
@@ -136,6 +141,9 @@ function updateGui()
 	// Set comments in comment boxes
 	$gui.matchComments.val(alliance[currTeamIndex].data.match.comments);
 	$gui.robotComments.val(alliance[currTeamIndex].data.comments);
+	
+	// Update the match number gui
+	$gui.matchNumber.val(matchNumber);
 }
 
 // Set button in tag area to false/true, update gui
@@ -336,6 +344,37 @@ function preventNonNumbers(keyCode, str, maxLength)
 	return true;
 }
 
+// Handles window click events
+function windowClick(e)
+{
+	if(isSubmitDialogOpen)
+	{
+		if(!$("#" + e.target.id).hasClass("submitDialog"))
+			hideSubmitDialog();
+		
+		else if(e.target.id === "submitYes" || e.target.id === "submitNo")
+		{
+			if(e.target.id === "submitYes")
+			{
+				saveToLocale();
+				resetScouting();
+			}
+			
+			hideSubmitDialog();
+		}
+	}
+}
+
+// Handles window keyup events
+function windowKeyUp(e)
+{
+	if(isSubmitDialogOpen)
+	{
+		if(e.keyCode === keyCodes.esc)
+			hideSubmitDialog();
+	}
+}
+
 // Shows the submit data dialog box
 function showSubmitDialog()
 {
@@ -346,6 +385,19 @@ function showSubmitDialog()
 	}, 400);
 	$(".mainContent button").attr("disabled","disabled");
 	$(".modal").css("display", "block").animate({
+		height: "15rem"
+	}, 800);
+}
+
+// Hides the submit data dialog box
+function hideSubmitDialog()
+{
+	isSubmitDialogOpen = false;
+	$(".mainContent").animate({
+		opacity: 1	
+	}, 400);
+	$(".mainContent button").attr("disabled",false);
+	$(".modal").css("display", "none").animate({
 		height: "15rem"
 	}, 800);
 }
