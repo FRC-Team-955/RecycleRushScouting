@@ -372,6 +372,17 @@ function windowKeyUp(e)
 	{
 		if(e.keyCode === keyCodes.esc)
 			hideSubmitDialog();
+		
+		if(isSubmitDialogOpen)
+		{
+			if(e.keyCode === keyCodes.ent)
+			{
+				saveToLocale();
+				resetScouting();
+				hideSubmitDialog();
+			}
+		}
+				
 	}
 }
 

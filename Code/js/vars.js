@@ -188,14 +188,15 @@ var contrBtn =
 // Keycodes for keyboard events
 var keyCodes = 
 {
-	esc: 27,
-	tab: 9,
-	zero: 48,
-	nine: 57,
-	back: 8,
-	del: 46,
-	lArrow: 37,
-	rArrow: 39
+	ent: 13,	// Enter
+	esc: 27,	// Escape
+	tab: 9,		// Tab
+	zero: 48,	// 0
+	nine: 57,	// 9
+	back: 8,	// Backspace
+	del: 46,	// Delete
+	lArrow: 37,	// Right arrow
+	rArrow: 39	// Left arrow
 };
 
 // Event types
