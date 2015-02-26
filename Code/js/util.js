@@ -28,3 +28,22 @@ function getDpadId(contr, stickId)
 {
 	return Math.floor(((getAng(contr, stickId) + 45) % 360) / 90);
 }
+
+// Omit leading characters
+function omitLeadingZeros(str)
+{
+	for(var i = 0; i < str.length; i++)
+		if(str[i] !== '0')
+			return str.substring(i);
+	
+	return "";
+}
+
+// Saves the file to the users computer
+function saveFile(fileName, fileData)
+{
+	var e = document.createElement('a');
+	e.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(fileData));
+	e.setAttribute('download', fileName);
+	e.click();
+}

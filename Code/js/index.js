@@ -4,6 +4,9 @@ var contr = new Controller();
 // When to update scouting
 var needUpdateGui = false;          
 
+// Match number
+var matchNumber = 0;
+
 // All robot data
 var teams = [];                 
 
@@ -13,6 +16,7 @@ var alliance = [];
 // Current team in alliance
 var currTeamIndex = 0;          
 
+// Current css names for buttons
 var currCssButtonStatusName = 
 {
 	active: cssButtonStatusNames.active.red,
@@ -55,11 +59,12 @@ var prevInnerId =
 };
 
 // Status of whether the save dialog is being shown
-var submitDialogIsOpen = false;
+var isSubmitDialogOpen = false;
 
 // Called when the document has been loaded once
 $(document).ready(init);
 
+// Init the scouting data
 function init() 
 {
 	console.log("Init");
@@ -68,6 +73,7 @@ function init()
 	window.requestAnimationFrame(main);
 }
 
+// Main loop, checks for controller button presses
 function main()
 {
 	contr.update(navigator.getGamepads()[0]);
@@ -149,7 +155,7 @@ function main()
 		// Set focus to old focus in area
 		currMode.scoring.innerId.x = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].x;
 		currMode.scoring.innerId.y = prevInnerId.scoring[scoringNames[currMode.scoring.subId]].y;
-		currMode.scoring.innerIdMax = maxInnerId[scoringNames[currMode.scoring.subId]];
+		currMode.scoring.innerIdMax = maxInnerId.scoring[scoringNames[currMode.scoring.subId]];
 	}
 
 	// Switch button focus in scoring submode
@@ -161,7 +167,6 @@ function main()
 		else if(contr.getButton(contrBtn.rd) && ++currMode.scoring.innerId >= currMode.scoring.innerIdMax)
 			currMode.scoring.innerId = 0;
 
-		console.log(currMode.scoring.innerId);
 		var subName = scoringNames[currMode.scoring.subId];
 		prevInnerId.scoring[subName].innerId = currMode.scoring.innerId;
 	}
@@ -177,19 +182,26 @@ function main()
 
 		else if(contr.getButton(contrBtn.y))
 			++alliance[currTeamIndex].data.scoring[subName][innerName];
-
-		console.log(alliance[currTeamIndex].data.scoring[subName][innerName]);
 	}
 
 	// Show dialog box/submit match data if dialog box is already open
 	if(contr.getButton(contrBtn.st))
 	{
-		if(submitDialogIsOpen)
+		if(isSubmitDialogOpen)
 		{
-			
+			saveToLocale();
 			resetScouting();
+			hideSubmitDialog();
 		}
+		
+		else
+			showSubmitDialog();
 	}
+	
+	// Cancel submitting data if dialog box is open
+	if(contr.getButton(contrBtn.bk))
+		if(isSubmitDialogOpen)
+			hideSubmitDialog();
 	
 	// Update gui if controller pressed a button
 	if(needUpdateGui)
@@ -207,10 +219,16 @@ function main()
 	window.requestAnimationFrame(main);
 }
 
+// Resets the scouting data
 function resetScouting()
 {
+	matchNumber++;
+	
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
+	{
 		alliance[i] = new RobotData();
+		$gui.teamNumbers[i].text(alliance[i].data.teamNumber = (i + 1));
+	}
 
 	var initSubName = 
 	{
@@ -266,6 +284,7 @@ function resetScouting()
 	updateGui();
 }
 
+// Gets data from thebluealliance
 function getData(key, callback)
 {
 	$.ajax
@@ -279,17 +298,43 @@ function getData(key, callback)
 	});
 }
 
+// Converts inner coord points to button ids in tag buttons
 function getTagInnerIndex()
 {
 	return (currMode.tags.innerId.x * currMode.tags.innerIdMax.y) + currMode.tags.innerId.y;
 }
 
+// Gets data from local storage
 function getLocaleData()
 {
-	teams = typeof(localStorage.teams) === "undefined" ? [] : localStorage.teams;
+	teams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
 }
 
+// Saves teams data to local storage, caches it
 function saveToLocale()
 {
-	localStorage.teams = teams;
+	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	{
+		alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].text());
+		
+		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
+			teams[alliance[i].data.teamNumber - 1] = new RobotData();
+		
+		teams[alliance[i].data.teamNumber - 1].addData(alliance[i].data);
+	}
+	
+	localStorage.teams = JSON.stringify(getTeams());
+	console.log(JSON.parse(localStorage.teams));
+}
+
+// Gets an array containing all teams that this scouting has data on
+function getTeams()
+{
+	var ret = [];
+	
+	for(var i = 0; i < teams.length; i++)
+		if(teams[i])
+			ret.push(teams[i]);
+	
+	return ret;
 }

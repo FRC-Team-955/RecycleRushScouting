@@ -1,6 +1,12 @@
 // Debug mode
 var debugMode = true;
 
+// Max match number length
+var maxMatchNumberLength = 3;
+
+// Max team number length
+var maxTeamNumberLength = 4;
+
 // Max teams per alliance
 var maxTeamsPerAlliance = 3; 
 
@@ -70,6 +76,9 @@ var scoringInnerNames =
 	teleop: ["greyStacked", "binsStacked", "highestBinLvl"] 
 };
 
+// Names for button names in match things
+var matchThingsInnerNames = ["coopStack", "coopSet", "highScoring"];
+
 // Max sub mode ids
 var maxSubId = { tags: 3, scoring: 2 };
 
@@ -135,11 +144,16 @@ var $gui =
 		teleop: []
 	},
 	
+	matchThings: [],
+	
+	matchComments: null,
+	robotComments: null,
 	teamNumbers: [],
 	allianceColor: null,
 	searchBar: null,
 	searchBarButton: null,
-	matchNumber: null
+	matchNumber: null,
+	title: null
 };
 
 // Button ids for controller
@@ -169,4 +183,25 @@ var contrBtn =
 	rd: 21,   // right stick down
 	rl: 22,   // right stick left
 	rr: 23    // right stick right
+};
+
+// Keycodes for keyboard events
+var keyCodes = 
+{
+	ent: 13,	// Enter
+	esc: 27,	// Escape
+	tab: 9,		// Tab
+	zero: 48,	// 0
+	nine: 57,	// 9
+	back: 8,	// Backspace
+	del: 46,	// Delete
+	lArrow: 37,	// Right arrow
+	rArrow: 39	// Left arrow
+};
+
+// Event types
+var eventTypes = 
+{
+	keyDown: "keydown",
+	blur: "blur"
 };
