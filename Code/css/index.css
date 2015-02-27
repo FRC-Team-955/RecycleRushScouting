@@ -383,3 +383,29 @@ th {
 .matchNumberLabel {
 	margin: 0;	
 }
+
+.selectionContainer {
+	height: 36rem;
+	border: solid #b8c2b8 1px;
+}
+
+h3 {
+	text-align: center;
+}
+.teamList,
+.pickList,
+.alliance
+{
+	height: 100%;
+	box-sizing: border-box;
+	border: #dbdbdb solid 10px;
+	border-radius: 25px;
+}
+
+.alliance {
+	background-color: #b8c2b8;
+}
+
+.allianceContainer {
+	height: 50%;
+}
