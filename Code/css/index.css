@@ -366,4 +366,20 @@ body {
 	text-align: center;
 }
 
+th {
+	text-align: center;
+	vertical-align: middle;
+}
 
+.addMatch {
+	float: left; 
+	height: 1.5rem;
+}
+
+.matchNumberImport {
+	vertical-align: middle;
+}
+
+.matchNumberLabel {
+	margin: 0;	
+}
