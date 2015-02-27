@@ -359,8 +359,11 @@ body {
 	padding-top: 1%;
 }
 
-.analysisTable {
+.analysisTable,
+.matchTable
+{
 	width: 100%;
 	text-align: center;
 }
+
 
