@@ -1,11 +1,11 @@
 @font-face {
 	font-family: "Raleway";
-	src: url("../fonts/Raleway-Medium.ttf");
+	src: url("../fonts/Raleway/Raleway-Light.ttf");
 }
 
 @font-face {
 	font-family: "OpenSans";
-	src: url("../fonts/OpenSans-Regular.ttf");
+	src: url("../fonts/Open_Sans/OpenSans-Light.ttf");
 }
 
 * {
@@ -21,6 +21,45 @@
 
 body {
 	background-color: #dbdbdb;
+	font-size: 1em;
+}
+
+h1,
+h2,
+h3 {
+	font-family: Raleway;
+}
+
+span {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.pure-button {
+	font-family: OpenSans;
+	font-size: 1em;
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}
+
+.pure-form {
+	font-family: OpenSans;
+}
+
+.pure-u-1 h1,
+.pure-u-1 h2,
+.pure-u-1 h3 {
+	margin-top: 0.1em;
+	margin-bottom: 0.1em;
+}
+
+.pure-u-1 .header {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+.cx .fixThisShit {
+	padding-top: 0;
 }
 
 .column {
@@ -28,49 +67,56 @@ body {
 }
 
 .title {
-	font-size: 2rem;
-	margin-left: 2rem;
-	margin-top: 1rem;
+	font-size: 2em;
+	margin-left: 0.5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 	font-family: "Raleway";
 }
 
 .button-alliance {
 	background-color: #3bbeff;
+	font-family: OpenSans;
 	width: 100%;
 	display: block;
-	margin-top: 1rem;
-	height: 2rem;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 }
 
 .teamInput {
 	background-color: #3bbeff;
-	margin-top: 1rem;
-	height: 2rem;
-	width: 4rem;
+	font-family: OpenSans;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
+	width: 5em;
 	text-align: center;
-	font-size: .75rem;
+	font-size: 1em;
 }
 
 .searchBar {
 	background-color: #3bbeff;
-	margin-top: 1rem;
-	height: 2rem;
+	font-family: OpenSans;
 	float: left;
+	font-size: 1em;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 }
 
 .matchNumber {
 	background-color: #3bbeff;
-	margin-top: 1rem;
-	height: 2rem;
+	font-family: OpenSans;
+	font-size: 1em;
 	text-align: center;
+	padding-bottom: 0.5em;
+	padding-bottom: 0.5em;
 	margin-right: 2rem;
 }
 
 .button-search {
-	margin-top: 1rem;
-	height: 2rem;
+	font-family: Raleway;
 	width: 100%;
-	padding: 8px 0;
+	padding-bottom: 0.5em;
+	padding-top: 0.5em;
 	background-color: #3bbeff;
 	border-radius: 4px;
 	border: 1px solid #ccc;
@@ -78,7 +124,7 @@ body {
 
 
 .cx {
-	margin: 1rem 1rem .5rem 1rem;
+	margin: 0.5em 0.5em .5em 0.5em;
 	background-color: #b8c2b8;
 }
 
@@ -107,6 +153,11 @@ body {
 	font-size: .75rem;
 }
 
+.teamButton {
+	margin-top: auto;
+	margin-bottom: auto;
+}
+
 .button-right {
 	float: right;
 }
@@ -127,8 +178,10 @@ body {
 
 .comments {
 	width: 100%;
-	height: 8rem;
-	margin-top: 1rem;
+	height: 9em;
+	font-family: OpenSans;
+	margin-top: 0.5em;
+	border: none;
 }
 
 .autoScore,
@@ -149,7 +202,7 @@ body {
 .autoSLabel,
 .teleSLabel
 {
-	margin-top: .2rem;
+	margin-top: auto;
 	margin-bottom: auto;
 }
 
@@ -171,9 +224,11 @@ body {
 }
 
 .matchComments {
-	height: 9rem;
+	font-family: OpenSans;
+	height: 6em;
 	width: 100%;
 	margin-top: 1rem;
+	border: none;
 }
 
 .slide {
@@ -249,7 +304,7 @@ body {
 }
 
 .titleStyle {
-	margin: 1rem 1rem 0 1rem;
+	margin: 0rem 1rem 0 1rem;
 }
 
 .teamContainer {
