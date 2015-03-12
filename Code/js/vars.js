@@ -1,6 +1,12 @@
 // Debug mode
 var debugMode = true;
 
+// List of teams for search button query autocomplete
+var teamsList = [];
+
+// Max Global teams in frc
+var maxGlobalTeams = 6000;
+
 // Max match number length
 var maxMatchNumberLength = 3;
 
@@ -61,7 +67,7 @@ var tagsNames = ["auto", "capabilities", "rating"];
 // Names for buttons in tag area submodes
 var tagsInnerNames = 
 { 
-	auto: ["handlesGrey", "movesBins", "handlesYellow", "movesToAuto"], 
+	auto: ["grabsBins", "movesBins", "handlesYellow", "movesToAuto"], 
 	capabilities: ["canStack", "canMoveLitter", "brokenDrive", "canPlaceBins", "clumsy", "brokenPickup"], 
 	rating: ["good", "meh", "bad"]
 };
@@ -128,23 +134,72 @@ var cssButtonStatusNames =
 	}
 };
 
-// All the interactive gui elements
-var $gui = 
+// Scouting mode class names
+var cssScoutingModeClassName = "scoutingMode"
+
+// Available scouting mode names
+var cssScoutingModeNames = 
 {
-	tags: 
-	{
-		auto: [],
-		capabilities: [],
-		rating: []
+	scouting: "scouting", 
+	analysis: "analysis", 
+	match: "match", 
+	allianceSelection: "allianceSelection" 
+};
+
+// All the interactive for scouting elements
+var $scouting = 
+{
+	"tags":
+	{            
+		"auto":
+		{
+			"grabsBins": null,
+			"movesBins": null,
+			"handlesYellow": null,
+			"movesToAuto": null
+		},
+
+		"capabilities":
+		{
+			"canStack": null,
+			"canMoveLitter": null,
+			"brokenDrive": null,
+			"canPlaceBins": null,
+			"clumsy": null,
+			"brokenPickup": null
+		},
+
+		"rating":
+		{
+			"good": null,
+			"meh": null,
+			"bad": null
+		}
 	},
 
-	scoring:
+	"scoring":
 	{
-		auto: [],
-		teleop: []
+		"auto":
+		{
+			"yellowMoved": null,
+			"yellowStacked": null,
+			"binsMoved": null
+		},
+
+		"teleop":
+		{
+			"greyStacked": null,
+			"binsStacked": null,
+			"highestBinLvl": null
+		}
 	},
-	
-	matchThings: [],
+
+	"matchThings": 
+	{
+		"coopStack": null,
+		"coopSet": null,
+		"highScoring": null,
+	},
 	
 	matchComments: null,
 	robotComments: null,
@@ -155,6 +210,68 @@ var $gui =
 	matchNumber: null,
 	title: null
 };
+
+// All interactive elements for analysis elements
+var $analysis = 
+{
+	"tags":
+	{            
+		"auto":
+		{
+			"grabsBins": null,
+			"movesBins": null,
+			"handlesYellow": null,
+			"movesToAuto": null
+		},
+
+		"capabilities":
+		{
+			"canStack": null,
+			"canMoveLitter": null,
+			"brokenDrive": null,
+			"canPlaceBins": null,
+			"clumsy": null,
+			"brokenPickup": null
+		},
+
+		"rating":
+		{
+			"good": null,
+			"meh": null,
+			"bad": null
+		}
+	},
+
+	"scoring":
+	{
+		"auto":
+		{
+			"yellowMoved": null,
+			"yellowStacked": null,
+			"binsMoved": null
+		},
+
+		"teleop":
+		{
+			"greyStacked": null,
+			"binsStacked": null,
+			"highestBinLvl": null
+		}
+	},
+
+	"matchThings": 
+	{
+		"coopStack": null,
+		"coopSet": null,
+		"highScoring": null
+	},
+
+	"total": null,
+	"average": null,
+	"matchComments": null,
+	"robotComments": null,
+	"teamNumber": null
+}
 
 // Button ids for controller
 var contrBtn =                              

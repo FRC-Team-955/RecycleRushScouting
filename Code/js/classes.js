@@ -95,7 +95,7 @@ function RobotData()
 		{            
 			"auto":
 			{
-				"handlesGrey": 0,
+				"grabsBins": 0,
 				"movesBins": 0,
 				"handlesYellow": 0,
 				"movesToAuto": 0
@@ -136,58 +136,60 @@ function RobotData()
 			}
 		},
 
-		"match": 
+		"matchThings": 
 		{
 			"coopStack": 0,
 			"coopSet": 0,
-			"highScoring": 0,
-			"comments": ""
+			"highScoring": 0
 		},
 
-		"comments": "",
-		"teamNumber": 0
+		"matchComments": "",
+		"robotComments": "",
+		"teamNumber": 0,
+		"matchesPlayed": 0
 	}; 
 }
 
 // Appends data to robot data
 RobotData.prototype.addData = function(data)
 {
-	var subName = "";
-	var innerName = "";
+	var subProp = "";
+	var innerProp = "";
 	
 	// Add tags data
 	for(var i = 0; i < tagsNames.length; i++)
 	{
-		subName = tagsNames[i];
+		subProp = tagsNames[i];
 		
-		for(var j = 0; j < tagsInnerNames[subName].length; j++)
+		for(var j = 0; j < tagsInnerNames[subProp].length; j++)
 		{
-			innerName = tagsInnerNames[subName][j];
-			this.data.tags[subName][innerName] += data.tags[subName][innerName];
+			innerProp = tagsInnerNames[subProp][j];
+			this.data.tags[subProp][innerProp] += data.tags[subProp][innerProp];
 		}
 	}
 	
 	// Add scoring data
 	for(var i = 0; i < scoringNames.length; i++)
 	{
-		subName = scoringNames[i];
+		subProp = scoringNames[i];
 		
-		for(var j = 0; j < scoringInnerNames[subName].length; j++)
+		for(var j = 0; j < scoringInnerNames[subProp].length; j++)
 		{
-			innerName = scoringInnerNames[subName][j];
-			this.data.scoring[subName][innerName] += data.scoring[subName][innerName];
+			innerProp = scoringInnerNames[subProp][j];
+			this.data.scoring[subProp][innerProp] += data.scoring[subProp][innerProp];
 		}
 	}
 	
 	// Add match things data
 	for(var i = 0; i < matchThingsInnerNames.length; i++)
 	{
-		innerName = matchThingsInnerNames[i];
-		this.data.match[innerName] += data.match[innerName]; 
+		innerProp = matchThingsInnerNames[i];
+		this.data.matchThings[innerProp] += data.matchThings[innerProp]; 
 	}
 	
-	// Add comments, set team number
-	this.data.match.comments += " | " + data.match.comments;
-	this.data.comments += " | " + data.comments;
+	// Add comments, set team number, inc matches played
+	this.data.matchComments += " | " + data.matchComments;
+	this.data.robotComments += " | " + data.robotComments;
 	this.data.teamNumber = data.teamNumber;
+	this.data.matchesPlayed++;
 }

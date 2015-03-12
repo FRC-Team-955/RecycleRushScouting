@@ -23,7 +23,8 @@
 		<link rel="stylesheet" href="bower_components/pure/tables-min.css" type="text/css">
 		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 		<link rel="stylesheet" href="css/index.css" type="text/css">
-		<script src="jquery/jquery-2.1.3.min.js"></script>
+		<script src="js/jquery/jquery-2.1.3.min.js"></script>
+		<script src="js/jquery-ui-1.11.3.custom/jquery-ui.min.js"></script>
 		<script src="js/vars.js"></script>
 		<script src="js/util.js"></script>
 		<script src="js/classes.js"></script>
@@ -96,472 +97,688 @@
 				</form>
 			</section>
 		</section>
-
-		<section class = "pure-g">
-			<section class = "pure-u-1 modal submitDialog" id="submitDialogContainer">
-				Save data and move to next match?<br>
-				<button class = "pure-button modalButton saveYes submitDialog" id="submitYes">Yes</button>
-				<button class = "pure-button modalButton saveNo submitDialog" id="submitNo">No</button>
-			</section>
-		</section>
-		<!-- Main Container -->
-		<section class = "pure-g mainContent">
-
-			<!-- First Column -->
-			<section class = "pure-u-7-12">
-
-				<!-- Second Row 1 -->
-				<section class = "pure-g cx">
-
-					<!-- Tags Title -->
-					<section class = "pure-u-1 header">
-						<h2 class = "tags">TAGS</h2>
-					</section>
-				</section>
-
-				<!-- Third Row 1 -->
-				<section class = "pure-g cx">
-
-					<!-- Autonomous Title -->
-					<section class = "pure-u-1 header">
-						<h3 class = "autoTags">Autonomous</h3>
-					</section>
-				</section>
-
-				<!-- Fourth Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Auto Container 1 -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Auto Button 1: Handles Grey Totes -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button button-auto unselected autoTButton" id = "button-tagsAutoGreyTotes">
-								Handles Grey Totes
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 filler spaceFixer"></section>
-
-						<!-- Auto Button 2: Handles Yellow Totes -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoYellowTotes">
-								Handles Yellow Totes
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Fifth Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Auto Container 2 -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Auto Button 3: Handles Recycling Bins -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto autoTButton" id = "button-tagsAutoRecycle">
-								Handles Recyling Bins
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 filler spaceFixer"></section>
-
-						<!-- Auto Button 4: Moves to Auto Zone -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoMovement">
-								Moves to Auto Zone
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Sixth Row 1 -->
-				<section class = "pure-g cx">
-
-					<!-- Teleop Title -->
-					<section class = "pure-u-1 header">
-						<h3 class = "teleTags">Capabilities</h3>
-					</section>
-				</section>
-
-				<!-- Seventh Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Teleop Container 1 -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Teleop Button 1: Can Stack Totes -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleStack">
-								Can Stack Totes
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 filler spaceFixer"></section>
-
-						<!-- Teleop Button 2: Can Place Recycling Bins -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleRecycle">
-								Can Place Recycling Bins
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Eighth Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Teleop Container 2 -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Teleop Button 3: Can Move/Hold Litter -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleLitter">
-								Can Move/Hold Litter
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 filler spaceFixer"></section>
-
-						<!-- Teleop Button 4: Clumsiness -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleClumsiness">
-								Clumsiness
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Ninth Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Teleop Container 3 -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Teleop Button 5: Broken Drivebase -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleBrokenDrive">
-								Broken Drivebase
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 filler spaceFixer"></section>
-
-						<!-- Teleop Button 6: Broken Pickup -->
-						<section class = "pure-u-10-24 spaceFixer">
-							<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleBrokenPickup">
-								Broken Pickup
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Tenth Row 1 -->
-				<section class = "pure-g cx">
-
-					<!-- Rating Title -->
-					<section class = "pure-u-1 header">
-						<h3 class = "rateTitle">Rating</h3>
-					</section>
-				</section>
-
-				<!-- Eleventh Row 1-->
-				<section class = "pure-g">
-
-					<!-- Rating Container -->
-					<section class= "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-4-24 spaceFixer filler"></section>
-
-						<!-- Rating Button 1: GOOD -->
-						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateGood">
-								GOOD
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 spaceFixer filler"></section>
-
-						<!-- Rating Button 2: MEH -->
-						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateMeh">
-								MEH
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-2-24 spaceFixer filler"></section>
-
-						<!-- Rating Button 3: BAD -->
-						<section class = "pure-u-4-24 spaceFixer">
-							<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateBad">
-								BAD
-							</button>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-4-24 spaceFixer filler"></section>
-					</section>
-				</section>
-
-				<!-- Twelth Row 1 -->
-				<section class = "pure-g cx">
-
-					<!-- Comments Title -->
-					<section class = "pure-u-1 header">
-						<h3 class = "commTitle">Comments</h3>
-					</section>
-				</section>
-
-				<!-- Thirteenth Row 1 -->
-				<section class = "pure-g">
-
-					<!-- Comments Container -->
-					<section class = "pure-u-1">
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-
-						<!-- Comments Box -->
-						<section class = "pure-u-22-24 spaceFixer commentContainer">
-							<form>
-								<textarea placeholder="Type comments here..." class = "comments" id = "robotComments"></textarea>
-							</form>
-						</section>
-
-						<!-- Filler section -->
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-					</section>
+		
+<!------------------------------------------------------------------------------------------------------------------------------------------------->
+		<!-- Scouting -->
+		<div id=scouting class="scoutingMode">
+			<section class = "pure-g">
+				<section class = "pure-u-1 modal submitDialog" id="submitDialogContainer">
+					Save data and move to next match?<br>
+					<button class = "pure-button modalButton saveYes submitDialog" id="submitYes">Yes</button>
+					<button class = "pure-button modalButton saveNo submitDialog" id="submitNo">No</button>
 				</section>
 			</section>
+			<!-- Main Container -->
+			<section class = "pure-g mainContent">
 
-			<!-- Column 2 -->
-			<section class="pure-u-5-12">
+				<!-- First Column -->
+				<section class = "pure-u-7-12">
 
-				<!-- Second Row 2 -->
-				<section class = "pure-g cx">
+					<!-- Second Row 1 -->
+					<section class = "pure-g cx">
 
-					<!-- Scoring Title -->
-					<section class = "pure-u-1 header">
-						<h2 class = "tags">SCORING</h2>
+						<!-- Tags Title -->
+						<section class = "pure-u-1 header">
+							<h2 class = "tags">TAGS</h2>
+						</section>
+					</section>
+
+					<!-- Third Row 1 -->
+					<section class = "pure-g cx">
+
+						<!-- Autonomous Title -->
+						<section class = "pure-u-1 header">
+							<h3 class = "autoTags">Autonomous</h3>
+						</section>
+					</section>
+
+					<!-- Fourth Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Auto Container 1 -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Auto Button 1: Handles Grey Totes -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button button-auto unselected autoTButton" id = "button-tagsAutoGrabsBins">
+									Grabs Bins
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 filler spaceFixer"></section>
+
+							<!-- Auto Button 2: Handles Yellow Totes -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoYellowTotes">
+									Handles Yellow Totes
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Fifth Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Auto Container 2 -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Auto Button 3: Handles Recycling Bins -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-auto autoTButton" id = "button-tagsAutoRecycle">
+									Handles Recyling Bins
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 filler spaceFixer"></section>
+
+							<!-- Auto Button 4: Moves to Auto Zone -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-auto button-right autoTButton" id = "button-tagsAutoMovement">
+									Moves to Auto Zone
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Sixth Row 1 -->
+					<section class = "pure-g cx">
+
+						<!-- Teleop Title -->
+						<section class = "pure-u-1 header">
+							<h3 class = "teleTags">Capabilities</h3>
+						</section>
+					</section>
+
+					<!-- Seventh Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Teleop Container 1 -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Teleop Button 1: Can Stack Totes -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleStack">
+									Can Stack Totes
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 filler spaceFixer"></section>
+
+							<!-- Teleop Button 2: Can Place Recycling Bins -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleRecycle">
+									Can Place Recycling Bins
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Eighth Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Teleop Container 2 -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Teleop Button 3: Can Move/Hold Litter -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleLitter">
+									Can Move/Hold Litter
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 filler spaceFixer"></section>
+
+							<!-- Teleop Button 4: Clumsiness -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleClumsiness">
+									Clumsiness
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Ninth Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Teleop Container 3 -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Teleop Button 5: Broken Drivebase -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele capaTButton" id = "button-tagsCapaTeleBrokenDrive">
+									Broken Drivebase
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 filler spaceFixer"></section>
+
+							<!-- Teleop Button 6: Broken Pickup -->
+							<section class = "pure-u-10-24 spaceFixer">
+								<button class = "pure-button unselected button-tele button-right capaTButton" id = "button-tagsCapaTeleBrokenPickup">
+									Broken Pickup
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Tenth Row 1 -->
+					<section class = "pure-g cx">
+
+						<!-- Rating Title -->
+						<section class = "pure-u-1 header">
+							<h3 class = "rateTitle">Rating</h3>
+						</section>
+					</section>
+
+					<!-- Eleventh Row 1-->
+					<section class = "pure-g">
+
+						<!-- Rating Container -->
+						<section class= "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-4-24 spaceFixer filler"></section>
+
+							<!-- Rating Button 1: GOOD -->
+							<section class = "pure-u-4-24 spaceFixer">
+								<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateGood">
+									GOOD
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 spaceFixer filler"></section>
+
+							<!-- Rating Button 2: MEH -->
+							<section class = "pure-u-4-24 spaceFixer">
+								<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateMeh">
+									MEH
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-2-24 spaceFixer filler"></section>
+
+							<!-- Rating Button 3: BAD -->
+							<section class = "pure-u-4-24 spaceFixer">
+								<button class = "pure-button unselected button-rate ratingTButton" id = "button-tagsRateBad">
+									BAD
+								</button>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-4-24 spaceFixer filler"></section>
+						</section>
+					</section>
+
+					<!-- Twelth Row 1 -->
+					<section class = "pure-g cx">
+
+						<!-- Comments Title -->
+						<section class = "pure-u-1 header">
+							<h3 class = "commTitle">Comments</h3>
+						</section>
+					</section>
+
+					<!-- Thirteenth Row 1 -->
+					<section class = "pure-g">
+
+						<!-- Comments Container -->
+						<section class = "pure-u-1">
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+
+							<!-- Comments Box -->
+							<section class = "pure-u-22-24 spaceFixer commentContainer">
+								<form>
+									<textarea placeholder="Type comments here..." class = "comments" id = "robotComments"></textarea>
+								</form>
+							</section>
+
+							<!-- Filler section -->
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+						</section>
 					</section>
 				</section>
 
-				<!-- Third Row 2 -->
-				<section class = "pure-g">
-					<section class="pure-u-1">
-						<section class = "pure-g cx fixThisShit">
+				<!-- Column 2 -->
+				<section class="pure-u-5-12">
 
-							<!-- Autonomous Scoring Title -->
-							<section class = "pure-u-1 header">
-								<h3 class = "autoS">Autonomous</h3>
-							</section>
-						</section>
+					<!-- Second Row 2 -->
+					<section class = "pure-g cx">
 
-						<!-- Fourth Row 2 -->
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Auto Scoring Label 1: Yellow Totes Moved to Auto -->
-							<section class="pure-u-3-8 spaceFixer autoSLabel">
-								<label for="button-scoringAutoYellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
-							</section>
-
-							<!-- Auto Scoring Button 1 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringAutoYellowMoved" class="pure-button unselected autoSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
-						</section>
-
-						<!-- Fifth Row 2 -->
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Auto Scoring Label 2: Yellow Totes Stacked -->
-							<section class="pure-u-3-8 spaceFixer autoSLabel">
-								<label for="button-scoringAutoYellowStacked" class = "label">Yellow Totes Stacked:</label>
-							</section>
-
-							<!-- Auto Scoring Button 2 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringAutoYellowStacked" class="pure-button unselected autoSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
-						</section>
-
-						<!-- Sixth Row 2 -->
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Auto Scoring Label 3: Recycling Bins Moved -->
-							<section class="pure-u-3-8 spaceFixer autoSLabel">
-								<label for="button-scoringAutoRecycle" class = "label" >Recycling Bins Moved:</label>
-							</section>
-
-							<!-- Auto Scoring Button 3 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringAutoRecycle" class="pure-button unselected autoSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
-						</section>
-
-						<!-- Sexenth Row 2 -->
-						<section class = "pure-g cx">
-
-							<!-- Teleop Scoring Title -->
-							<section class = "pure-u-1 header">
-								<h3 class = "teleS">Teleop</h3>
-							</section>
-						</section>
-
-						<!-- Eighth Row 2 -->
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Tele Scoring Label 1: Grey Totes Stacked -->
-							<section class="pure-u-3-8 spaceFixer teleSLabel">
-								<label for="button-scoringTeleGrey" class = "label">Grey Totes Stacked:</label>
-							</section>
-
-							<!-- Tele Scoring Button 1 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringTeleGrey" class="pure-button unselected teleSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
-						</section>
-
-						<!-- Ninth Row 2 -->
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Tele Scoring Label 2: Recycling Bins Stacked-->
-							<section class="pure-u-3-8 spaceFixer teleSLabel">
-								<label for="button-scoringTeleRecycle" class = "label">Recyling Bins Stacked:</label>
-							</section>
-
-							<!-- Tele Scoring Button 2 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringTeleRecycle" class="pure-button unselected teleSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
-						</section>
-						<section class="pure-g">
-
-							<!-- Filler section -->
-							<section class="pure-u-1-8 filler spaceFixer"></section>
-
-							<!-- Tele Scoring Label 3: Highest Recycling Bin-->
-							<section class="pure-u-3-8 spaceFixer teleSLabel">
-								<label for="button-scoringTeleHighestRecycle" class = "label">Highest Recycling Bin:</label>
-							</section>
-
-							<!-- Tele Scoring Button 3 -->
-							<section class = "pure-u-1-6 spaceFixer">
-								<button id="button-scoringTeleHighestRecycle" class="pure-button unselected teleSButton">0</button>
-							</section>
-							<section class="pure-u-1-3 filler spaceFixer"></section>
+						<!-- Scoring Title -->
+						<section class = "pure-u-1 header">
+							<h2 class = "tags">SCORING</h2>
 						</section>
 					</section>
-				</section>
-				<!-- Tenth Row 2 -->
-				<section class = "pure-g matchThings matchMargin cx">
 
-					<!-- Match Things Title -->
-					<section class = "pure-u-1 header">
-						<h2 class = "matchThingsTitle">Match Things</h2>
-					</section>
-				</section>
-				<section class = "pure-g">
-					<section class = "pure-u-1-3 spaceFixer">
-						<section class = "pure-g matchMargin">
-							<section class = "pure-u-1">
-								<button class = "pure-button unselected button-match spaceFixer" id = "button-coopStack">
-									Coopertition Stack
-								</button>
+					<!-- Third Row 2 -->
+					<section class = "pure-g">
+						<section class="pure-u-1">
+							<section class = "pure-g cx fixThisShit">
+
+								<!-- Autonomous Scoring Title -->
+								<section class = "pure-u-1 header">
+									<h3 class = "autoS">Autonomous</h3>
+								</section>
 							</section>
-						</section>
-						<section class = "pure-g matchMargin">
-							<section class = "pure-u-1">
-								<button class = "pure-button unselected button-match spaceFixer" id = "button-coopSet">
-									Coopertition Set
-								</button>
+
+							<!-- Fourth Row 2 -->
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Auto Scoring Label 1: Yellow Totes Moved to Auto -->
+								<section class="pure-u-3-8 spaceFixer autoSLabel">
+									<label for="button-scoringAutoYellowMoved" class = "label">Yellow Totes Moved to Auto:</label>
+								</section>
+
+								<!-- Auto Scoring Button 1 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringAutoYellowMoved" class="pure-button unselected autoSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
 							</section>
-						</section>
-						<section class = "pure-g matchMargin">
-							<section class = "pure-u-1">
-								<button class = "pure-button unselected button-match spaceFixer" id = "button-highScoring">
-									High Scoring
-								</button>
+
+							<!-- Fifth Row 2 -->
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Auto Scoring Label 2: Yellow Totes Stacked -->
+								<section class="pure-u-3-8 spaceFixer autoSLabel">
+									<label for="button-scoringAutoYellowStacked" class = "label">Yellow Totes Stacked:</label>
+								</section>
+
+								<!-- Auto Scoring Button 2 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringAutoYellowStacked" class="pure-button unselected autoSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
+							</section>
+
+							<!-- Sixth Row 2 -->
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Auto Scoring Label 3: Recycling Bins Moved -->
+								<section class="pure-u-3-8 spaceFixer autoSLabel">
+									<label for="button-scoringAutoRecycle" class = "label" >Recycling Bins Moved:</label>
+								</section>
+
+								<!-- Auto Scoring Button 3 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringAutoRecycle" class="pure-button unselected autoSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
+							</section>
+
+							<!-- Sexenth Row 2 -->
+							<section class = "pure-g cx">
+
+								<!-- Teleop Scoring Title -->
+								<section class = "pure-u-1 header">
+									<h3 class = "teleS">Teleop</h3>
+								</section>
+							</section>
+
+							<!-- Eighth Row 2 -->
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Tele Scoring Label 1: Grey Totes Stacked -->
+								<section class="pure-u-3-8 spaceFixer teleSLabel">
+									<label for="button-scoringTeleGrey" class = "label">Grey Totes Stacked:</label>
+								</section>
+
+								<!-- Tele Scoring Button 1 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringTeleGrey" class="pure-button unselected teleSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
+							</section>
+
+							<!-- Ninth Row 2 -->
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Tele Scoring Label 2: Recycling Bins Stacked-->
+								<section class="pure-u-3-8 spaceFixer teleSLabel">
+									<label for="button-scoringTeleRecycle" class = "label">Recyling Bins Stacked:</label>
+								</section>
+
+								<!-- Tele Scoring Button 2 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringTeleRecycle" class="pure-button unselected teleSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
+							</section>
+							<section class="pure-g">
+
+								<!-- Filler section -->
+								<section class="pure-u-1-8 filler spaceFixer"></section>
+
+								<!-- Tele Scoring Label 3: Highest Recycling Bin-->
+								<section class="pure-u-3-8 spaceFixer teleSLabel">
+									<label for="button-scoringTeleHighestRecycle" class = "label">Highest Recycling Bin:</label>
+								</section>
+
+								<!-- Tele Scoring Button 3 -->
+								<section class = "pure-u-1-6 spaceFixer">
+									<button id="button-scoringTeleHighestRecycle" class="pure-button unselected teleSButton">0</button>
+								</section>
+								<section class="pure-u-1-3 filler spaceFixer"></section>
 							</section>
 						</section>
 					</section>
-					<section class = "pure-u-2-3 spaceFixer">
-						<section class = "pure-g">
-							
-							<!-- Match Comments Title -->
-							<section class = "pure-u-1 header">
-								<h3 class = "commTitle">Comments</h3>
+					<!-- Tenth Row 2 -->
+					<section class = "pure-g matchThings matchMargin cx">
+
+						<!-- Match Things Title -->
+						<section class = "pure-u-1 header">
+							<h2 class = "matchThingsTitle">Match Things</h2>
+						</section>
+					</section>
+					<section class = "pure-g">
+						<section class = "pure-u-1-3 spaceFixer">
+							<section class = "pure-g matchMargin">
+								<section class = "pure-u-1">
+									<button class = "pure-button unselected button-match spaceFixer" id = "button-coopStack">
+										Coopertition Stack
+									</button>
+								</section>
+							</section>
+							<section class = "pure-g matchMargin">
+								<section class = "pure-u-1">
+									<button class = "pure-button unselected button-match spaceFixer" id = "button-coopSet">
+										Coopertition Set
+									</button>
+								</section>
+							</section>
+							<section class = "pure-g matchMargin">
+								<section class = "pure-u-1">
+									<button class = "pure-button unselected button-match spaceFixer" id = "button-highScoring">
+										High Scoring
+									</button>
+								</section>
 							</section>
 						</section>
-						<section class="pure-u-1-24 spaceFixer filler"></section>
-						<section class = "pure-u-11-12 spaceFixer commentContainer">
-							<form>
-								<textarea placeholder="Type comments here..." class = "matchComments" id = "matchComments"></textarea>
-							</form>
+						<section class = "pure-u-2-3 spaceFixer">
+							<section class = "pure-g">
+
+								<!-- Match Comments Title -->
+								<section class = "pure-u-1 header">
+									<h3 class = "commTitle">Comments</h3>
+								</section>
+							</section>
+							<section class="pure-u-1-24 spaceFixer filler"></section>
+							<section class = "pure-u-11-12 spaceFixer commentContainer">
+								<form>
+									<textarea placeholder="Type comments here..." class = "matchComments" id = "matchComments"></textarea>
+								</form>
+							</section>
+							<section class="pure-u-1-24 spaceFixer filler"></section>
 						</section>
-						<section class="pure-u-1-24 spaceFixer filler"></section>
 					</section>
 				</section>
 			</section>
-		</section>
+		</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------------->
+		<!-- Analysis -->
+		<div id="analysis" class="scoutingMode">
+			<section class = "pure-g teamContainer">
+				<section class = "pure-u-1-3 teamImg">
+					<button class = "pure-button imgImport spaceFixer">
+						<i class="fa fa-plus"></i>
+					</button>
+				</section>
+				<section class = "pure-u-1-3 teamText spaceFixer">
+					<p class = "teamNumb">Team #</p>
+					<p>Team Nickname</p>
+					<p>Team Location</p>
+				</section>
+				<section class = "pure-u-1-3 spaceFixer">
+					<section class = "analysisAutoTags pure-button">
+						Auto Tags
+					</section>
+					<section class = "analysisCapaTags pure-button">
+						Capabilities
+					</section>
+					<section class = "analysisRating pure-button">
+						Rating
+					</section>
+					<section class = "analysisAutoScoring pure-button">
+						Auto Scoring
+					</section>
+					<section class = "analysisTeleScoring pure-button">
+						Teleop Scoring
+					</section>
+					<section class = "analysisTeleScoring pure-button">
+						PLACEHOLDER 
+					</section>
+				</section>
+			</section>
+			<section class = "pure-g analysisTags">
+					<section class = "pure-u-1-3">
+						<button class = "pure-button analysisTotal">
+							Total
+						</button>
+					</section>
+					<section class = "pure-u-1-3">
+						<button class = "pure-button analysisAverage">
+							Average
+						</button>
+					</section>
+					<section class = "pure-u-1-3">
+						<button class = "pure-button analysisMatch spaceFixer">
+							Match Number
+						</button>
+						<button class = "pure-button analysisMatchSelect spaceFixer next">
+							&#171
+						</button>
+						<section class = "pure-button analysisMatchDisplay spaceFixer">
+							0
+						</section>
+						<button class = "pure-button analysisMatchSelect spaceFixer next">
+							&#187
+						</button>
+					</section>
+			</section>
+			<section class = "pure-g">
+				<section class = "pure-u-1">
+					<table class = "pure-table pure-table-bordered analysisTable">
+						<tbody>
+							<tr>
+								<td>Grabs Bins:</td>
+								<td id = "dataGrabsBins">Data 1</td>
+								<td>Broken Drive:</td>
+								<td id = "dataBrokenDrive">Data 9</td>
+								<td>Grey Stacked:</td>
+								<td id = "dataGreyStacked">Data 17</td>
+							</tr>
+							<tr>
+								<td>Handles Bins:</td>
+								<td id = "dataHandlesBins">Data 2</td>
+								<td>Broken Pickup:</td>
+								<td id = "dataBrokenPickup">Data 10</td>
+								<td>Bins Stacked:</td>
+								<td id = "dataBinsStacked">Data 18</td>
+							</tr>
+							<tr>
+								<td>Handles Yellow:</td>
+								<td id = "dataHandlesYellow">Data 3</td>
+								<td>Good:</td>
+								<td id = "dataGood">Data 11</td>
+								<td>Highest Bin Lvl:</td>
+								<td id = "dataHighestBinLvl">Data 19</td>
+							</tr>
+							<tr>
+								<td>Moves to Auto:</td>
+								<td id = "dataMovesToAuto">Data 4</td>
+								<td>Meh:</td>
+								<td id = "dataMeh">Data 12</td>
+								<td>Coop Stack Matches:</td>
+								<td id = "dataCoopStack">Data 20</td>
+							</tr>
+							<tr>
+								<td>Can Stack:</td>
+								<td id = "dataCanStack">Data 5</td>
+								<td>Bad:</td>
+								<td id = "dataBad">Data 13</td>
+								<td>Coop Set Matches:</td>
+								<td id = "dataCoopSet">Data 21</td>
+							</tr>
+							<tr>
+								<td>Can Place Bins:</td>
+								<td id = "dataCanPlaceBins">Data 6</td>
+								<td>Yellows Moved:</td>
+								<td id = "dataYellowMoved">Data 14</td>
+								<td>High-Scoring Matches:</td>
+								<td id = "dataHighScore">Data 22</td>
+							</tr>
+							<tr>
+								<td>Can Move Litter:</td>
+								<td id = "dataCanMoveLitter">Data 7</td>
+								<td>Yellows Stacked:</td>
+								<td id = "dataYellowStacked">Data 15</td>
+								<td>Match Comments:</td>
+								<td id="dataMatchComments"></td>
+							</tr>
+							<tr>
+								<td>Clumsy:</td>
+								<td id = "dataClumsy">Data 8</td>
+								<td>Bins Moved:</td>
+								<td id = "dataBinsMoved">Data 16</td>
+								<td>Robot Comments:</td>
+								<td id="dataRobotComments"></td>
+							</tr>
+						</tbody>
+					</table>
+				</section>
+			</section>
+		</div>
+		
+<!------------------------------------------------------------------------------------------------------------------------------------------------->
+		<!-- Match -->
+		<div id="match" class="scoutingMode">
+			<table class = "pure-table pure-table-bordered matchTable">
+				<thead>
+					<tr>
+						<th class = "matchNumberImport">
+							<button class = "pure-button spaceFixer addMatch">
+								<i class="fa fa-plus"></i>
+							</button>
+								#
+						</th>
+						<th colspan="3">Red Alliance</th>
+						<th colspan="3">Blue Alliance</th>
+						<th colspan="3">Scores</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Data 1</td>
+						<td>Data 2</td>
+						<td>Data 3</td>
+						<td>Data 4</td>
+						<td>Data 5</td>
+						<td>Data 6</td>
+						<td>Data 7</td>
+						<td>Data 8</td>
+						<td>Data 9</td>
+						<td>Data 10</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+<!------------------------------------------------------------------------------------------------------------------------------------------------->
+		<!-- Alliance Selection -->
+		<div id="allianceSelection" class="scoutingMode">
+			<section class = "pure-g selectionContainer">
+				<section class = "pure-u-4-24 teamList">
+					<h3>Team List</h3>
+				</section>
+				<section class = "pure-u-16-24">
+					<section class = "pure-g allianceContainer">
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 1</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 2</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 3</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 4</h3>
+						</section>
+					</section>
+					<section class = "pure-g allianceContainer">
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 5</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 6</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 7</h3>
+						</section>
+						<section class = "pure-u-1-4 alliance">
+							<h3>Alliance 8</h3>
+						</section>
+					</section>
+				</section>
+				<section class = "pure-u-4-24 pickList">
+					<h3>Pick List</h3>
+				</section>
+			</section>
+		</div>
 	</body>
 </html>

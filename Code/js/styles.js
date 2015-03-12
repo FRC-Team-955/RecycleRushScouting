@@ -1,7 +1,42 @@
 // Init the gui
 function initStyle() 
-{
+{		
+	for(var i = 1; i <= maxGlobalTeams; i++)
+		teamsList[i - 1] = "" + i;
+	
 	setElements();
+	
+	$scouting.searchBarButton.click(function(e)
+  	{
+		$scouting.searchBar.blur();
+		var inputVal = $scouting.searchBar.val();
+		
+		if(inputVal.toLowerCase() === "home")
+			changeModeTo(cssScoutingModeNames.scouting);
+	
+		else if(!isNaN(inputVal))
+		{
+			currAnalysisTeam = parseInt(inputVal);
+			changeModeTo(cssScoutingModeNames.analysis);
+		}
+		
+		updateGui();
+	});
+	
+	$("form").submit(function() { return false; });
+	
+	$scouting.searchBar.keyup(function(e)
+  	{			
+		if(e.keyCode === keyCodes.ent)
+		{
+			$scouting.searchBarButton.click();
+		}
+	});
+
+	$scouting.searchBar.autocomplete
+	({
+		source: teamsList
+	});
 	
 	// Assign ctrl+s to go to next match
 	$(window).bind('keydown', function(event) {
@@ -23,15 +58,15 @@ function initStyle()
 		.keyup(windowKeyUp);
 	
 	// Assign click event to title
-	$gui.title.click(titleClick);
+	$scouting.title.click(titleClick);
 	
 	// Assign click events to all buttons tags area
 	for(var subProp in cssButtonAreaNames.tags)
 		$("." + cssButtonAreaNames.tags[subProp]).click(function(){ tagButtonClick(this.id); });
 
 	// Assign double click events to team number inputs
-	for(var i = 0; i < $gui.teamNumbers.length; i++)
-		$gui.teamNumbers[i]
+	for(var i = 0; i < $scouting.teamNumbers.length; i++)
+		$scouting.teamNumbers[i]
 			.attr("contenteditable", "true")				// Make it editable
 			.focus(function(){ selectAllText(this); })		// Select all text
 			.keydown(changeTeamNumber)						// Prevent non numbers
@@ -39,28 +74,32 @@ function initStyle()
 			.click(function(){ teamNumberClick(this); });	// Change team focus
 		
 	// Assign click event to alliance color button
-	$gui.allianceColor.click(changeAllianceColor);
+	$scouting.allianceColor.click(changeAllianceColor);
 	
 	// Assign change event for match number box
-	$gui.matchNumber
+	$scouting.matchNumber
 		.focus(function(){ this.select(); })	// Select all text
 		.keydown(changeMatchNumber)				// Prevent non numbers
 		.blur(changeMatchNumber);				// Update match number
 	
 	// Assign click events to buttons in match things
-	for(var i = 0; i < $gui.matchThings.length; i++)
-		$gui.matchThings[i].click(function() { matchButtonClick(this.id); } );
+	for(var innerProp in $scouting.matchThings)
+		$scouting.matchThings[innerProp].click(function() { matchThingsButtonClick(this.id); } );
 	
 	// Update comment boxes
-	$gui.matchComments.blur(function()
+	$scouting.matchComments.blur(function()
 	{
-		alliance[currTeamIndex].data.match.comments = this.value;
+		alliance[currTeamIndex].data.matchComments = this.value;
 	});
 	
-	$gui.robotComments.blur(function()
+	$scouting.robotComments.blur(function()
 	{
-		alliance[currTeamIndex].data.comments = this.value;
+		alliance[currTeamIndex].data.robotComments = this.value;
 	});
+	
+	$analysis.total.click(totalButtonClick);
+	$analysis.average.click(averageButtonClick);
+	changeModeTo(cssScoutingModeNames.scouting);
 }
 
 // Updates the gui to match the alliance data
@@ -75,75 +114,133 @@ function updateGui()
 		for(var subProp in cssButtonAreaNames[prop])
 			$("." + cssButtonAreaNames[prop][subProp]).removeClass(btnRemoveClasses);
 	
-	// Index for button in array of button elements in gui obj
-	var btnIndex = 0;
+	// Scouting mode
+	if(currScoutingModeName === cssScoutingModeNames.scouting)
+	{		
+		// Set buttons that are active gui wise for tags
+		for(var subProp in alliance[currTeamIndex].data.tags)
+			for(var innerProp in alliance[currTeamIndex].data.tags[subProp])
+				if(alliance[currTeamIndex].data.tags[subProp][innerProp] === 1)
+					$scouting.tags[subProp][innerProp].addClass(currCssButtonStatusName.active);
 
-	// Set buttons that are active gui wise for tags
-	for(var subProp in alliance[currTeamIndex].data.tags)
+		// Set buttons that are active gui wise for match things buttons
+		for(var innerProp in $scouting.matchThings)
+		{
+			var currVal = alliance[currTeamIndex].data.matchThings[innerProp];
+			$scouting.matchThings[innerProp].removeClass(btnRemoveClasses);
+
+			if(alliance[currTeamIndex].data.matchThings[innerProp] === 1)
+				$scouting.matchThings[innerProp].addClass(currCssButtonStatusName.active);
+		}
+
+		// Set the buttons text to match robot data for scoring
+		for(var subProp in alliance[currTeamIndex].data.scoring)
+			for(var innerProp in alliance[currTeamIndex].data.scoring[subProp])
+				$scouting.scoring[subProp][innerProp].html(alliance[currTeamIndex].data.scoring[subProp][innerProp]);
+
+		// Set focus to buttons that have focus
+		var tagSubProp = tagsNames[currMode.tags.subId];
+		var tagInnerProp = tagsInnerNames[tagSubProp][getTagInnerIndex()];
+		var scoringSubProp = scoringNames[currMode.scoring.subId];
+		var scoringInnerProp = scoringInnerNames[scoringSubProp][currMode.scoring.innerId];
+		$scouting.tags[tagSubProp][tagInnerProp].addClass(currCssButtonStatusName.focus);
+		$scouting.scoring[scoringSubProp][scoringInnerProp].addClass(currCssButtonStatusName.focus);
+		
+		// Set comments in comment boxes
+		$scouting.matchComments.val(alliance[currTeamIndex].data.matchComments);
+		$scouting.robotComments.val(alliance[currTeamIndex].data.robotComments);
+
+	}
+	
+	// Analysis mode
+	else if(currScoutingModeName === cssScoutingModeNames.analysis)
 	{
-		btnIndex = 0;
-
-		for(var innerProp in alliance[currTeamIndex].data.tags[subProp])
-		{	
-			if(alliance[currTeamIndex].data.tags[subProp][innerProp] === 1)
-				$gui.tags[subProp][btnIndex].addClass(currCssButtonStatusName.active);
-
-			btnIndex++;
+		$analysis.total.removeClass(btnRemoveClasses);
+		$analysis.average.removeClass(btnRemoveClasses);
+		
+		if(analysisShowTotals)
+			$analysis.total.addClass(currCssButtonStatusName.active);
+		
+		else if(!analysisShowTotals)
+			$analysis.average.addClass(currCssButtonStatusName.active);
+		
+		if(teams[currAnalysisTeam - 1])
+		{
+			// Set team number
+			$analysis.teamNumber.text("Team " + currAnalysisTeam);
+			var dataMod = 1;
+			
+			if(!analysisShowTotals)
+				dataMod = teams[currAnalysisTeam - 1].data.matchesPlayed;
+					
+			// Tags auto
+			for(var prop in $analysis.tags.auto)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.tags.auto[prop] / dataMod);
+				$analysis.tags.auto[prop].html(val);
+			}
+			
+			// Tags capabilities
+			for(var prop in $analysis.tags.capabilities)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.tags.capabilities[prop] / dataMod);
+				$analysis.tags.capabilities[prop].html(val);
+			}
+			
+			// Tags rating
+			for(var prop in $analysis.tags.rating)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.tags.rating[prop] / dataMod);
+				$analysis.tags.rating[prop].html(val);
+			}
+			
+			// Scoring auto
+			for(var prop in $analysis.scoring.auto)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.scoring.auto[prop] / dataMod);
+				$analysis.scoring.auto[prop].html(val);
+			}
+			
+			// Scoring teleop
+			for(var prop in $analysis.scoring.teleop)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.scoring.teleop[prop] / dataMod);
+				$analysis.scoring.teleop[prop].html(val);
+			}
+			
+			// MatchThings
+			for(var prop in $analysis.matchThings)
+			{
+				var val = round(teams[currAnalysisTeam - 1].data.matchThings[prop] / dataMod);
+				$analysis.matchThings[prop].html(val);
+			}
+			
+			$analysis.matchComments.html(teams[currAnalysisTeam - 1].data.matchComments);
+			$analysis.robotComments.html(teams[currAnalysisTeam - 1].data.robotComments);
 		}
 	}
 	
-	// Set buttons that are active gui wise for match things buttons
-	for(var i = 0; i < $gui.matchThings.length; i++)
-	{
-		var innerName = matchThingsInnerNames[i];
-		var currVal = alliance[currTeamIndex].data.match[innerName];
-		$gui.matchThings[i].removeClass(btnRemoveClasses);
-		
-		if(alliance[currTeamIndex].data.match[innerName] === 1)
-			$gui.matchThings[i].addClass(currCssButtonStatusName.active);
-	}
-	
-	// Set the buttons text to match robot data for scoring
-	for(var subProp in alliance[currTeamIndex].data.scoring)
-	{
-		btnIndex = 0;
-
-		for(var innerProp in alliance[currTeamIndex].data.scoring[subProp])
-			$gui.scoring[subProp][btnIndex++].html(alliance[currTeamIndex].data.scoring[subProp][innerProp]);
-	}
-
-	// Set focus to buttons that have focus
-	var tagBtnId = getTagInnerIndex();
-	var tagSubName = tagsNames[currMode.tags.subId];
-	var scoringSubName = scoringNames[currMode.scoring.subId];
-	$gui.tags[tagSubName][tagBtnId].addClass(currCssButtonStatusName.focus);
-	$gui.scoring[scoringSubName][currMode.scoring.innerId].addClass(currCssButtonStatusName.focus);
-	
 	// Set alliance color, team numbers color, searchbar color, match number color
-	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
-		$gui.teamNumbers[i].removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
-		
+		$scouting.teamNumbers[i].removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+
 		// Give current team button for entering data focus
 		if(i === currTeamIndex)
-			$gui.teamNumbers[i].addClass(currCssButtonStatusName.focus);
+			$scouting.teamNumbers[i].addClass(currCssButtonStatusName.focus);
 	}
 	
-	$gui.allianceColor.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
-	$gui.searchBar.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
-	$gui.searchBarButton.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
-	$gui.matchNumber.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$scouting.allianceColor.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$scouting.searchBar.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$scouting.searchBarButton.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
+	$scouting.matchNumber.removeClass(btnRemoveClasses).addClass(currCssButtonStatusName.active);
 	
 	// Set the text in alliance color based on alliance color
 	var allianceText = currCssButtonStatusName.active === cssButtonStatusNames.active.red ? "Red" : "Blue";
-	$gui.allianceColor.html(allianceText);
-	
-	// Set comments in comment boxes
-	$gui.matchComments.val(alliance[currTeamIndex].data.match.comments);
-	$gui.robotComments.val(alliance[currTeamIndex].data.comments);
-	
+	$scouting.allianceColor.html(allianceText);
+		
 	// Update the match number gui
-	$gui.matchNumber.val(matchNumber);
+	$scouting.matchNumber.val(matchNumber);
 }
 
 // Set button in tag area to false/true, update gui
@@ -154,25 +251,22 @@ function tagButtonClick(elmName)
 	// Find button in gui and alliance data
 	for(var subProp in cssButtonAreaNames.tags)
 	{
-		var btnIndex = 0;
-
 		if($elm.hasClass(cssButtonAreaNames.tags[subProp]))
 		{
-			for(var innerProp in tagsInnerNames[subProp])
+			for(var innerId in tagsInnerNames[subProp])
 			{
+				var innerProp = tagsInnerNames[subProp][innerId];
+				
 				// Set all rating buttons to false, since only can be active
 				if(subProp === tagsNames[subId.tags.rating])
-					alliance[currTeamIndex].data.tags.rating[tagsInnerNames[subProp][btnIndex]] = 0;
-
+					alliance[currTeamIndex].data.tags.rating[innerProp] = 0;
+				
 				// Flip alliance tag data
-				if(elmName === $gui.tags[subProp][btnIndex][0].id)
+				if(elmName === $scouting.tags[subProp][innerProp][0].id)
 				{
-					var innerName = tagsInnerNames[subProp][btnIndex];
-					var currVal = alliance[currTeamIndex].data.tags[subProp][innerName];
-					alliance[currTeamIndex].data.tags[subProp][innerName] = (currVal === 0 ? 1 : 0);
+					var currVal = alliance[currTeamIndex].data.tags[subProp][innerProp];
+					alliance[currTeamIndex].data.tags[subProp][innerProp] = (currVal === 0 ? 1 : 0);
 				}
-
-				btnIndex++;
 			}
 		}
 	}
@@ -191,13 +285,13 @@ function titleClick(elm)
 // Give focus to team number that was clicked
 function teamNumberClick(elm)
 {
-	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
-		$gui.teamNumbers[i].removeClass(currCssButtonStatusName.focus);
+		$scouting.teamNumbers[i].removeClass(currCssButtonStatusName.focus);
 		
-		if($gui.teamNumbers[i][0].id === elm.id)
+		if($scouting.teamNumbers[i][0].id === elm.id)
 		{
-			$gui.teamNumbers[i].addClass(currCssButtonStatusName.focus);
+			$scouting.teamNumbers[i].addClass(currCssButtonStatusName.focus);
 			currTeamIndex = i;
 		}
 	}
@@ -206,18 +300,31 @@ function teamNumberClick(elm)
 }
 
 // Updates team in alliance data
-function matchButtonClick(elmName)
+function matchThingsButtonClick(elmName)
 {
-	for(var i = 0; i < $gui.matchThings.length; i++)
+	for(var innerProp in $scouting.matchThings)
 	{
-		if($gui.matchThings[i][0].id === elmName)
+		if($scouting.matchThings[innerProp][0].id === elmName)
 		{
-			var innerName = matchThingsInnerNames[i];
-			var currVal = alliance[currTeamIndex].data.match[innerName];
-			alliance[currTeamIndex].data.match[innerName] = (currVal === 0 ? 1 : 0); 
+			var currVal = alliance[currTeamIndex].data.matchThings[innerProp];
+			alliance[currTeamIndex].data.matchThings[innerProp] = (currVal === 0 ? 1 : 0); 
 		}
 	}
 	
+	updateGui();
+}
+
+// Total button in analysis
+function totalButtonClick()
+{
+	analysisShowTotals = true;
+	updateGui();
+}
+
+// Average button in analysis
+function averageButtonClick()
+{
+	analysisShowTotals = false;
 	updateGui();
 }
 
@@ -254,12 +361,12 @@ function changeAllianceColor()
 // Updates the match number, only allow numbers
 function changeMatchNumber(e)
 {
-	var currVal = $gui.matchNumber.val();
+	var currVal = $scouting.matchNumber.val();
 	
 	if(e.type === eventTypes.keyDown)
 	{
 		if(e.keyCode === keyCodes.esc)
-			$gui.matchNumber.blur();
+			$scouting.matchNumber.blur();
 		
 		else if(preventNonNumbers(e.keyCode, currVal, maxMatchNumberLength))
 			e.preventDefault();
@@ -280,7 +387,7 @@ function changeMatchNumber(e)
 			matchNumber = parseInt(currVal);
 		
 		// Update the match number gui
-		$gui.matchNumber.val(currVal);
+		$scouting.matchNumber.val(currVal);
 		return;
 	}
 }
@@ -289,17 +396,17 @@ function changeMatchNumber(e)
 function changeTeamNumber(e)
 {
 	var teamIndex = parseInt(e.target.id[e.target.id.length - 1]);
-	var currVal = $gui.teamNumbers[teamIndex].text();
+	var currVal = $scouting.teamNumbers[teamIndex].text();
 	var selectedText = window.getSelection().toString();
 	
 	if(e.type === eventTypes.keyDown)
 	{
 		if(e.keyCode === keyCodes.esc)
-			$gui.teamNumbers[teamIndex].blur();	
+			$scouting.teamNumbers[teamIndex].blur();	
 			
 		else if(e.keyCode === keyCodes.back && (currVal.length <= 1 || selectedText.length === currVal.length))
 		{
-			selectAllText($gui.teamNumbers[teamIndex][0]);
+			selectAllText($scouting.teamNumbers[teamIndex][0]);
 			e.preventDefault();
 		}
 		
@@ -322,7 +429,7 @@ function changeTeamNumber(e)
 			alliance[teamIndex].data.teamNumber = parseInt(currVal);
 
 		// Update the team number gui
-		$gui.teamNumbers[teamIndex].text(currVal);
+		$scouting.teamNumbers[teamIndex].text(currVal);
 		window.getSelection().removeAllRanges();
 		return;
 	}
@@ -381,8 +488,7 @@ function windowKeyUp(e)
 				resetScouting();
 				hideSubmitDialog();
 			}
-		}
-				
+		}		
 	}
 }
 
@@ -413,64 +519,121 @@ function hideSubmitDialog()
 	}, 800);
 }
 
-// Gets elements from gui and puts them into $gui obj
+// Changes the scouting mode to something
+function changeModeTo(modeName)
+{
+	$("." + cssScoutingModeClassName).show().not("#" + modeName).hide();
+	currScoutingModeName = modeName;
+}
+
+// Gets elements from gui and puts them into gui objs
 function setElements()
 {
+	/*** Scouting ***/
+	
 	/* TAGS ELEMENTS */
 	// Auto elements
-	$gui.tags.auto.push($("#button-tagsAutoGreyTotes"));
-	$gui.tags.auto.push($("#button-tagsAutoRecycle"));
-	$gui.tags.auto.push($("#button-tagsAutoYellowTotes"));
-	$gui.tags.auto.push($("#button-tagsAutoMovement"));
+	$scouting.tags.auto.grabsBins = $("#button-tagsAutoGrabsBins");
+	$scouting.tags.auto.movesBins = $("#button-tagsAutoRecycle");
+	$scouting.tags.auto.handlesYellow = $("#button-tagsAutoYellowTotes");
+	$scouting.tags.auto.movesToAuto = $("#button-tagsAutoMovement");
 
 	// Capabilities elements
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleStack"));
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleLitter"));
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleBrokenDrive"));
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleRecycle"));
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleClumsiness"));
-	$gui.tags.capabilities.push($("#button-tagsCapaTeleBrokenPickup"));
+	$scouting.tags.capabilities.canStack = $("#button-tagsCapaTeleStack");
+	$scouting.tags.capabilities.canMoveLitter = $("#button-tagsCapaTeleLitter");
+	$scouting.tags.capabilities.brokenDrive = $("#button-tagsCapaTeleBrokenDrive");
+	$scouting.tags.capabilities.canPlaceBins = $("#button-tagsCapaTeleRecycle");
+	$scouting.tags.capabilities.clumsy = $("#button-tagsCapaTeleClumsiness");
+	$scouting.tags.capabilities.brokenPickup = $("#button-tagsCapaTeleBrokenPickup");
 
 	// Rating elements
-	$gui.tags.rating.push($("#button-tagsRateGood"));
-	$gui.tags.rating.push($("#button-tagsRateMeh"));
-	$gui.tags.rating.push($("#button-tagsRateBad"));
+	$scouting.tags.rating.good = $("#button-tagsRateGood");
+	$scouting.tags.rating.meh = $("#button-tagsRateMeh");
+	$scouting.tags.rating.bad = $("#button-tagsRateBad");
 
 	/* SCORING ELEMENTS */
 	// Auto elements
-	$gui.scoring.auto.push($("#button-scoringAutoYellowMoved"));
-	$gui.scoring.auto.push($("#button-scoringAutoYellowStacked"));
-	$gui.scoring.auto.push($("#button-scoringAutoRecycle"));
+	$scouting.scoring.auto.yellowMoved = $("#button-scoringAutoYellowMoved");
+	$scouting.scoring.auto.yellowStacked = $("#button-scoringAutoYellowStacked");
+	$scouting.scoring.auto.binsMoved = $("#button-scoringAutoRecycle");
 
 	// Scoring element
-	$gui.scoring.teleop.push($("#button-scoringTeleGrey"));
-	$gui.scoring.teleop.push($("#button-scoringTeleRecycle"));
-	$gui.scoring.teleop.push($("#button-scoringTeleHighestRecycle"));
+	$scouting.scoring.teleop.greyStacked = $("#button-scoringTeleGrey");
+	$scouting.scoring.teleop.binsStacked = $("#button-scoringTeleRecycle");
+	$scouting.scoring.teleop.highestBinLvl = $("#button-scoringTeleHighestRecycle");
 
 	/* MATCH THING ELEMENTS */
-	$gui.matchThings.push($("#button-coopStack"));
-	$gui.matchThings.push($("#button-coopSet"));
-	$gui.matchThings.push($("#button-highScoring"));
+	$scouting.matchThings.coopStack = $("#button-coopStack");
+	$scouting.matchThings.coopSet = $("#button-coopSet");
+	$scouting.matchThings.highScoring = $("#button-highScoring");
 	
 	// Comment boxes
-	$gui.matchComments = $("#matchComments");
-	$gui.robotComments = $("#robotComments");
+	$scouting.matchComments = $("#matchComments");
+	$scouting.robotComments = $("#robotComments");
 	
 	// Team numbers elements
-	$gui.teamNumbers.push($("#button-teamInput0"));
-	$gui.teamNumbers.push($("#button-teamInput1"));
-	$gui.teamNumbers.push($("#button-teamInput2"));
+	$scouting.teamNumbers.push($("#button-teamInput0"));
+	$scouting.teamNumbers.push($("#button-teamInput1"));
+	$scouting.teamNumbers.push($("#button-teamInput2"));
 
 	// Alliance color element
-	$gui.allianceColor = $("#button-allianceSelection");
+	$scouting.allianceColor = $("#button-allianceSelection");
 
 	// Search bar elements
-	$gui.searchBar = $("#searchBar");
-	$gui.searchBarButton = $("#button-search");
+	$scouting.searchBar = $("#searchBar");
+	$scouting.searchBarButton = $("#button-search");
 
 	// Match number element
-	$gui.matchNumber = $("#matchNumber");
+	$scouting.matchNumber = $("#matchNumber");
 	
 	// Title
-	$gui.title = $("#title");
+	$scouting.title = $("#title");
+	
+	
+	/*** Analysis ***/
+
+	/* TAGS ELEMENTS */
+	// Auto elements
+	$analysis.tags.auto.grabsBins = $("#dataGrabsBins");
+	$analysis.tags.auto.movesBins = $("#dataHandlesBins");
+	$analysis.tags.auto.handlesYellow = $("#dataHandlesYellow");
+	$analysis.tags.auto.movesToAuto = $("#dataMovesToAuto");
+
+	// Capabilities elements
+	$analysis.tags.capabilities.canStack = $("#dataCanStack");
+	$analysis.tags.capabilities.canMoveLitter = $("#dataCanMoveLitter");
+	$analysis.tags.capabilities.brokenDrive = $("#dataBrokenDrive");
+	$analysis.tags.capabilities.canPlaceBins = $("#dataCanPlaceBins");
+	$analysis.tags.capabilities.clumsy = $("#dataClumsy");
+	$analysis.tags.capabilities.brokenPickup = $("#dataBrokenPickup");
+
+	// Rating elements
+	$analysis.tags.rating.good = $("#dataGood");
+	$analysis.tags.rating.meh = $("#dataMeh");
+	$analysis.tags.rating.bad = $("#dataBad");
+
+	/* SCORING ELEMENTS */
+	// Auto elements
+	$analysis.scoring.auto.yellowMoved = $("#dataYellowMoved");
+	$analysis.scoring.auto.yellowStacked = $("#dataYellowStacked");
+	$analysis.scoring.auto.binsMoved = $("#dataBinsMoved");
+
+	// Scoring element
+	$analysis.scoring.teleop.greyStacked = $("#dataGreyStacked");
+	$analysis.scoring.teleop.binsStacked = $("#dataBinsStacked");
+	$analysis.scoring.teleop.highestBinLvl = $("#dataHighestBinLvl");
+
+	/* MATCH THING ELEMENTS */
+	$analysis.matchThings.coopStack = $("#dataCoopStack");
+	$analysis.matchThings.coopSet = $("#dataCoopSet");
+	$analysis.matchThings.highScoring = $("#dataHighScore");
+
+	// Total, Average
+	$analysis.total = $(".analysisTotal");
+	$analysis.average = $(".analysisAverage");
+	
+	// Comment boxes
+	$analysis.matchComments = $("#dataMatchComments");
+	$analysis.robotComments = $("#dataRobotComments");
+	$analysis.teamNumber = $(".teamNumb");
 }

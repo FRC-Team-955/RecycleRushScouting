@@ -1,8 +1,17 @@
+// Current team for analysis mode
+var currAnalysisTeam = 0;
+
+// Current file name off scouting
+var currScoutingModeName = "";
+
 // Controller for scouting
 var contr = new Controller();   
 
 // When to update scouting
 var needUpdateGui = false;          
+
+// Show totals or averages of a teams data in analysis mode
+var analysisShowTotals = true;
 
 // Match number
 var matchNumber = 0;
@@ -67,10 +76,11 @@ $(document).ready(init);
 // Init the scouting data
 function init() 
 {
-	console.log("Init");
+	currAnalysisTeam = localStorage.currAnalysisTeam ? localStorage.currAnalysisTeam : 0;
+	console.log("Init:");
 	initStyle();
 	resetScouting();
-	window.requestAnimationFrame(main);
+//	window.requestAnimationFrame(main);
 }
 
 // Main loop, checks for controller button presses
@@ -227,7 +237,7 @@ function resetScouting()
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
 	{
 		alliance[i] = new RobotData();
-		$gui.teamNumbers[i].text(alliance[i].data.teamNumber = (i + 1));
+		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = (i + 1));
 	}
 
 	var initSubName = 
@@ -307,15 +317,19 @@ function getTagInnerIndex()
 // Gets data from local storage
 function getLocaleData()
 {
-	teams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
+	var localTeams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
+	
+	for(var i = 0; i < localTeams.length; i++)
+		teams[localTeams[i].data.teamNumber - 1] = localTeams[i];
 }
 
 // Saves teams data to local storage, caches it
 function saveToLocale()
 {
-	for(var i = 0; i < $gui.teamNumbers.length; i++)
+	console.log($analysis.tags.auto.grabsBins);
+	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
-		alliance[i].data.teamNumber = parseInt($gui.teamNumbers[i].text());
+		alliance[i].data.teamNumber = parseInt($scouting.teamNumbers[i].text());
 		
 		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
 			teams[alliance[i].data.teamNumber - 1] = new RobotData();

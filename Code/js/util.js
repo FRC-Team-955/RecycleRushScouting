@@ -47,3 +47,9 @@ function saveFile(fileName, fileData)
 	e.setAttribute('download', fileName);
 	e.click();
 }
+
+// Rounds the number to the nearest hundreths place
+function round(num)
+{
+	return Math.floor((num * 100) + 0.5) / 100;
+}
