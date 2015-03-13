@@ -76,11 +76,11 @@ $(document).ready(init);
 // Init the scouting data
 function init() 
 {
-	currAnalysisTeam = localStorage.currAnalysisTeam ? localStorage.currAnalysisTeam : 0;
 	console.log("Init:");
+	getLocaleData();
 	initStyle();
 	resetScouting();
-//	window.requestAnimationFrame(main);
+	window.requestAnimationFrame(main);
 }
 
 // Main loop, checks for controller button presses
@@ -326,7 +326,6 @@ function getLocaleData()
 // Saves teams data to local storage, caches it
 function saveToLocale()
 {
-	console.log($analysis.tags.auto.grabsBins);
 	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
 		alliance[i].data.teamNumber = parseInt($scouting.teamNumbers[i].text());
@@ -334,10 +333,10 @@ function saveToLocale()
 		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
 			teams[alliance[i].data.teamNumber - 1] = new RobotData();
 		
-		teams[alliance[i].data.teamNumber - 1].addData(alliance[i].data);
+		appendTeamData(teams[alliance[i].data.teamNumber - 1].data, alliance[i].data);
 	}
 	
-	localStorage.teams = JSON.stringify(getTeams());
+	localStorage.teams = JSON.stringify(getTeams(), null, 4);
 	console.log(JSON.parse(localStorage.teams));
 }
 
@@ -351,4 +350,48 @@ function getTeams()
 			ret.push(teams[i]);
 	
 	return ret;
+}
+
+// Adds the new data to current team data
+function appendTeamData(currData, newData)
+{
+	var subProp = "";
+	var innerProp = "";
+	
+	// Add tags data
+	for(var i = 0; i < tagsNames.length; i++)
+	{
+		subProp = tagsNames[i];
+		
+		for(var j = 0; j < tagsInnerNames[subProp].length; j++)
+		{
+			innerProp = tagsInnerNames[subProp][j];
+			currData.tags[subProp][innerProp] += newData.tags[subProp][innerProp];
+		}
+	}
+	
+	// Add scoring data
+	for(var i = 0; i < scoringNames.length; i++)
+	{
+		subProp = scoringNames[i];
+		
+		for(var j = 0; j < scoringInnerNames[subProp].length; j++)
+		{
+			innerProp = scoringInnerNames[subProp][j];
+			currData.scoring[subProp][innerProp] += newData.scoring[subProp][innerProp];
+		}
+	}
+	
+	// Add match things data
+	for(var i = 0; i < matchThingsInnerNames.length; i++)
+	{
+		innerProp = matchThingsInnerNames[i];
+		currData.matchThings[innerProp] += newData.matchThings[innerProp]; 
+	}
+	
+	// Add comments, set team number, inc matches played
+	currData.matchComments += " | " + newData.matchComments;
+	currData.robotComments += " | " + newData.robotComments;
+	currData.teamNumber = newData.teamNumber;
+	currData.matchesPlayed++;
 }

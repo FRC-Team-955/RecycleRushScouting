@@ -270,7 +270,9 @@ var $analysis =
 	"average": null,
 	"matchComments": null,
 	"robotComments": null,
-	"teamNumber": null
+	"teamNumber": null,
+	"teamNickname": null,
+	"teamLocation": null
 }
 
 // Button ids for controller
