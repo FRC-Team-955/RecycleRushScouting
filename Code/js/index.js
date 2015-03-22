@@ -1,5 +1,5 @@
 // Current team for analysis mode
-var currAnalysisTeam = 0;
+var currAnalysisTeam = 1;
 
 // Current file name off scouting
 var currScoutingModeName = "";
@@ -389,9 +389,10 @@ function appendTeamData(currData, newData)
 		currData.matchThings[innerProp] += newData.matchThings[innerProp]; 
 	}
 	
-	// Add comments, set team number, inc matches played
+	// Add comments, set team number, inc matches played, add match to matches played
 	currData.matchComments += " | " + newData.matchComments;
 	currData.robotComments += " | " + newData.robotComments;
 	currData.teamNumber = newData.teamNumber;
 	currData.matchesPlayed++;
+	currData.matchesPlayedIn.push(matchNumber);
 }

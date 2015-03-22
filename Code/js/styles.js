@@ -1,11 +1,38 @@
 // Init the gui
 function initStyle() 
 {		
+	// Create autocomplete list of teams
 	for(var i = 1; i <= maxGlobalTeams; i++)
 		teamsList[i - 1] = "" + i;
 	
+	// Set all the gui objs to the html elements
 	setElements();
 	
+	// Ask to save the scouting data when closing the scouting app
+	//$(window).unload(titleClick);
+	
+	// Assign ctrl+s to go to next match
+	$(window).bind('keydown', function(event) {
+		if (event.ctrlKey || event.metaKey) {
+			switch (String.fromCharCode(event.which).toLowerCase()) {
+				case 's':
+					// Make current element with focus lose focus so data gets saved
+					$(":focus").blur();
+					showSubmitDialog();
+					break;
+			}
+		}
+	});
+	
+	// Assign click, keyup event to scouting
+	$(window)
+		.click(windowClick)
+		.keyup(windowKeyup);
+	
+	// Prevent enter from refreshing the page
+	$("form").submit(function() { return false; });
+	
+	// Process the search bar input
 	$scouting.searchBarButton.click(function(e)
   	{
 		$scouting.searchBar.blur();
@@ -23,10 +50,10 @@ function initStyle()
 		updateGui();
 	});
 	
-	$(window).unload(titleClick);
-	$("form").submit(function() { return false; });
-	$scouting.searchBar.focus(function(){ this.select(); });
+	// Highlight the input in the search bar when it gets focus
+	$scouting.searchBar.click(function(){ this.select(); });
 	
+	// Process the search bar input when enter is pressed
 	$scouting.searchBar.keyup(function(e)
   	{			
 		if(e.keyCode === keyCodes.ent)
@@ -35,29 +62,11 @@ function initStyle()
 		}
 	});
 
+	// Add autocomplete to the search bar element
 	$scouting.searchBar.autocomplete
 	({
 		source: teamsList
-	});
-	
-	// Assign ctrl+s to go to next match
-	$(window).bind('keydown', function(event) {
-		if (event.ctrlKey || event.metaKey) {
-			switch (String.fromCharCode(event.which).toLowerCase()) {
-				case 's':
-					showSubmitDialog();
-					break;
-			}
-			
-			// Make current element with focus lose focus so data gets saved
-			$(":focus").blur();
-		}
-	});
-	
-	// Assign click, keyup event to scouting
-	$(window)
-		.click(windowClick)
-		.keyup(windowKeyUp);
+	})
 	
 	// Assign click event to title
 	$scouting.title.click(titleClick);
@@ -70,7 +79,6 @@ function initStyle()
 	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 		$scouting.teamNumbers[i]
 			.attr("contenteditable", "true")				// Make it editable
-			.focus(function(){ selectAllText(this); })		// Select all text
 			.keydown(changeTeamNumber)						// Prevent non numbers
 			.blur(changeTeamNumber)							// Update team number data
 			.click(function(){ teamNumberClick(this); });	// Change team focus
@@ -80,7 +88,7 @@ function initStyle()
 	
 	// Assign change event for match number box
 	$scouting.matchNumber
-		.focus(function(){ this.select(); })	// Select all text
+		.click(function(){ this.select(); })	// Select all text
 		.keydown(changeMatchNumber)				// Prevent non numbers
 		.blur(changeMatchNumber);				// Update match number
 	
@@ -284,6 +292,8 @@ function titleClick(elm)
 // Give focus to team number that was clicked
 function teamNumberClick(elm)
 {
+	selectAllText(elm);
+	
 	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
 		$scouting.teamNumbers[i].removeClass(currCssButtonStatusName.focus);
@@ -472,7 +482,7 @@ function windowClick(e)
 }
 
 // Handles window keyup events
-function windowKeyUp(e)
+function windowKeyup(e)
 {
 	if(isSubmitDialogOpen)
 	{
@@ -651,7 +661,13 @@ function setElements()
 	// Comment boxes
 	$analysis.matchComments = $("#dataMatchComments");
 	$analysis.robotComments = $("#dataRobotComments");
+	
+	// Miscellaneous
 	$analysis.teamNumber = $(".teamNumb");
 	$analysis.teamNickname = $("#teamNickname");
 	$analysis.teamLocation = $("#teamLocation");
+	$analysis.teamMatchNumber = $("#analysisMatchMode");
+	$analysis.teamNextMatch = $("#analysisNextMatch");
+	$analysis.teamPrevMatch = $("#analysisPrevMatch");
+	$analysis.teamCurrMatch = $("#analysisCurrMatch");
 }

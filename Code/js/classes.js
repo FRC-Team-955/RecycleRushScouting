@@ -146,6 +146,7 @@ function RobotData()
 		"matchComments": "",
 		"robotComments": "",
 		"teamNumber": 0,
-		"matchesPlayed": 0
+		"matchesPlayed": 0,
+		"matchesPlayedIn": []
 	}; 
 }

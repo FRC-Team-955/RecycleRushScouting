@@ -272,7 +272,11 @@ var $analysis =
 	"robotComments": null,
 	"teamNumber": null,
 	"teamNickname": null,
-	"teamLocation": null
+	"teamLocation": null,
+	"matchNumber": null,
+	"nextMatch": null,
+	"prevMatch": null,
+	"currMatch": null
 }
 
 // Button ids for controller
