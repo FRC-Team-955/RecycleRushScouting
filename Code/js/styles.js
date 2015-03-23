@@ -36,10 +36,19 @@ function initStyle()
 	$scouting.searchBarButton.click(function(e)
   	{
 		$scouting.searchBar.blur();
-		var inputVal = $scouting.searchBar.val();
+		var inputVal = $scouting.searchBar.val().toLocaleLowerCase();
 		
-		if(inputVal.toLowerCase() === "home")
+		if(inputVal === "home")
 			changeModeTo(cssScoutingModeNames.scouting);
+		
+		else if(inputVal === "alliance")
+			changeModeTo(cssScoutingModeNames.allianceSelection);
+		
+		else if(inputVal === "match")
+			changeModeTo(cssScoutingModeNames.match);
+		
+		else if(inputVal === "pit")
+			changeModeTo(cssScoutingModeNames.pit);
 	
 		else if(!isNaN(inputVal))
 		{
@@ -532,7 +541,10 @@ function hideSubmitDialog()
 function changeModeTo(modeName)
 {
 	$("." + cssScoutingModeClassName).show().not("#" + modeName).hide();
-	getData("team/frc" + currAnalysisTeam, updateTeamAnalysisData);
+	
+	if(modeName === cssScoutingModeNames.analysis)
+		getData("team/frc" + currAnalysisTeam, updateTeamAnalysisData);
+	
 	currScoutingModeName = modeName;
 }
 

@@ -143,7 +143,8 @@ var cssScoutingModeNames =
 	scouting: "scouting", 
 	analysis: "analysis", 
 	match: "match", 
-	allianceSelection: "allianceSelection" 
+	allianceSelection: "allianceSelection",
+	pit: "pit"
 };
 
 // All the interactive for scouting elements
