@@ -38,21 +38,26 @@ function initStyle()
 		$scouting.searchBar.blur();
 		var inputVal = $scouting.searchBar.val().toLocaleLowerCase();
 		
+		// Switch to scouting mode
 		if(inputVal === "home")
 			changeModeTo(cssScoutingModeNames.scouting);
 		
+		// Switch to alliance selection mode
 		else if(inputVal === "alliance")
 			changeModeTo(cssScoutingModeNames.allianceSelection);
 		
+		// Switch to individual match mode
 		else if(inputVal === "match")
 			changeModeTo(cssScoutingModeNames.match);
 		
+		// Swtich to pit scouting mode
 		else if(inputVal === "pit")
 			changeModeTo(cssScoutingModeNames.pit);
 	
+		// Switch to team analysis mode
 		else if(!isNaN(inputVal))
 		{
-			currAnalysisTeam = parseInt(inputVal);
+			analysis.team = parseInt(inputVal);
 			changeModeTo(cssScoutingModeNames.analysis);
 		}
 		
@@ -116,8 +121,27 @@ function initStyle()
 		alliance[currTeamIndex].data.robotComments = this.value;
 	});
 	
+	// Update analysis gui
 	$analysis.total.click(totalButtonClick);
 	$analysis.average.click(averageButtonClick);
+	$analysis.match.click(matchButtonClick);
+	$analysis.prevMatch.click(prevMatchButtonClick);
+	$analysis.nextMatch.click(nextMatchButtonClick);
+	
+	$analysis.robotImgFile.change(function () 
+  	{
+        if(this.files && this.files[0]) 
+		{
+            var reader = new FileReader();
+            reader.onload = function(e)
+			{
+				$analysis.robotImg.attr("src", e.target.result);
+			};
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+	
+	$analysis.robotImgButton.click(function(){ $analysis.robotImgFile.click(); });
 	changeModeTo(cssScoutingModeNames.scouting);
 }
 
@@ -174,67 +198,126 @@ function updateGui()
 	// Analysis mode
 	else if(currScoutingModeName === cssScoutingModeNames.analysis)
 	{
+		// Remove button styles from all of them
 		$analysis.total.removeClass(btnRemoveClasses);
 		$analysis.average.removeClass(btnRemoveClasses);
-		var teamDataExists = teams[currAnalysisTeam - 1];
+		$analysis.match.removeClass(btnRemoveClasses);
+		var teamDataExists = teams[analysis.team - 1];
 		
-		if(analysisShowTotals)
+		// Add button style to currently selected button mode
+		if(analysis.dataMode === analysisDataModes.total)
 			$analysis.total.addClass(currCssButtonStatusName.active);
 		
-		else if(!analysisShowTotals)
+		else if(analysis.dataMode === analysisDataModes.average)
 			$analysis.average.addClass(currCssButtonStatusName.active);
 		
+		else if(analysis.dataMode === analysisDataModes.match)
+			$analysis.match.addClass(currCssButtonStatusName.active);
+		
 		// Set team number
-		$analysis.teamNumber.text("Team " + currAnalysisTeam);
-		var dataMod = 1;
-
-		if(!analysisShowTotals && teamDataExists)
-			dataMod = teams[currAnalysisTeam - 1].data.matchesPlayed;
-
-		// Tags auto
-		for(var prop in $analysis.tags.auto)
+		$analysis.teamNumber.text("Team " + analysis.team);
+		
+		if(analysis.dataMode === analysisDataModes.total || analysis.dataMode === analysisDataModes.average)
 		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.tags.auto[prop] / dataMod) : "N/A";
-			$analysis.tags.auto[prop].html(val);
-		}
+			var dataMod = 1;
 
-		// Tags capabilities
-		for(var prop in $analysis.tags.capabilities)
+			if(analysis.dataMode === analysisDataModes.average && teamDataExists)
+				dataMod = teams[analysis.team - 1].data.matchesPlayed;
+
+			// Tags auto
+			for(var prop in $analysis.tags.auto)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.tags.auto[prop] / dataMod) : "N/A";
+				$analysis.tags.auto[prop].html(val);
+			}
+
+			// Tags capabilities
+			for(var prop in $analysis.tags.capabilities)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.tags.capabilities[prop] / dataMod) : "N/A";
+				$analysis.tags.capabilities[prop].html(val);
+			}
+
+			// Tags rating
+			for(var prop in $analysis.tags.rating)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.tags.rating[prop] / dataMod) : "N/A";
+				$analysis.tags.rating[prop].html(val);
+			}
+
+			// Scoring auto
+			for(var prop in $analysis.scoring.auto)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.scoring.auto[prop] / dataMod) : "N/A";
+				$analysis.scoring.auto[prop].html(val);
+			}
+
+			// Scoring teleop
+			for(var prop in $analysis.scoring.teleop)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.scoring.teleop[prop] / dataMod) : "N/A";
+				$analysis.scoring.teleop[prop].html(val);
+			}
+
+			// MatchThings
+			for(var prop in $analysis.matchThings)
+			{
+				var val = teamDataExists ? round(teams[analysis.team - 1].data.matchThings[prop] / dataMod) : "N/A";
+				$analysis.matchThings[prop].html(val);
+			}
+
+			$analysis.matchComments.html(teamDataExists ? teams[analysis.team - 1].data.matchComments : "N/A");
+			$analysis.robotComments.html(teamDataExists ? teams[analysis.team - 1].data.robotComments : "N/A");
+		}
+		
+		if(analysis.dataMode === analysisDataModes.match)
 		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.tags.capabilities[prop] / dataMod) : "N/A";
-			$analysis.tags.capabilities[prop].html(val);
-		}
+			// Tags auto
+			for(var prop in $analysis.tags.auto)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].tags.auto[prop] : "N/A";
+				$analysis.tags.auto[prop].html(val);
+			}
 
-		// Tags rating
-		for(var prop in $analysis.tags.rating)
-		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.tags.rating[prop] / dataMod) : "N/A";
-			$analysis.tags.rating[prop].html(val);
-		}
+			// Tags capabilities
+			for(var prop in $analysis.tags.capabilities)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].tags.capabilities[prop] : "N/A";
+				$analysis.tags.capabilities[prop].html(val);
+			}
 
-		// Scoring auto
-		for(var prop in $analysis.scoring.auto)
-		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.scoring.auto[prop] / dataMod) : "N/A";
-			$analysis.scoring.auto[prop].html(val);
-		}
+			// Tags rating
+			for(var prop in $analysis.tags.rating)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].tags.rating[prop] : "N/A";
+				$analysis.tags.rating[prop].html(val);
+			}
 
-		// Scoring teleop
-		for(var prop in $analysis.scoring.teleop)
-		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.scoring.teleop[prop] / dataMod) : "N/A";
-			$analysis.scoring.teleop[prop].html(val);
-		}
+			// Scoring auto
+			for(var prop in $analysis.scoring.auto)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].scoring.auto[prop] : "N/A";
+				$analysis.scoring.auto[prop].html(val);
+			}
 
-		// MatchThings
-		for(var prop in $analysis.matchThings)
-		{
-			var val = teamDataExists ? round(teams[currAnalysisTeam - 1].data.matchThings[prop] / dataMod) : "N/A";
-			$analysis.matchThings[prop].html(val);
-		}
+			// Scoring teleop
+			for(var prop in $analysis.scoring.teleop)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].scoring.teleop[prop] : "N/A";
+				$analysis.scoring.teleop[prop].html(val);
+			}
 
-		$analysis.matchComments.html(teamDataExists ? teams[currAnalysisTeam - 1].data.matchComments : "N/A");
-		$analysis.robotComments.html(teamDataExists ? teams[currAnalysisTeam - 1].data.robotComments : "N/A");
+			// MatchThings
+			for(var prop in $analysis.matchThings)
+			{
+				var val = teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].matchThings[prop] : "N/A";
+				$analysis.matchThings[prop].html(val);
+			}
+
+			$analysis.matchComments.html(teamDataExists ? teams[analysis.team - 1].data.matchComments : "N/A");
+			$analysis.robotComments.html(teamDataExists ? teams[analysis.team - 1].data.robotComments : "N/A");
+			$analysis.currMatch.html(teamDataExists ? teams[analysis.team - 1].data.matchesPlayedIn[analysis.currMatchIndex] : "N/A");
+		}
 	}
 	
 	// Set alliance color, team numbers color, searchbar color, match number color
@@ -335,14 +418,43 @@ function matchThingsButtonClick(elmName)
 // Total button in analysis
 function totalButtonClick()
 {
-	analysisShowTotals = true;
+	analysis.dataMode = analysisDataModes.total;
 	updateGui();
 }
 
 // Average button in analysis
 function averageButtonClick()
 {
-	analysisShowTotals = false;
+	analysis.dataMode = analysisDataModes.average;
+	updateGui();
+}
+
+// Match button in analysis
+function matchButtonClick()
+{
+	analysis.dataMode = analysisDataModes.match;
+	updateGui();
+}
+
+// Prev Match button in analysis
+function prevMatchButtonClick()
+{
+	analysis.dataMode = analysisDataModes.match;
+	
+	if(--analysis.currMatchIndex < 0)
+		analysis.currMatchIndex = teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayedIn.length - 1 : 0;
+	
+	updateGui();
+}
+
+// Next Match button in analysis
+function nextMatchButtonClick()
+{
+	analysis.dataMode = analysisDataModes.match;
+	
+	if(++analysis.currMatchIndex >= (teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayedIn.length : 0))
+		analysis.currMatchIndex = 0;
+		
 	updateGui();
 }
 
@@ -543,7 +655,7 @@ function changeModeTo(modeName)
 	$("." + cssScoutingModeClassName).show().not("#" + modeName).hide();
 	
 	if(modeName === cssScoutingModeNames.analysis)
-		getData("team/frc" + currAnalysisTeam, updateTeamAnalysisData);
+		getData("team/frc" + analysis.team, updateTeamAnalysisData);
 	
 	currScoutingModeName = modeName;
 }
@@ -667,8 +779,9 @@ function setElements()
 	$analysis.matchThings.highScoring = $("#dataHighScore");
 
 	// Total, Average
-	$analysis.total = $(".analysisTotal");
-	$analysis.average = $(".analysisAverage");
+	$analysis.total = $(".analysisTotalMode");
+	$analysis.average = $(".analysisAverageMode");
+	$analysis.match = $(".analysisMatchMode");
 	
 	// Comment boxes
 	$analysis.matchComments = $("#dataMatchComments");
@@ -678,8 +791,11 @@ function setElements()
 	$analysis.teamNumber = $(".teamNumb");
 	$analysis.teamNickname = $("#teamNickname");
 	$analysis.teamLocation = $("#teamLocation");
-	$analysis.teamMatchNumber = $("#analysisMatchMode");
-	$analysis.teamNextMatch = $("#analysisNextMatch");
-	$analysis.teamPrevMatch = $("#analysisPrevMatch");
-	$analysis.teamCurrMatch = $("#analysisCurrMatch");
+	$analysis.matchNumber = $("#analysisMatchMode");
+	$analysis.nextMatch = $("#analysisNextMatch");
+	$analysis.prevMatch = $("#analysisPrevMatch");
+	$analysis.currMatch = $("#analysisCurrMatch");
+	$analysis.robotImg = $("#robotImg");
+	$analysis.robotImgFile = $("#robotImgFile");
+	$analysis.robotImgButton = $(".imgImport");
 }

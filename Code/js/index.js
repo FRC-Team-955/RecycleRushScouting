@@ -1,5 +1,5 @@
-// Current team for analysis mode
-var currAnalysisTeam = 1;
+// Data for analysis mode
+var analysis = { team: 1, dataMode: analysisDataModes.total, currMatchIndex: 0 };
 
 // Current file name off scouting
 var currScoutingModeName = "";
@@ -9,9 +9,6 @@ var contr = new Controller();
 
 // When to update scouting
 var needUpdateGui = false;          
-
-// Show totals or averages of a teams data in analysis mode
-var analysisShowTotals = true;
 
 // Match number
 var matchNumber = 0;
@@ -355,6 +352,19 @@ function getTeams()
 // Adds the new data to current team data
 function appendTeamData(currData, newData)
 {
+	var addData = true;
+	var matchIndex = 0;
+	
+	for(var i = 0; i < currData.matchesPlayedIn.length; i++)
+	{
+		if(matchNumber === currData.matchesPlayedIn[i])
+		{
+			addData = false;
+			matchIndex = i;
+			break;
+		}
+	}
+	
 	var subProp = "";
 	var innerProp = "";
 	
@@ -366,6 +376,10 @@ function appendTeamData(currData, newData)
 		for(var j = 0; j < tagsInnerNames[subProp].length; j++)
 		{
 			innerProp = tagsInnerNames[subProp][j];
+			
+			if(!addData)
+				currData.tags[subProp][innerProp] -= currData.matches[matchIndex].tags[subProp][innerProp];
+			
 			currData.tags[subProp][innerProp] += newData.tags[subProp][innerProp];
 		}
 	}
@@ -378,6 +392,10 @@ function appendTeamData(currData, newData)
 		for(var j = 0; j < scoringInnerNames[subProp].length; j++)
 		{
 			innerProp = scoringInnerNames[subProp][j];
+			
+			if(!addData)
+				currData.scoring[subProp][innerProp] -= currData.matches[matchIndex].scoring[subProp][innerProp];
+			
 			currData.scoring[subProp][innerProp] += newData.scoring[subProp][innerProp];
 		}
 	}
@@ -386,13 +404,29 @@ function appendTeamData(currData, newData)
 	for(var i = 0; i < matchThingsInnerNames.length; i++)
 	{
 		innerProp = matchThingsInnerNames[i];
+		
+		if(!addData)
+			currData.matchThings[innerProp] -= currData.matches[matchIndex].matchThings[innerProp]; 
+		
 		currData.matchThings[innerProp] += newData.matchThings[innerProp]; 
 	}
 	
 	// Add comments, set team number, inc matches played, add match to matches played
-	currData.matchComments += " | " + newData.matchComments;
-	currData.robotComments += " | " + newData.robotComments;
+	if(!addData)
+	{
+		currData.matchComments = currData.matchComments.replace(currData.matches[matchIndex].matchComments, newData.matchComments);
+		currData.robotComments = currData.robotComments.replace(currData.matches[matchIndex].robotComments, newData.robotComments);
+		currData.matches[matchIndex] = newData;
+	}
+	
+	if(addData)
+	{
+		currData.matchComments += " | " + newData.matchComments;
+		currData.robotComments += " | " + newData.robotComments;
+		currData.matchesPlayed++;
+		currData.matchesPlayedIn.push(matchNumber);
+		currData.matches.push(newData);
+	}
+		
 	currData.teamNumber = newData.teamNumber;
-	currData.matchesPlayed++;
-	currData.matchesPlayedIn.push(matchNumber);
 }

@@ -269,6 +269,7 @@ var $analysis =
 
 	"total": null,
 	"average": null,
+	"match": null,
 	"matchComments": null,
 	"robotComments": null,
 	"teamNumber": null,
@@ -277,7 +278,10 @@ var $analysis =
 	"matchNumber": null,
 	"nextMatch": null,
 	"prevMatch": null,
-	"currMatch": null
+	"currMatch": null,
+	"robotImg": null,
+	"robotImgFile": null,
+	"robotImgButton": null
 }
 
 // Button ids for controller
@@ -328,4 +332,12 @@ var eventTypes =
 {
 	keyDown: "keydown",
 	blur: "blur"
+};
+
+// Analysis data modes
+var analysisDataModes = 
+{
+	total: 0,
+	average: 1,
+	match: 2
 };
