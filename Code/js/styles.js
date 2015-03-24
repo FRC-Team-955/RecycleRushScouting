@@ -142,6 +142,7 @@ function initStyle()
     });
 	
 	$analysis.robotImgButton.click(function(){ $analysis.robotImgFile.click(); });
+	$match.newMatchButton.click(createMatch);	
 	changeModeTo(cssScoutingModeNames.scouting);
 }
 
@@ -192,7 +193,6 @@ function updateGui()
 		// Set comments in comment boxes
 		$scouting.matchComments.val(alliance[currTeamIndex].data.matchComments);
 		$scouting.robotComments.val(alliance[currTeamIndex].data.robotComments);
-
 	}
 	
 	// Analysis mode
@@ -318,6 +318,93 @@ function updateGui()
 			$analysis.robotComments.html(teamDataExists ? teams[analysis.team - 1].data.robotComments : "N/A");
 			$analysis.currMatch.html(teamDataExists ? teams[analysis.team - 1].data.matchesPlayedIn[analysis.currMatchIndex] : "N/A");
 		}
+	}
+	
+	else if(currScoutingModeName === cssScoutingModeNames.match)
+	{
+		$match.matchTable.html("");
+		
+		for(var i = 0; i < matches.length; i++)
+		{
+			var newMatch = matches[i];
+			
+			if(!newMatch)
+				continue;
+			
+			// New match row
+			var newRow = document.createElement("tr");
+			newRow.id = newMatch.matchNumber - 1;
+
+			// Match number
+			var newCol = document.createElement("td");
+			newCol.classList.add(cssMatchTableNames.match);
+			newCol.innerHTML = newMatch.matchNumber;
+			newRow.appendChild(newCol);
+
+			// Teams
+			for(var j = 0; j < maxTeamsPerAlliance * 2; j++)
+			{
+				newCol = document.createElement("td");
+
+				if(j < maxTeamsPerAlliance)
+				{
+					newCol.classList.add(cssMatchTableNames.red);
+					newCol.innerHTML = newMatch.red[j];
+					newCol.id = j;
+				}
+
+				else
+				{
+					newCol.classList.add(cssMatchTableNames.blue);
+					newCol.innerHTML = newMatch.blue[j - maxTeamsPerAlliance];
+					newCol.id = j - maxTeamsPerAlliance;
+				}
+
+				newRow.appendChild(newCol);
+			}
+
+			// Scores
+			newCol = document.createElement("td");
+			newCol.classList.add(cssMatchTableNames.redScore);
+			newCol.innerHTML = newMatch.redScore;
+			newRow.appendChild(newCol);
+			newCol = document.createElement("td");
+			newCol.classList.add(cssMatchTableNames.blueScore);
+			newCol.innerHTML = newMatch.blueScore;
+			newRow.appendChild(newCol);
+			$match.matchTable.append(newRow);
+		}
+		
+		$match.matchTable.find("tr").find("td").each(function()
+		{
+			$(this).click(function(e)
+			{ 
+				loseMatchModeFocus(false); 
+				selectAllText(this);
+				$(this).addClass("focus");
+				e.stopPropagation(); 
+			});
+		});
+
+		$match.matchTable.keydown(function(e)
+		{
+			var elm = $(".focus")[0];
+
+			if(e.keyCode === keyCodes.esc)
+				loseMatchModeFocus(true);
+
+			else if(!elm)
+				e.preventDefault();
+
+			else
+			{
+				if(elm.classList[0] === cssMatchTableNames.red || elm.classList[0] === cssMatchTableNames.blue)
+					changeMatchDataNumber(elm, e, maxTeamNumberLength);
+
+				else
+					changeMatchDataNumber(elm, e, maxMatchNumberLength);
+			}
+		});
 	}
 	
 	// Set alliance color, team numbers color, searchbar color, match number color
@@ -471,6 +558,8 @@ function selectAllText(elm)
 // Changes the alliance color for the gui
 function changeAllianceColor()
 {
+	loseMatchModeFocus(true);
+	
 	// Change alliance color to blue, change text to "Blue"
 	if(currCssButtonStatusName.active == cssButtonStatusNames.active.red)
 	{
@@ -484,6 +573,10 @@ function changeAllianceColor()
 		currCssButtonStatusName.active = cssButtonStatusNames.active.red;
 		currCssButtonStatusName.focus = cssButtonStatusNames.focus.red;
 	}
+	
+	// Update team numbers
+	for(var i = 0; i < maxTeamsPerAlliance; i++)
+		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = matches[matchNumber - 1][getAllianceColor()][i]);
 	
 	updateGui();
 }
@@ -518,6 +611,14 @@ function changeMatchNumber(e)
 		
 		// Update the match number gui
 		$scouting.matchNumber.val(currVal);
+		
+		if(!matches[matchNumber - 1])
+			matches[matchNumber - 1] = new Match(matchNumber);
+		
+		// Update team numbers
+		for(var i = 0; i < maxTeamsPerAlliance; i++)
+			$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = matches[matchNumber - 1][getAllianceColor()][i]);
+		
 		return;
 	}
 }
@@ -561,7 +662,120 @@ function changeTeamNumber(e)
 		// Update the team number gui
 		$scouting.teamNumbers[teamIndex].text(currVal);
 		window.getSelection().removeAllRanges();
+		matches[matchNumber - 1][getAllianceColor()][teamIndex] = currVal;
+		updateGui();
 		return;
+	}
+}
+
+// Limits the match data number in match mode
+function changeMatchDataNumber(elm, e, maxInputLength)
+{
+	var currVal = elm.innerHTML;
+	var selectedText = window.getSelection().toString();
+	
+	if(e.keyCode === keyCodes.back && (currVal.length <= 1 || selectedText.length === currVal.length))
+	{
+		selectAllText(elm);
+		e.preventDefault();
+	}
+
+	else if(preventNonNumbers(e.keyCode, currVal, maxInputLength))
+		e.preventDefault();
+}
+
+// Blurs the match data number in match mode
+function blurMatchDataNumber(elm)
+{
+	var currVal = omitLeadingZeros(elm.innerHTML);
+	var matchIndex = parseInt($(elm).parent()[0].id, 10);
+	var subProp = "";
+	var isAlliance = false;
+	var teamIndex = parseInt(elm.id, 10);
+	
+	if(elm.classList[0] === cssMatchTableNames.match)
+		subProp = "matchNumber";
+	
+	else if(elm.classList[0] === cssMatchTableNames.redScore)
+		subProp = "redScore";
+	
+	else if(elm.classList[0] === cssMatchTableNames.blueScore)
+		subProp = "blueScore";
+	
+	else
+	{
+		subProp = elm.classList[0] === cssMatchTableNames.red ? "red" : "blue";
+		isAlliance = true;
+	}
+	
+	// If no number was inputted, put in previous match number
+	if(currVal.length === 0)
+		currVal = isAlliance ? matches[matchIndex][subProp][teamIndex] : matches[matchIndex][subProp];
+
+	// Set number to new input
+	else
+	{
+		if(isAlliance)
+			matches[matchIndex][subProp][teamIndex] = parseInt(currVal, 10);
+		
+		else
+			matches[matchIndex][subProp] = parseInt(currVal, 10)
+	}
+
+	// Update the team number gui
+	elm.innerHTML = currVal;
+		
+	// Update match array if new match number was entered
+	if(subProp === "matchNumber")
+	{
+		matches[currVal - 1] = matches[matchIndex];
+		matches[matchIndex] = null;
+		$(elm).parent()[0].id = matchIndex = currVal - 1;
+		
+		if(!matches[matchNumber - 1])
+			matches[matchNumber - 1] = new Match(matchNumber);
+	}
+	
+	// Update team numbers	
+	for(var i = 0; i < maxTeamsPerAlliance; i++)
+		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = matches[matchNumber - 1][getAllianceColor()][i]);
+}
+
+// Creates new match row in match mode
+function createMatch()
+{
+	// New match obj
+	var newMatch = new Match(matches[matches.length - 1] ? matches[matches.length - 1].matchNumber + 1 : 1);
+	newMatch.redScore = 0;
+	newMatch.blueScore = 0;
+	
+	for(var i = 0; i < maxTeamsPerAlliance; i++)
+	{
+		newMatch.red.push(i + 1);
+		newMatch.blue.push(i + 3);
+	}
+	
+	matches[newMatch.matchNumber - 1] = newMatch;
+	updateGui();
+}
+
+// Lose focus on match mode table
+function loseMatchModeFocus(newFocus)
+{
+	// Remove focus class from all elements, for match mode
+	var matchElmsWithFocus = $(".focus");
+	
+	// Switch focus to input so that match mode input isn't still focused
+	if(matchElmsWithFocus.length > 0)
+	{
+		blurMatchDataNumber(matchElmsWithFocus[0]);
+		matchElmsWithFocus.removeClass("focus");
+		
+		if(newFocus)
+		{
+			$scouting.matchNumber.focus();
+			$scouting.matchNumber.blur();
+		}
 	}
 }
 
@@ -584,9 +798,11 @@ function preventNonNumbers(keyCode, str, maxLength)
 // Handles window click events
 function windowClick(e)
 {
+	loseMatchModeFocus(true);
+	
 	if(isSubmitDialogOpen)
 	{
-		if(!$("#" + e.target.id).hasClass("submitDialog"))
+		if(!$(e.target).hasClass("submitDialog"))
 			hideSubmitDialog();
 		
 		else if(e.target.id === "submitYes" || e.target.id === "submitNo")
@@ -798,4 +1014,8 @@ function setElements()
 	$analysis.robotImg = $("#robotImg");
 	$analysis.robotImgFile = $("#robotImgFile");
 	$analysis.robotImgButton = $(".imgImport");
+	
+	/*** MATCH ***/
+	$match.newMatchButton = $(".addMatch");
+	$match.matchTable = $(".matchTable").find("tbody");
 }

@@ -1,6 +1,9 @@
 // Data for analysis mode
 var analysis = { team: 1, dataMode: analysisDataModes.total, currMatchIndex: 0 };
 
+// Data for match mode
+var matches = [];
+
 // Current file name off scouting
 var currScoutingModeName = "";
 
@@ -231,10 +234,13 @@ function resetScouting()
 {
 	matchNumber++;
 	
+	if(!matches[matchNumber - 1])
+		matches[matchNumber - 1] = new Match(matchNumber);
+	
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
 	{
 		alliance[i] = new RobotData();
-		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = (i + 1));
+		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = matches[matchNumber - 1][getAllianceColor()][i]);
 	}
 
 	var initSubName = 
@@ -314,7 +320,7 @@ function getTagInnerIndex()
 // Gets data from local storage
 function getLocaleData()
 {
-	var localTeams = typeof(localStorage.teams) === "undefined" ? [] : JSON.parse(localStorage.teams);
+	var localTeams = !localStorage.teams ? [] : JSON.parse(localStorage.teams);
 	
 	for(var i = 0; i < localTeams.length; i++)
 		teams[localTeams[i].data.teamNumber - 1] = localTeams[i];
@@ -327,7 +333,7 @@ function saveToLocale()
 	{
 		alliance[i].data.teamNumber = parseInt($scouting.teamNumbers[i].text());
 		
-		if(typeof(teams[alliance[i].data.teamNumber - 1]) === "undefined")
+		if(!teams[alliance[i].data.teamNumber - 1])
 			teams[alliance[i].data.teamNumber - 1] = new RobotData();
 		
 		appendTeamData(teams[alliance[i].data.teamNumber - 1].data, alliance[i].data);
@@ -347,6 +353,12 @@ function getTeams()
 			ret.push(teams[i]);
 	
 	return ret;
+}
+
+// Gets the current alliance color, "red" : "blue
+function getAllianceColor()
+{
+	return currCssButtonStatusName.active === cssButtonStatusNames.active.red ? "red" : "blue";
 }
 
 // Adds the new data to current team data

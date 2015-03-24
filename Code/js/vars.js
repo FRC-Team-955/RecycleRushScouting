@@ -13,6 +13,9 @@ var maxMatchNumberLength = 3;
 // Max team number length
 var maxTeamNumberLength = 4;
 
+// Max score number length
+var maxScoreNumberLength = 3;
+
 // Max teams per alliance
 var maxTeamsPerAlliance = 3; 
 
@@ -147,6 +150,15 @@ var cssScoutingModeNames =
 	pit: "pit"
 };
 
+var cssMatchTableNames = 
+{
+	match: "matchModeMatchNumber",
+	red: "matchModeRedTeam",
+	blue: "matchModeBlueTeam",
+	redScore: "matchModeRedScore",
+	blueScore: "matchModeBlueScore"
+}
+
 // All the interactive for scouting elements
 var $scouting = 
 {
@@ -202,14 +214,14 @@ var $scouting =
 		"highScoring": null,
 	},
 	
-	matchComments: null,
-	robotComments: null,
-	teamNumbers: [],
-	allianceColor: null,
-	searchBar: null,
-	searchBarButton: null,
-	matchNumber: null,
-	title: null
+	"matchComments": null,
+	"robotComments": null,
+	"teamNumbers": [],
+	"allianceColor": null,
+	"searchBar": null,
+	"searchBarButton": null,
+	"matchNumber": null,
+	"title": null
 };
 
 // All interactive elements for analysis elements
@@ -282,6 +294,13 @@ var $analysis =
 	"robotImg": null,
 	"robotImgFile": null,
 	"robotImgButton": null
+}
+
+// All interactive match elements
+var $match =
+{
+	"newMatchButton": null,
+	"matchTable": null
 }
 
 // Button ids for controller

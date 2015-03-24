@@ -151,3 +151,12 @@ function RobotData()
 		"matches": []
 	}; 
 }
+
+function Match(newMatchNumber)
+{
+	this.matchNumber = newMatchNumber;
+	this.red = [1, 2, 3];
+	this.blue = [4, 5, 6];
+	this.redScore = 0;
+	this.blueScore = 0; 
+}
