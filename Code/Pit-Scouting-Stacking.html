@@ -1,0 +1,361 @@
+<html>
+	<head>
+		<link rel="icon" href="images/tablogo.png">
+		<link rel="stylesheet" href="bower_components/pure/buttons-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/buttons-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/base-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/base-context-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/forms-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/forms-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-responsive-old-ie-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-units-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-paginator-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/pure-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/pure-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/tables-min.css" type="text/css">
+		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="css/index.css" type="text/css">
+		<script src="jquery/jquery-2.1.3.min.js"></script>
+		<script src="js/vars.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/classes.js"></script>
+		<script src="js/styles.js"></script>
+		<script src="js/debug.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body>
+			<!-- Page Header -->
+		<section class = "pure-g">
+
+			<!-- Scouting Application Title -->
+			<section class = "pure-u-1-2">
+				<h1 class="pitTitle">Pit Scouting</h1>
+			</section>
+
+			<!-- Filler section -->
+			<section class = "pure-u-2-24"></section>
+
+			<!-- Search Bar -->
+			<section class = "pure-u-8-24">
+				<form class = "pure-form">
+					<input class = "pure-input-2-3 pitSearchBar" type = "search" id = "searchBar" placeholder="Search...">
+					<section class = "pure-u-1-3">
+						<button class="pure-button pitButtonSearch" id = "button-search">
+							<i class="fa fa-search fa-lg"></i>
+						</button>
+					</section>
+				</form>
+			</section>
+
+			<!-- Filler section -->
+			<section class = "pure-u-1-24"></section>
+		</section>
+		<!--Toggle Buttons -->
+		<section class = "pure-g">
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Drive</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Intake</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Stacking</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Auto</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Strategy</strong>
+				</button>
+			</section>
+            <section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Details</strong>
+				</button>
+			</section>
+		</section>
+		<!--Stacking Tab-->
+		<section class = "pure-g pitContainerStacking">
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Type</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Elevator</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>4-Bar</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>D-Stack</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingType1"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Elevator Type</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>1-Stage</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>2-Stage</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Belt</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Chain</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Pneumatic</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevType1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevType2"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevType3"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Elevator Type 2</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>1 Level</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>H Level</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevType2-1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevType2-2"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Elevator Speed</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Slow</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Medium</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Fast</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingElevSpeed1"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Location</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Landfill</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Feeder</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingLocation1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingLocation2"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Stack Height</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>1</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>2</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>3</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>4</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>5</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>6</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingHeight1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingHeight2"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Cap Height</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>1</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>2</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>3</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>4</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>5</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>6</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingCapHeight1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingCapHeight2"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Special Features</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Tilt</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Hug</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Alignment</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Dual-I</strong></button>
+					</section>
+				</section>
+			</section>
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>Dual-E</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle"><strong>RCG</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingFeat1"><strong>Edit</strong></button>
+					</section>
+					<section class = "pure-u-1-4 pitStyle">
+						<button class = "pure-button pitButtonStyle edit" id = "button-stackingFeat2"><strong>Edit</strong></button>
+					</section>
+				</section>
+			</section>
+            <section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+						<button class = "pure-button pitHeaderStyle"><strong>Comments</strong></button>
+					</section>
+				</section>
+				<section class = "pure-u-1 pitRow">
+					<section class = "pure-g">
+						<section class = "pure-u-1 pitStyle">
+							<form class="pure-form pitComments">
+    							<fieldset>
+    							    <textarea class = "pure-input-1 pitC"></textarea>
+    							</fieldset>
+						</section>
+					</section>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>

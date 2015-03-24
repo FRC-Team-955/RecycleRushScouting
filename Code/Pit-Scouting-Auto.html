@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<link rel="icon" href="images/tablogo.png">
+		<link rel="stylesheet" href="bower_components/pure/buttons-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/buttons-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/base-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/base-context-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/forms-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/forms-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-responsive-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-responsive-old-ie-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/grids-units-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-core-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/menus-paginator-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/pure-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/pure-nr-min.css" type="text/css">
+		<link rel="stylesheet" href="bower_components/pure/tables-min.css" type="text/css">
+		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+		<link rel="stylesheet" href="css/index.css" type="text/css">
+		<script src="jquery/jquery-2.1.3.min.js"></script>
+		<script src="js/vars.js"></script>
+		<script src="js/util.js"></script>
+		<script src="js/classes.js"></script>
+		<script src="js/styles.js"></script>
+		<script src="js/debug.js"></script>
+		<script src="js/index.js"></script>
+	</head>
+	<body>
+			<!-- Page Header -->
+		<section class = "pure-g">
+
+			<!-- Scouting Application Title -->
+			<section class = "pure-u-1-2">
+				<h1 class="pitTitle">Pit Scouting</h1>
+			</section>
+
+			<!-- Filler section -->
+			<section class = "pure-u-2-24"></section>
+
+			<!-- Search Bar -->
+			<section class = "pure-u-8-24">
+				<form class = "pure-form">
+					<input class = "pure-input-2-3 pitSearchBar" type = "search" id = "searchBar" placeholder="Search...">
+					<section class = "pure-u-1-3">
+						<button class="pure-button pitButtonSearch" id = "button-search">
+							<i class="fa fa-search fa-lg"></i>
+						</button>
+					</section>
+				</form>
+			</section>
+
+			<!-- Filler section -->
+			<section class = "pure-u-1-24"></section>
+		</section>
+		<!--Toggle Buttons -->
+		<section class = "pure-g">
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Drive</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Intake</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Stacking</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Auto</strong>
+				</button>
+			</section>
+			<section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Strategy</strong>
+				</button>
+			</section>
+            <section class = "pure-u-4-24">
+				<button class = "pure-button pitToggle">
+					<strong>Details</strong>
+				</button>
+			</section>
+		</section>
+		<!--Auto Tab-->
+		<section class = "pure-g pitContainerAuto">
+			<section class = "pure-u-1 pitRow">
+				<section class = "pure-g pitStyle">
+					<section class = "pure-u-1 pitStyle">
+                        <button class = "pure-button pitHeaderStyle"><strong>Comments</strong></button>
+					</section>
+				</section>
+				<section class = "pure-u-1 pitRow">
+					<section class = "pure-g">
+						<section class = "pure-u-1 pitStyle">
+							<form class="pure-form pitComments">
+    							<fieldset>
+    							    <textarea class = "pure-input-1 pitC"></textarea>
+    							</fieldset>
+						</section>
+					</section>
+				</section>
+			</section>
+		</section>
+	</body>
+</html>
