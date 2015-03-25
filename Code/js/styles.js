@@ -428,6 +428,9 @@ function updateGui()
 		
 	// Update the match number gui
 	$scouting.matchNumber.val(matchNumber);
+	
+	// Save data locally
+	localStorage.matches = JSON.stringify(matches, null, 4);
 }
 
 // Set button in tag area to false/true, update gui
@@ -612,8 +615,12 @@ function changeMatchNumber(e)
 		// Update the match number gui
 		$scouting.matchNumber.val(currVal);
 		
+		// Update match gui if new match was created
 		if(!matches[matchNumber - 1])
+		{
 			matches[matchNumber - 1] = new Match(matchNumber);
+			updateGui();
+		}
 		
 		// Update team numbers
 		for(var i = 0; i < maxTeamsPerAlliance; i++)
