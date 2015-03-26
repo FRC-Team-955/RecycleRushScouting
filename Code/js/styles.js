@@ -135,6 +135,8 @@ function initStyle()
             var reader = new FileReader();
             reader.onload = function(e)
 			{
+				teamsImg[analysis.team - 1] = e.target.result;
+				localStorage.teamsImg = JSON.stringify(teamsImg);
 				$analysis.robotImg.attr("src", e.target.result);
 			};
             reader.readAsDataURL(this.files[0]);
@@ -1020,25 +1022,13 @@ function changeModeTo(modeName)
 	$("." + cssScoutingModeClassName).show().not("#" + modeName).hide();
 	
 	if(modeName === cssScoutingModeNames.analysis)
-		getData("team/frc" + analysis.team, updateTeamAnalysisData);
-	
-	currScoutingModeName = modeName;
-}
-
-// Updates team data for analysis
-function updateTeamAnalysisData(data)
-{
-	var nickname = "";
-	var location = "";
-	
-	if(data !== null)
 	{
-		nickname = data.nickname;
-		location = data.location;
+		$analysis.teamNickname.text("Nickname: " + getTeamName(analysis.team));
+		$analysis.teamLocation.text("Team Location: " + getTeamLocation(analysis.team));
+		$analysis.robotImg.attr("src", teamsImg[analysis.team - 1] || "");
 	}
 	
-	$analysis.teamNickname.text("Nickname: " + nickname);
-	$analysis.teamLocation.text("Team Location: " + location);
+	currScoutingModeName = modeName;
 }
 
 // Gets elements from gui and puts them into gui objs
