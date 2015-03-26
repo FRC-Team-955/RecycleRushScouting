@@ -332,6 +332,9 @@ function getLocaleData()
 		teams[localTeams[i].data.teamNumber - 1] = localTeams[i];
 	
 	matches = !localStorage.matches ? [] : JSON.parse(localStorage.matches);
+	
+	if(localStorage.allianceData)
+		allianceData = JSON.parse(localStorage.allianceData);
 }
 
 // Saves teams data to local storage, caches it

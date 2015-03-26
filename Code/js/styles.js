@@ -544,6 +544,9 @@ function updateGui()
 			
 			e.stopPropagation();
 		});
+		
+		// Save alliance data locally
+		localStorage.allianceData = JSON.stringify(allianceData);
 	}
 	
 	// Set alliance color, team numbers color, searchbar color, match number color
@@ -568,7 +571,7 @@ function updateGui()
 	// Update the match number gui
 	$scouting.matchNumber.val(matchNumber);
 	
-	// Save data locally
+	// Save matches data locally
 	localStorage.matches = JSON.stringify(matches, null, 4);
 }
 
