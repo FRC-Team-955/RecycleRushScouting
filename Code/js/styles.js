@@ -27,6 +27,15 @@ function initStyle()
 				case 'q':
 					$scouting.mergeFile.click();
 					break;
+					
+				// Clear local storage
+				case 'l':
+					var clearLocal = confirm("Clear scouting data locally?");
+					
+					if(clearLocal)
+						localStorage.clear();
+					
+					break;
 			}
 		}
 	});
