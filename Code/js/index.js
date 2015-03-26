@@ -22,6 +22,9 @@ var matchNumber = 0;
 // All robot data
 var teams = [];                 
 
+// All teams imgs
+var teamsImg = [];
+
 // Teams attending curent event
 var teamsAttending = [190, 847, 955, 956, 957, 997, 1359, 1432, 1510, 1983, 2002, 2093, 2192, 2374, 2517, 2521, 2550, 2811, 2915, 2990, 3024, 3192, 4043, 4051, 4057, 4110, 4127, 4692, 5085, 5198, 5450, 5497];
 	
@@ -326,15 +329,22 @@ function getTagInnerIndex()
 // Gets data from local storage
 function getLocaleData()
 {
-	var localTeams = !localStorage.teams ? [] : JSON.parse(localStorage.teams);
+	if(localStorage.teams)
+	{
+		var localTeams = JSON.parse(localStorage.teams);
+
+		for(var i = 0; i < localTeams.length; i++)
+			teams[localTeams[i].data.teamNumber - 1] = localTeams[i];
+	}
 	
-	for(var i = 0; i < localTeams.length; i++)
-		teams[localTeams[i].data.teamNumber - 1] = localTeams[i];
-	
-	matches = !localStorage.matches ? [] : JSON.parse(localStorage.matches);
+	if(localStorage.matches)
+		matches = JSON.parse(localStorage.matches);
 	
 	if(localStorage.allianceData)
 		allianceData = JSON.parse(localStorage.allianceData);
+	
+	if(localStorage.teamsImg)
+		teamsImg = JSON.parse(localStorage.teamsImg);
 }
 
 // Saves teams data to local storage, caches it
