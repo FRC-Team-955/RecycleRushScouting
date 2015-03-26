@@ -15,10 +15,17 @@ function initStyle()
 	$(window).bind('keydown', function(event) {
 		if (event.ctrlKey || event.metaKey) {
 			switch (String.fromCharCode(event.which).toLowerCase()) {
+				
+				// Show submit dialog box
 				case 's':
 					// Make current element with focus lose focus so data gets saved
 					$(":focus").blur();
 					showSubmitDialog();
+					break;
+					
+				// Upload file merge app data
+				case 'q':
+					$scouting.mergeFile.click();
 					break;
 			}
 		}
@@ -31,6 +38,22 @@ function initStyle()
 	
 	// Prevent enter from refreshing the page
 	$("form").submit(function() { return false; });
+	
+	// Merge file input
+	$scouting.mergeFile.change(function()
+   	{
+		if(this.files && this.files[0])	
+		{
+			var reader = new FileReader();
+			
+			reader.onload = function(e)
+			{
+				mergeAppData(JSON.parse(e.target.result));
+			}
+			
+			reader.readAsText(this.files[0]);
+		}
+	})
 	
 	// Process the search bar input
 	$scouting.searchBarButton.click(function(e)
@@ -611,8 +634,36 @@ function tagButtonClick(elmName)
 // Save scouting to user on title click
 function titleClick(elm)
 {
-	saveFile("scoutingData.json", JSON.stringify(getTeams(), null, 4));
+	var appData = { teams: getTeams(), teamsImg: teamsImg, matches: matches };
+	saveFile("scoutingData.json", JSON.stringify(appData, null, 4));
 	console.log("saved");
+}
+
+// Merges another scouting data with this ones
+function mergeAppData(newAppData)
+{
+	// Team data
+	for(var i = 0; i < newAppData.teams.length; i++)
+	{
+		if(!teams[i])
+			teams[i] = new RobotData();
+		
+		appendTeamData(teams[i].data, newAppData.teams[i].data);
+	}
+	
+	// Team imgs data
+	for(var i = 0; i < newAppData.teamsImg.length; i++)
+		if(newAppData.teamsImg[i])
+			teamsImg[i] = newAppData.teamsImg[i];
+	
+	// Matches
+	for(var i = 0; i < newAppData.matches.length; i++)
+		if(newAppData.matches[i])
+			matches[i] = newAppData.matches[i];
+	
+	// Change mode to current and update gui so that the new data is shown
+	changeModeTo(currScoutingModeName);
+	updateGui();
 }
 
 // Give focus to team number that was clicked
@@ -1094,6 +1145,8 @@ function setElements()
 	// Title
 	$scouting.title = $("#title");
 	
+	// Merge file input
+	$scouting.mergeFile = $("#appDataMerge");
 	
 	/*** Analysis ***/
 

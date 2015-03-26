@@ -228,7 +228,8 @@ var $scouting =
 	"searchBar": null,
 	"searchBarButton": null,
 	"matchNumber": null,
-	"title": null
+	"title": null,
+	"mergeFile": null
 };
 
 // All interactive elements for analysis elements
