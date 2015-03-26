@@ -143,6 +143,83 @@ function initStyle()
 	
 	$analysis.robotImgButton.click(function(){ $analysis.robotImgFile.click(); });
 	$match.newMatchButton.click(createMatch);	
+	
+	// Assign click event to teams list
+	$alliance.teamList.click(function()
+	{
+		var selectedElm = $("." + cssAllianceNames.teamFocus);
+		
+		if(selectedElm.length > 0)
+		{
+			var val = parseInt(selectedElm[0].innerHTML, 10);
+			
+			for(var i = 0; i < allianceData.alliances.length; i++)
+				for(var j = 0; j < allianceData.alliances[i].length; j++)
+					if(allianceData.alliances[i][j] === val)
+						allianceData.alliances[i].splice(j, 1);
+			
+			for(var i = 0; i < allianceData.pickList.length; i++)
+				if(allianceData.pickList[i] === val)
+					allianceData.pickList.splice(i, 1);
+			
+			updateGui();
+		}
+	});
+	
+	// Assign click event to pick list
+	$alliance.pickList.click(function()
+	{
+		var selectedElm = $("." + cssAllianceNames.teamFocus);
+		
+		if(selectedElm.length > 0)
+		{
+			var val = parseInt(selectedElm[0].innerHTML, 10);
+			
+			for(var i = 0; i < allianceData.alliances.length; i++)
+				for(var j = 0; j < allianceData.alliances[i].length; j++)
+					if(allianceData.alliances[i][j] === val)
+						allianceData.alliances[i].splice(j, 1);
+			
+			for(var i = 0; i < allianceData.pickList.length; i++)
+				if(allianceData.pickList[i] === val)
+					allianceData.pickList.splice(i, 1);
+			
+			allianceData.pickList.push(val);
+			$("*").removeClass(cssAllianceNames.teamFocus);
+			updateGui();
+		}
+	});
+	
+	// Assign click event to alliance div
+	$alliance.alliances.click(function() 
+  	{
+		var selectedElm = $("." + cssAllianceNames.teamFocus);
+		
+		if(selectedElm.length > 0)
+		{
+			var allianceIndex = parseInt($(this)[0].id.substring(8), 10) - 1;
+
+			if(allianceData.alliances[allianceIndex].length < allianceData.maxPerAlliance)
+			{
+				var val = parseInt(selectedElm[0].innerHTML, 10);
+				
+				for(var i = 0; i < allianceData.alliances.length; i++)
+					for(var j = 0; j < allianceData.alliances[i].length; j++)
+						if(allianceData.alliances[i][j] === val)
+							allianceData.alliances[i].splice(j, 1);
+				
+				for(var i = 0; i < allianceData.pickList.length; i++)
+					if(allianceData.pickList[i] === val)
+						allianceData.pickList.splice(i, 1);
+				
+				allianceData.alliances[allianceIndex].push(val);
+			}
+			
+			$("*").removeClass(cssAllianceNames.teamFocus);
+			updateGui();
+		}
+	});
+	
 	changeModeTo(cssScoutingModeNames.scouting);
 }
 
@@ -319,7 +396,8 @@ function updateGui()
 			$analysis.currMatch.html(teamDataExists ? teams[analysis.team - 1].data.matchesPlayedIn[analysis.currMatchIndex] : "N/A");
 		}
 	}
-	
+
+	// Match mode
 	else if(currScoutingModeName === cssScoutingModeNames.match)
 	{
 		$match.matchTable.html("");
@@ -404,6 +482,67 @@ function updateGui()
 				else
 					changeMatchDataNumber(elm, e, maxMatchNumberLength);
 			}
+		});
+	}
+	
+	// Alliance selection mode
+	if(currScoutingModeName === cssScoutingModeNames.allianceSelection)
+	{
+		// Add the teams to the teams list in alliance
+		$alliance.teamList[0].innerHTML = $alliance.teamList[0].innerHTML.substring(0, 24);
+		var html = "";
+
+		for(var i = 0; i < teamsAttending.length; i++)
+		{
+			var elm = document.createElement("div");
+			elm.classList.add(cssAllianceNames.teamItem);
+			elm.innerHTML = teamsAttending[i];
+			html += elm.outerHTML;
+		}
+
+		$alliance.teamList.append(html);
+		
+		// Add teams to alliance 
+		for(var i = 0; i < allianceData.alliances.length; i++)
+		{
+			$($alliance.alliances[i])[0].innerHTML = $($alliance.alliances[i])[0].innerHTML.substring(0, 34);
+			html = "";
+			
+			for(var j = 0; j < allianceData.alliances[i].length; j++)
+			{
+				var elm = document.createElement("div");
+				elm.classList.add(cssAllianceNames.teamItem);
+				elm.innerHTML = allianceData.alliances[i][j];
+				html += elm.outerHTML;
+			}
+			
+			$($alliance.alliances[i]).append(html);
+		}
+		
+		$alliance.pickList[0].innerHTML = $alliance.pickList[0].innerHTML.substring(0, 29);
+		html = "";
+		
+		// Add teams to pick list
+		for(var i = 0; i < allianceData.pickList.length; i++)
+		{
+			var elm = document.createElement("div");
+			elm.classList.add(cssAllianceNames.teamItem);
+			elm.innerHTML = allianceData.pickList[i];
+			html += elm.outerHTML;
+		}
+		
+		$alliance.pickList.append(html);
+		
+		// Assign click event to the new team items
+		$("." + cssAllianceNames.teamItem).click(function(e) 
+		{
+			var thisHasFocus = $(this).hasClass(cssAllianceNames.teamFocus);
+			$("*").removeClass(cssAllianceNames.teamFocus);
+
+			if(!thisHasFocus)
+				$(this).addClass(cssAllianceNames.teamFocus);
+			
+			e.stopPropagation();
 		});
 	}
 	
@@ -1025,4 +1164,9 @@ function setElements()
 	/*** MATCH ***/
 	$match.newMatchButton = $(".addMatch");
 	$match.matchTable = $(".matchTable").find("tbody");
+	
+	/*** ALLIANCE ***/
+	$alliance.teamList = $(".teamList");
+	$alliance.pickList = $(".pickList");
+	$alliance.alliances = $("." + cssAllianceNames.allianceContainer);
 }

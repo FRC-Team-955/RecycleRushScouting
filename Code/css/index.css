@@ -43,6 +43,29 @@
 	display: none;
 }
 
+.teamItem
+{
+	width: 80%;
+	height: 30px;
+	margin: 3px auto;
+	background-color: dimgray;
+	text-align: center;
+	font-size: 16px;
+	line-height: 30px;
+	border-radius: 2px;
+	color: white;
+}
+
+.teamFocus
+{
+	opacity: 0.75;
+}
+
+.teamList
+{
+	overflow-y: scroll;
+}
+
 body {
 	background-color: #dbdbdb;
 	font-size: 1em;

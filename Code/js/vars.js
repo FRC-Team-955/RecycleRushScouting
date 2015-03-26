@@ -159,6 +159,13 @@ var cssMatchTableNames =
 	blueScore: "matchModeBlueScore"
 }
 
+var cssAllianceNames = 
+{
+	teamItem: "teamItem",
+	teamFocus: "teamFocus",
+	allianceContainer: "alliance"
+};
+
 // All the interactive for scouting elements
 var $scouting = 
 {
@@ -301,6 +308,14 @@ var $match =
 {
 	"newMatchButton": null,
 	"matchTable": null
+}
+
+// All interactive alliance elements
+var $alliance = 
+{
+	"teamList": null,
+	"pickList": null,
+	"alliances": null
 }
 
 // Button ids for controller

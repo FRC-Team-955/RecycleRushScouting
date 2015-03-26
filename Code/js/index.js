@@ -4,6 +4,9 @@ var analysis = { team: 1, dataMode: analysisDataModes.total, currMatchIndex: 0 }
 // Data for match mode
 var matches = [];
 
+// Data for alliance mode
+var allianceData = { pickList: [], alliances: [[], [], [], [], [], [], [], []], maxPerAlliance: 5 };
+
 // Current file name off scouting
 var currScoutingModeName = "";
 
@@ -19,6 +22,9 @@ var matchNumber = 0;
 // All robot data
 var teams = [];                 
 
+// Teams attending curent event
+var teamsAttending = [190, 847, 955, 956, 957, 997, 1359, 1432, 1510, 1983, 2002, 2093, 2192, 2374, 2517, 2521, 2550, 2811, 2915, 2990, 3024, 3192, 4043, 4051, 4057, 4110, 4127, 4692, 5085, 5198, 5450, 5497];
+	
 // Alliance data for current match
 var alliance = [];              
 
