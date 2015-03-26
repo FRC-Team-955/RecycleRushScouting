@@ -145,7 +145,8 @@ function initStyle()
 	// Update comment boxes
 	$scouting.matchComments.blur(function()
 	{
-		alliance[currTeamIndex].data.matchComments = this.value;
+		for(var i = 0; i < maxTeamsPerAlliance; i++)
+			alliance[i].data.matchComments = this.value;
 	});
 	
 	$scouting.robotComments.blur(function()
@@ -701,8 +702,10 @@ function matchThingsButtonClick(elmName)
 	{
 		if($scouting.matchThings[innerProp][0].id === elmName)
 		{
-			var currVal = alliance[currTeamIndex].data.matchThings[innerProp];
-			alliance[currTeamIndex].data.matchThings[innerProp] = (currVal === 0 ? 1 : 0); 
+			var newVal = alliance[currTeamIndex].data.matchThings[innerProp] === 0 ? 1: 0;
+			
+			for(var i = 0; i < maxTeamsPerAlliance; i++)
+				alliance[i].data.matchThings[innerProp] = newVal; 
 		}
 	}
 	
