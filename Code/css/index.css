@@ -599,3 +599,8 @@ h3 {
 .antiPure {
 	box-shadow: none !important;
 }
+
+.teleForward, 
+.teleBack {
+    width: 100%
+}
