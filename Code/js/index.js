@@ -248,7 +248,7 @@ function resetScouting()
 	
 	for(var i = 0; i < maxTeamsPerAlliance; i++)
 	{
-		alliance[i] = new RobotData();
+		alliance[i] = new MatchData();
 		$scouting.teamNumbers[i].text(alliance[i].data.teamNumber = matches[matchNumber - 1][getAllianceColor()][i]);
 	}
 
@@ -353,11 +353,12 @@ function saveToLocale()
 	for(var i = 0; i < $scouting.teamNumbers.length; i++)
 	{
 		alliance[i].data.teamNumber = parseInt($scouting.teamNumbers[i].text());
+		alliance[i].data.matchNumber = matchNumber;
 		
 		if(!teams[alliance[i].data.teamNumber - 1])
 			teams[alliance[i].data.teamNumber - 1] = new RobotData();
 		
-		appendTeamData(teams[alliance[i].data.teamNumber - 1].data, alliance[i].data);
+		addMatchData(teams[alliance[i].data.teamNumber - 1].data, alliance[i].data);
 	}
 	
 	localStorage.teams = JSON.stringify(getTeams(), null, 4);
@@ -382,15 +383,15 @@ function getAllianceColor()
 	return currCssButtonStatusName.active === cssButtonStatusNames.active.red ? "red" : "blue";
 }
 
-// Adds the new data to current team data
-function appendTeamData(currData, newData)
+// Adds match data to team
+function addMatchData(teamData, matchData)
 {
 	var addData = true;
 	var matchIndex = 0;
 	
-	for(var i = 0; i < currData.matchesPlayedIn.length; i++)
+	for(var i = 0; i < teamData.matches.length; i++)
 	{
-		if(matchNumber === currData.matchesPlayedIn[i])
+		if(matchData.matchNumber === teamData.matches[i].matchNumber)
 		{
 			addData = false;
 			matchIndex = i;
@@ -411,9 +412,9 @@ function appendTeamData(currData, newData)
 			innerProp = tagsInnerNames[subProp][j];
 			
 			if(!addData)
-				currData.tags[subProp][innerProp] -= currData.matches[matchIndex].tags[subProp][innerProp];
+				teamData.tags[subProp][innerProp] -= teamData.matches[matchIndex].tags[subProp][innerProp];
 			
-			currData.tags[subProp][innerProp] += newData.tags[subProp][innerProp];
+			teamData.tags[subProp][innerProp] += matchData.tags[subProp][innerProp];
 		}
 	}
 	
@@ -427,9 +428,9 @@ function appendTeamData(currData, newData)
 			innerProp = scoringInnerNames[subProp][j];
 			
 			if(!addData)
-				currData.scoring[subProp][innerProp] -= currData.matches[matchIndex].scoring[subProp][innerProp];
+				teamData.scoring[subProp][innerProp] -= teamData.matches[matchIndex].scoring[subProp][innerProp];
 			
-			currData.scoring[subProp][innerProp] += newData.scoring[subProp][innerProp];
+			teamData.scoring[subProp][innerProp] += matchData.scoring[subProp][innerProp];
 		}
 	}
 	
@@ -439,27 +440,24 @@ function appendTeamData(currData, newData)
 		innerProp = matchThingsInnerNames[i];
 		
 		if(!addData)
-			currData.matchThings[innerProp] -= currData.matches[matchIndex].matchThings[innerProp]; 
+			teamData.matchThings[innerProp] -= teamData.matches[matchIndex].matchThings[innerProp]; 
 		
-		currData.matchThings[innerProp] += newData.matchThings[innerProp]; 
+		teamData.matchThings[innerProp] += matchData.matchThings[innerProp]; 
 	}
 	
 	// Add comments, set team number, inc matches played, add match to matches played
 	if(!addData)
 	{
-		currData.matchComments = currData.matchComments.replace(currData.matches[matchIndex].matchComments, newData.matchComments);
-		currData.robotComments = currData.robotComments.replace(currData.matches[matchIndex].robotComments, newData.robotComments);
-		currData.matches[matchIndex] = newData;
+		teamData.matchComments = teamData.matchComments.replace(teamData.matches[matchIndex].matchComments, matchData.matchComments);
+		teamData.robotComments = teamData.robotComments.replace(teamData.matches[matchIndex].robotComments, matchData.robotComments);
+		teamData.matches[matchIndex] = matchData;
 	}
 	
 	if(addData)
 	{
-		currData.matchComments += " | " + newData.matchComments;
-		currData.robotComments += " | " + newData.robotComments;
-		currData.matchesPlayed++;
-		currData.matchesPlayedIn.push(matchNumber);
-		currData.matches.push(newData);
+		teamData.matchComments += " | " + matchData.matchComments;
+		teamData.robotComments += " | " + matchData.robotComments;
+		teamData.matchesPlayed++;
+		teamData.matches.push(matchData);
 	}
-		
-	currData.teamNumber = newData.teamNumber;
 }

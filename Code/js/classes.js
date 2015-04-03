@@ -147,8 +147,70 @@ function RobotData()
 		"robotComments": "",
 		"teamNumber": 0,
 		"matchesPlayed": 0,
-		"matchesPlayedIn": [],
 		"matches": []
+	}; 
+}
+
+function MatchData()
+{
+	this.data = 
+	{
+		"tags":
+		{            
+			"auto":
+			{
+				"grabsBins": 0,
+				"movesBins": 0,
+				"handlesYellow": 0,
+				"movesToAuto": 0
+			},
+
+			"capabilities":
+			{
+				"canStack": 0,
+				"canMoveLitter": 0,
+				"brokenDrive": 0,
+				"canPlaceBins": 0,
+				"clumsy": 0,
+				"brokenPickup": 0
+			},
+
+			"rating":
+			{
+				"good": 0,
+				"meh": 0,
+				"bad": 0
+			}
+		},
+
+		"scoring":
+		{
+			"auto":
+			{
+				"yellowMoved": 0,
+				"yellowStacked": 0,
+				"binsMoved": 0
+			},
+
+			"teleop":
+			{
+				"greyStacked": 0,
+				"binsStacked": 0,
+				"highestBinLvl": 0
+			}
+		},
+
+		"matchThings": 
+		{
+			"coopStack": 0,
+			"coopSet": 0,
+			"highScoring": 0
+		},
+
+		"matchComments": "",
+		"robotComments": "",
+		"teamNumber": 0,
+		"matchNumber": 0
 	}; 
 }
 
