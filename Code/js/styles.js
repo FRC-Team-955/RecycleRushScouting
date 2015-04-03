@@ -428,7 +428,7 @@ function updateGui()
 
 			$analysis.matchComments.html(teamDataExists ? teams[analysis.team - 1].data.matchComments : "N/A");
 			$analysis.robotComments.html(teamDataExists ? teams[analysis.team - 1].data.robotComments : "N/A");
-			$analysis.currMatch.html(teamDataExists ? teams[analysis.team - 1].data.matchesPlayedIn[analysis.currMatchIndex] : "N/A");
+			$analysis.currMatch.html(teamDataExists ? teams[analysis.team - 1].data.matches[analysis.currMatchIndex].matchNumber : "N/A");
 		}
 	}
 
@@ -655,10 +655,11 @@ function mergeAppData(newAppData)
 	// Team data
 	for(var i = 0; i < newAppData.teams.length; i++)
 	{
-		if(!teams[i])
-			teams[i] = new RobotData();
+		if(!teams[newAppData.teams[i].data.teamNumber - 1])
+			teams[newAppData.teams[i].data.teamNumber - 1] = new RobotData(newAppData.teams[i].data.teamNumber);
 		
-		appendTeamData(teams[i].data, newAppData.teams[i].data);
+		for(var j = 0; j < newAppData.teams[i].data.matchesPlayed; j++)
+			addMatchData(teams[newAppData.teams[i].data.teamNumber - 1].data, newAppData.teams[i].data.matches[j]);
 	}
 	
 	// Team imgs data
@@ -739,7 +740,7 @@ function prevMatchButtonClick()
 	analysis.dataMode = analysisDataModes.match;
 	
 	if(--analysis.currMatchIndex < 0)
-		analysis.currMatchIndex = teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayedIn.length - 1 : 0;
+		analysis.currMatchIndex = teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayed - 1 : 0;
 	
 	updateGui();
 }
@@ -749,7 +750,7 @@ function nextMatchButtonClick()
 {
 	analysis.dataMode = analysisDataModes.match;
 	
-	if(++analysis.currMatchIndex >= (teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayedIn.length : 0))
+	if(++analysis.currMatchIndex >= (teams[analysis.team - 1] ? teams[analysis.team - 1].data.matchesPlayed : 0))
 		analysis.currMatchIndex = 0;
 		
 	updateGui();

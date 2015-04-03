@@ -10,7 +10,7 @@
 
 @font-face {
 	font-family: "Orbitron";
-	src: url("../fonts/Orbitron/Orbitron-Regular.ttf");
+	src: url("../fonts/Orbitron/Orbitron-Bold.ttf");
 }
 
 * {
@@ -24,7 +24,7 @@
 	user-select: none;
 }
 
-.ui-autocomplete 
+.ui-autocomplete
 {
 	position: fixed;
 	z-index: 9999 !important;
@@ -98,7 +98,7 @@ span {
 
 .pure-button-hover,
 .pure-button:hover,
-.pure-button:focus 
+.pure-button:focus
 {
 	background-image: none;
 }
@@ -453,7 +453,7 @@ span {
 }
 
 .analysisAutoTags {
-	background-color: #ceb5ff !important; 
+	background-color: #ceb5ff !important;
 }
 
 .analysisCapaTags {
@@ -464,7 +464,7 @@ span {
 	background-color: #a5ff8e !important;
 }
 
-.analysisAutoScoring {	
+.analysisAutoScoring {
 	background-color: #ffef85 !important;
 }
 
@@ -512,7 +512,7 @@ th {
 }
 
 .addMatch {
-	float: left; 
+	float: left;
 	height: 1.5rem;
 }
 
@@ -521,7 +521,7 @@ th {
 }
 
 .matchNumberLabel {
-	margin: 0;	
+	margin: 0;
 }
 
 .selectionContainer {
@@ -546,7 +546,7 @@ h3 {
 	background-color: #b8c2b8;
 }
 
-.allianceContainer { 
+.allianceContainer {
 	height: 100%;
 }
 
@@ -571,7 +571,7 @@ h3 {
 	border-radius: 4px;
 	border: 1px solid #ccc;
 	display: none;
-	
+
 }
 
 .pitToggle {
