@@ -655,11 +655,11 @@ function mergeAppData(newAppData)
 	// Team data
 	for(var i = 0; i < newAppData.teams.length; i++)
 	{
-		if(!teams[i])
-			teams[i] = new RobotData(newAppData.teams[i].data.teamNumber);
+		if(!teams[newAppData.teams[i].data.teamNumber - 1])
+			teams[newAppData.teams[i].data.teamNumber - 1] = new RobotData(newAppData.teams[i].data.teamNumber);
 		
 		for(var j = 0; j < newAppData.teams[i].data.matchesPlayed; j++)
-			addMatchData(teams[i].data, newAppData.teams[i].data.matches[j]);
+			addMatchData(teams[newAppData.teams[i].data.teamNumber - 1].data, newAppData.teams[i].data.matches[j]);
 	}
 	
 	// Team imgs data
