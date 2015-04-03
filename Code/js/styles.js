@@ -656,7 +656,7 @@ function mergeAppData(newAppData)
 	for(var i = 0; i < newAppData.teams.length; i++)
 	{
 		if(!teams[i])
-			teams[i] = new RobotData();
+			teams[i] = new RobotData(newAppData.teams[i].data.teamNumber);
 		
 		for(var j = 0; j < newAppData.teams[i].data.matchesPlayed; j++)
 			addMatchData(teams[i].data, newAppData.teams[i].data.matches[j]);

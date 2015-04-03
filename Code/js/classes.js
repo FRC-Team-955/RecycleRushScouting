@@ -87,7 +87,7 @@ Controller.prototype.getButton = function(btnId)
 };
 
 // Robot data
-function RobotData()
+function RobotData(teamNumber)
 {
 	this.data = 
 	{
@@ -145,7 +145,7 @@ function RobotData()
 
 		"matchComments": "",
 		"robotComments": "",
-		"teamNumber": 0,
+		"teamNumber": teamNumber,
 		"matchesPlayed": 0,
 		"matches": []
 	}; 

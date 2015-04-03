@@ -356,7 +356,7 @@ function saveToLocale()
 		alliance[i].data.matchNumber = matchNumber;
 		
 		if(!teams[alliance[i].data.teamNumber - 1])
-			teams[alliance[i].data.teamNumber - 1] = new RobotData();
+			teams[alliance[i].data.teamNumber - 1] = new RobotData(alliance[i].data.teamNumber);
 		
 		addMatchData(teams[alliance[i].data.teamNumber - 1].data, alliance[i].data);
 	}
