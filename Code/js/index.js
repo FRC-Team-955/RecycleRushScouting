@@ -5,7 +5,7 @@ var analysis = { team: 1, dataMode: analysisDataModes.total, currMatchIndex: 0 }
 var matches = [];
 
 // Data for alliance mode
-var allianceData = { pickList: [], alliances: [[], [], [], [], [], [], [], []], maxPerAlliance: 5 };
+var allianceData = { pickList: [], alliances: [[], [], [], [], [], [], [], []], maxPerAlliance: 5, lastItem: { allianceIndex: null, teamIndex: null, oldVal: null} };
 
 // Current file name off scouting
 var currScoutingModeName = "";
@@ -26,8 +26,7 @@ var teams = [];
 var teamsImg = [];
 
 // Teams attending curent event
-var teamsAttending = [ 360, 488, 492, 847, 948, 955, 997, 1318, 1425, 1510, 1540, 1595, 1778, 1983, 2046, 2147, 2149, 2471, 2521, 2522, 2550, 2557, 2605, 2635, 2907, 2930, 2944, 2980, 2990, 3024, 3218, 3219, 3221, 3238, 3393, 3574, 3586, 3588, 3663, 3674, 3711, 3787, 3789, 3826, 3968, 4061, 4125, 4132, 4205, 4304, 4450, 4469, 4488, 4513, 4608, 4654, 4681, 4911, 4915, 4918, 4980, 5111, 5468, 5495, 5588, 5683, 5748, 5779];
-
+var teamsAttending = [ 25, 74, 100, 118, 133, 155, 175, 190, 195, 269, 295, 321, 533, 537, 540, 587, 932, 955, 1094, 1111, 1466, 1671, 1678, 1720, 1741, 1756, 1918, 1983, 2039, 2158, 2339, 2468, 2522, 2607, 2761, 2877, 3015, 3039, 3130, 3137, 3171, 3310, 3314, 3464, 3467, 3539, 3574, 3641, 3783, 3785, 3838, 3940, 4013, 4118, 4188, 4322, 4471, 4501, 4522, 4541, 4575, 4678, 4841, 4842, 4903, 4954, 5012, 5027, 5188, 5418, 5479, 5489, 5495, 5511, 5526, 5529, 5710];
 // Alliance data for current match
 var alliance = [];              
 
@@ -95,16 +94,23 @@ function init()
 // Main loop, checks for controller button presses
 function main()
 {
+	// Update the controller to get new input
 	contr.update(navigator.getGamepads()[0]);
 	needUpdateGui = contr.buttonGotPressed();
 
 	// Switch to previous robot in alliance
 	if(contr.getButton(contrBtn.lt) && --currTeamIndex < 0)
+	{
+		blurCurrentFocus(); // Blur focus so that data will get saved if a text box has focus
 		currTeamIndex = maxTeamsPerAlliance - 1;
-
+	}
+	
 	// Switch to next robot in alliance
 	if(contr.getButton(contrBtn.rt) && ++currTeamIndex >= maxTeamsPerAlliance)
+	{
+		blurCurrentFocus(); // Blur focus so that data will get saved if a text box has focus
 		currTeamIndex = 0;
+	}
 
 	// Switch tags area focus to previous/next area
 	if(contr.getButton([contrBtn.du, contrBtn.dd]))
