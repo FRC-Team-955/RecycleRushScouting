@@ -18,8 +18,6 @@ function initStyle()
 				
 				// Show submit dialog box
 				case 's':
-					// Make current element with focus lose focus so data gets saved
-					$(":focus").blur();
 					showSubmitDialog();
 					break;
 					
@@ -571,15 +569,35 @@ function updateGui()
 		// Assign click event to the new team items
 		$("." + cssAllianceNames.teamItem).click(function(e) 
 		{
+			var $focusedElm = $("." + cssAllianceNames.teamFocus);
 			var thisHasFocus = $(this).hasClass(cssAllianceNames.teamFocus);
 			$("*").removeClass(cssAllianceNames.teamFocus);
 
 			if(!thisHasFocus)
+			{
+				var oldAllianceIndex = $focusedElm.length > 0 ? parseInt($focusedElm.parent().attr("id").substring(8), 10) - 1 : null;
+				
+//				console.log(oldAllianceIndex + " : " + newAllianceIndex);
+				
+				// Switch teams if a team is currently selected and a new team is selected
+				if(oldAllianceIndex)
+				{
+					var newAllianceIndex = parseInt($(this).parent()[0].id.substring(8), 10) - 1;
+					var oldSelectedVal = parseInt($focusedElm[0].innerHTML, 10);
+					var newSelectedVal = parseInt(this.innerHTML, 10);
+					var oldIndex = allianceData.alliances[oldAllianceIndex].indexOf(oldSelectedVal);
+					var newIndex = allianceData.alliances[newAllianceIndex].indexOf(newSelectedVal);
+					allianceData.alliances[oldAllianceIndex][oldIndex] = newSelectedVal;
+					allianceData.alliances[newAllianceIndex][newIndex] = oldSelectedVal;
+					updateGui();
+				}
+				
 				$(this).addClass(cssAllianceNames.teamFocus);
+			}
 			
 			e.stopPropagation();
 		});
-		
+		 
 		// Save alliance data locally
 		localStorage.allianceData = JSON.stringify(allianceData);
 	}
@@ -1053,9 +1071,16 @@ function windowKeyup(e)
 	}
 }
 
+// Make current element with focus lose focus so data gets saved
+function blurCurrentFocus()
+{
+	$(":focus").blur();
+}
+
 // Shows the submit data dialog box
 function showSubmitDialog()
 {
+	blurCurrentFocus();
 	isSubmitDialogOpen = true;
 	event.preventDefault();
 	$(".mainContent").animate({
